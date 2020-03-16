@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SW2</string>
+    <string name="title_activity_maps">Map</string>
+    <dimen name="asd">10dp</dimen>
+</resources>
