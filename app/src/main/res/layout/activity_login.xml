@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
+    android:background="@drawable/hamburguesa2"
     android:ems="10"
+
     tools:context=".LoginActivity">
 
     <ProgressBar
@@ -16,52 +18,94 @@
         android:indeterminate="true"
         android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/editUser"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_margin="10dp"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:layout_height="184dp"
 
-    <EditText
-        android:id="@+id/editPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_margin="10dp"
-        android:inputType="textPassword"
-        android:text="Password" />
+        android:orientation="vertical"
+        android:padding="10dp" />
 
 
-    <Button
-        android:id="@+id/Login"
-        android:onClick="login"
-        android:background="@color/colorPrimary"
-        android:textColor="@android:color/white"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Iniciar sesion" />
-    <TextView
-        android:id="@+id/textforgotpassword"
-        android:gravity="center"
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="forgotPassword"
-        android:text="Olvidaste tu contraseña ?" />
+        android:layout_height="302dp"
 
-    <Button
-        android:id="@+id/EnviarREGISTRAR"
-        android:onClick="register"
-        android:gravity="center"
-        android:background="@color/colorPrimary"
-        android:textColor="@android:color/white"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/editUser"
+            style="@android:style/Widget.Material.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/backwithborder"
+            android:ellipsize="start"
+            android:ems="10"
+            android:hint="CorreoElectronico"
+            android:inputType="textPersonName"
+            android:paddingLeft="20dp" />
+
+        <EditText
+            android:id="@+id/editPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/backwithborder"
+            android:ems="10"
+            android:hint=".........."
+            android:inputType="textPassword"
+            android:paddingLeft="20dp"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/textforgotpassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:onClick="forgotPassword"
+            android:text="Olvidaste tu contraseña ?"
+            android:textColor="@color/Negro"
+            android:textSize="24dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="144dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/Login"
+                android:layout_width="156dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/button_border"
+                android:gravity="center"
+                android:onClick="login"
+                android:padding="15dp"
+                android:text="Iniciar sesion"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/EnviarREGISTRAR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/button_border_registrar"
+                android:gravity="center"
+                android:onClick="register"
+                android:padding="15dp"
+                android:text="Registrar"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Registrar" />
+        android:layout_height="215dp"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+    </LinearLayout>
 
 </LinearLayout>
