@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    android:background="@drawable/hamburguesa2"
     android:ems="10"
-
     tools:context=".LoginActivity">
 
     <ProgressBar
@@ -20,18 +18,23 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="184dp"
+        android:layout_height="239dp"
 
         android:orientation="vertical"
-        android:padding="10dp" />
+        android:padding="10dp">
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="185dp"
+            android:layout_marginTop="40dp"
+            app:srcCompat="@drawable/holy_burger_logo" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="302dp"
-
         android:orientation="vertical">
-
         <EditText
             android:id="@+id/editUser"
             style="@android:style/Widget.Material.EditText"
@@ -44,7 +47,6 @@
             android:hint="CorreoElectronico"
             android:inputType="textPersonName"
             android:paddingLeft="20dp" />
-
         <EditText
             android:id="@+id/editPassword"
             android:layout_width="match_parent"
@@ -56,7 +58,6 @@
             android:inputType="textPassword"
             android:paddingLeft="20dp"
             android:textSize="30dp" />
-
         <TextView
             android:id="@+id/textforgotpassword"
             android:layout_width="match_parent"
@@ -67,12 +68,10 @@
             android:text="Olvidaste tu contraseña ?"
             android:textColor="@color/Negro"
             android:textSize="24dp" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="144dp"
             android:orientation="horizontal">
-
             <Button
                 android:id="@+id/Login"
                 android:layout_width="156dp"
@@ -84,7 +83,6 @@
                 android:padding="15dp"
                 android:text="Iniciar sesion"
                 android:textColor="@android:color/white" />
-
             <Button
                 android:id="@+id/EnviarREGISTRAR"
                 android:layout_width="match_parent"
@@ -97,7 +95,6 @@
                 android:text="Registrar"
                 android:textColor="@android:color/white" />
         </LinearLayout>
-
     </LinearLayout>
 
     <LinearLayout
@@ -105,7 +102,6 @@
         android:layout_height="215dp"
         android:orientation="vertical"
         android:padding="10dp">
-
     </LinearLayout>
 
 </LinearLayout>

@@ -2,4 +2,13 @@
     <string name="app_name">SW2</string>
     <string name="title_activity_maps">Map</string>
     <dimen name="asd">10dp</dimen>
+    <string name="title_activity_menu_principal">menu_principal</string>
+    <string name="title_home">Home</string>
+    <string name="title_afiliacion">Afiliacion</string>
+    <string name="title_busqueada">Busqueada</string>
+    <string name="title_Contratos">Contratos</string>
+    <string name="title_activity_navagation_main_bottom_bar">navagation_main_bottom_bar</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
 </resources>
