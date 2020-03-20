@@ -6,8 +6,8 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:ems="10"
+    android:background="@color/Negro"
     tools:context=".LoginActivity">
-
     <ProgressBar
         android:id="@+id/progressBar2"
         style="?android:attr/progressBarStyle"
@@ -18,46 +18,49 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="239dp"
-
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="15dp">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="185dp"
+            android:layout_width="329dp"
+            android:layout_height="142dp"
             android:layout_marginTop="40dp"
             app:srcCompat="@drawable/holy_burger_logo" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="302dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <EditText
             android:id="@+id/editUser"
             style="@android:style/Widget.Material.EditText"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_margin="10dp"
             android:background="@drawable/backwithborder"
             android:ellipsize="start"
             android:ems="10"
             android:hint="CorreoElectronico"
             android:inputType="textPersonName"
-            android:paddingLeft="20dp" />
+            android:paddingLeft="20dp"
+            android:textSize="20dp" />
+
         <EditText
             android:id="@+id/editPassword"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_margin="10dp"
             android:background="@drawable/backwithborder"
             android:ems="10"
             android:hint=".........."
             android:inputType="textPassword"
             android:paddingLeft="20dp"
-            android:textSize="30dp" />
+            android:textSize="20dp" />
+
         <TextView
             android:id="@+id/textforgotpassword"
             android:layout_width="match_parent"
@@ -66,12 +69,14 @@
             android:gravity="center"
             android:onClick="forgotPassword"
             android:text="Olvidaste tu contraseña ?"
-            android:textColor="@color/Negro"
+            android:textColor="@color/white"
             android:textSize="24dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="144dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <Button
                 android:id="@+id/Login"
                 android:layout_width="156dp"
@@ -83,6 +88,7 @@
                 android:padding="15dp"
                 android:text="Iniciar sesion"
                 android:textColor="@android:color/white" />
+
             <Button
                 android:id="@+id/EnviarREGISTRAR"
                 android:layout_width="match_parent"
@@ -97,11 +103,9 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <pl.droidsonroids.gif.GifImageView
         android:layout_width="match_parent"
-        android:layout_height="215dp"
-        android:orientation="vertical"
-        android:padding="10dp">
-    </LinearLayout>
+        android:layout_height="match_parent"
+        android:background="@drawable/fire_login"></pl.droidsonroids.gif.GifImageView>
 
 </LinearLayout>

@@ -35,7 +35,6 @@
         android:id="@+id/textApellidos"
         android:layout_width="@dimen/Ancho_editetext_register"
         android:layout_height="@dimen/Altura_editetext_register"
-
         android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="Apellidop"
