@@ -2,16 +2,22 @@ package com.example.sw2.framents
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Adapter
 import android.widget.ListView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.sw2.Clases.AdaptadorListView
 import com.example.sw2.Clases.ServicioListView
 import com.example.sw2.R
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.*
 
 class HomeFragment: Fragment() {
@@ -41,10 +47,28 @@ class HomeFragment: Fragment() {
         adaptador = AdaptadorListView(activity,Lista!!)
         ListView?.adapter = adaptador
 
+
+        retrieveDataFromFireBase()
+
         return inflater.inflate(R.layout.fragment_home,container,false)
 
 
 
+
+    }
+
+    fun retrieveDataFromFireBase(){
+        val reff  = FirebaseDatabase.getInstance().getReference().child(    "Servicios").child("-M2zHQllD_lB0er61cMj")
+        Log.d("datos",reff.toString())
+        val postListener = object :  ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+            override fun onDataChange(p0: DataSnapshot) {
+                Toast.makeText(context,p0.child("distrito").value.toString(),Toast.LENGTH_LONG).show()
+            }
+        }
+        reff.addValueEventListener(postListener)
 
     }
 

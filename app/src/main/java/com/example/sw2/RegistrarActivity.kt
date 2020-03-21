@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.example.sw2.Clases.ServicioListView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
@@ -40,10 +41,10 @@ class RegistrarActivity : AppCompatActivity() {
         database = FirebaseDatabase.getInstance()
         auth = FirebaseAuth.getInstance()
 
-        dbReference = database.reference.child("message")
+        /*dbReference = database.reference.child("message")
         dbReference.setValue("Hola mundo")
 
-
+*/
         dbReference = database.reference.child("User")
     }
     fun register(view:View){
@@ -55,6 +56,10 @@ class RegistrarActivity : AppCompatActivity() {
         val email: String = txtEmail.text.toString()
         val password: String = txtPassword.text.toString()
 
+/*
+        var postRef : DatabaseReference = database.reference.child("Servicios")
+        var newPost :DatabaseReference = postRef.push()*/
+
         if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(lastname) &&
             !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)){
                 progressBar.visibility = View.VISIBLE
@@ -63,14 +68,14 @@ class RegistrarActivity : AppCompatActivity() {
                 addOnCompleteListener(this){
                 task ->
                     if(task.isComplete){
-                        Toast.makeText(this,"gosu",Toast.LENGTH_SHORT).show()
+
                         val user : FirebaseUser?= auth.currentUser
                         VerifyEmail(user)
 
                         val userBD = dbReference.child(user?.uid.toString())
-
                         userBD.child("Name").setValue(name)
                         userBD.child("LastName").setValue(lastname)
+                        userBD.child("email").setValue(email)
                         action()
 
                     }else{

@@ -38,7 +38,6 @@ class AdaptadorListView(var contexto : FragmentActivity?, items:ArrayList<Servic
 
         return vista!!
 
-
     }
 
     override fun getItem(p0: Int): Any {

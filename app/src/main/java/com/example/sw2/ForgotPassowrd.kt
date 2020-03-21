@@ -22,16 +22,6 @@ class ForgotPassowrd : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         progressbar = findViewById(R.id.progressBar3)
 
-
-
-
-
-
-
-
-
-
-
     }
     fun send(view: View){
         val email = txtEmail.text.toString()
