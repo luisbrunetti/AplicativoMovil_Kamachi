@@ -20,6 +20,10 @@ class AdaptadorListView(var contexto : FragmentActivity?, items:ArrayList<Servic
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
         var viewHolde : ViewHolder? = null
         var vista: View? =  p1
+
+
+
+
         Toast.makeText(contexto,vista.toString(),Toast.LENGTH_LONG).show()
         if(vista ==null){
             vista =LayoutInflater.from(contexto).inflate(R.layout.template_listview_homefragment,null)
