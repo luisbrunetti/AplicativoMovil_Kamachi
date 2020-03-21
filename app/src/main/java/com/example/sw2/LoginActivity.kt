@@ -10,6 +10,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
+import com.example.sw2.framents.HomeFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 
@@ -21,6 +22,9 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var pogressBarLogin: ProgressBar
     private lateinit var mAuthListener : FirebaseAuth
     private lateinit var auth: FirebaseAuth
+
+    private var usuarioProp: String  = "luisbruno777@gmail.com"
+    private var contraseñaProp:String = "123456"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -53,9 +57,12 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginUser() {
-
+        /*
         val user: String = txtUser.text.toString()
-        val password: String = txtPassword.text.toString()
+        val password: String = txtPassword.text.toString()*/
+        val user:String = usuarioProp
+        val password:String = contraseñaProp
+
 
 
         auth = FirebaseAuth.getInstance()
@@ -65,8 +72,9 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, "entre a loquear", Toast.LENGTH_SHORT).show()
             auth.signInWithEmailAndPassword(user, password).addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
-                    action()
+                    var intent = Intent(this,MainActivity::class.java)
+                    intent.putExtra("NombreUsuario",user)
+                    action(intent)
                 } else {
                     Toast.makeText(this, "Error en autotentificaio", Toast.LENGTH_SHORT).show()
 
@@ -78,9 +86,8 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun action() {
-        startActivity(Intent(this, MainActivity::class.java))
-
+    private fun action(intent:Intent) {
+        startActivity(intent)
     }
 }
 

@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:ems="10"
-    android:background="@color/Negro"
+    android:background="@color/white"
     tools:context=".LoginActivity">
     <ProgressBar
         android:id="@+id/progressBar2"
@@ -24,7 +24,7 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="329dp"
+            android:layout_width="wrap_content"
             android:layout_height="142dp"
             android:layout_marginTop="40dp"
             app:srcCompat="@drawable/holy_burger_logo" />
@@ -68,9 +68,9 @@
             android:layout_margin="10dp"
             android:gravity="center"
             android:onClick="forgotPassword"
-            android:text="Olvidaste tu contraseña ?"
-            android:textColor="@color/white"
-            android:textSize="24dp" />
+            android:text="¿Olvidaste tu contraseña?"
+            android:textColor="@color/Negro"
+            android:textSize="20dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -103,9 +103,5 @@
         </LinearLayout>
     </LinearLayout>
 
-    <pl.droidsonroids.gif.GifImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/fire_login"></pl.droidsonroids.gif.GifImageView>
 
 </LinearLayout>

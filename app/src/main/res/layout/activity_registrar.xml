@@ -19,17 +19,32 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.368" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="325dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="32dp"
+        android:text="Ingresa los siguientes datos para registrarte"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
+
     <EditText
         android:id="@+id/textNombre"
         android:layout_width="@dimen/Ancho_editetext_register"
         android:layout_height="@dimen/Altura_editetext_register"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/backwithborder"
         android:ems="10"
         android:hint="Nombre"
+        android:paddingLeft="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/textView"></EditText>
 
     <EditText
         android:id="@+id/textApellidos"
@@ -37,6 +52,8 @@
         android:layout_height="@dimen/Altura_editetext_register"
         android:layout_marginTop="24dp"
         android:ems="10"
+        android:paddingLeft="20dp"
+        android:background="@drawable/backwithborder"
         android:hint="Apellidop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -47,8 +64,10 @@
         android:id="@+id/txtCorreo"
         android:layout_width="@dimen/Ancho_editetext_register"
         android:layout_height="@dimen/Altura_editetext_register"
+        android:paddingLeft="20dp"
         android:layout_marginTop="24dp"
         android:ems="10"
+        android:background="@drawable/backwithborder"
         android:hint="Correo"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +79,8 @@
         android:id="@+id/txtPassword"
         android:layout_width="@dimen/Ancho_editetext_register"
         android:layout_height="@dimen/Altura_editetext_register"
-
+        android:paddingLeft="20dp"
+        android:background="@drawable/backwithborder"
         android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="Contraseña"
@@ -75,14 +95,13 @@
         android:layout_width="329dp"
         android:layout_height="46dp"
 
-        android:background="@color/colorPrimary"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/button_border_registrar"
         android:onClick="register"
-        android:text="Crear cuenta "
+        android:text="Crear cuenta"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPassword"
-        app:layout_constraintVertical_bias="0.143" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

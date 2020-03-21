@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,24 +9,35 @@
 
     <ProgressBar
         android:id="@+id/progressBar3"
-        android:indeterminate="true"
-        android:visibility="gone"
-        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/txtemail"
-        android:layout_width="match_parent"
+        android:layout_width="387dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="236dp"
         android:ems="10"
         android:hint="Correo electronico"
         android:inputType="textPersonName"
-        android:layout_height="wrap_content" ></EditText>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></EditText>
+
     <Button
-        android:onClick="send"
         android:id="@+id/buttonforgotpassword"
-        android:layout_width="match_parent"
-        android:text="Enviar"
+        android:layout_width="358dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="56dp"
         android:background="@color/colorPrimary"
-        android:layout_height="wrap_content" ></Button>
-</LinearLayout>
+        android:onClick="send"
+        android:text="Enviar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtemail"
+        app:layout_constraintVertical_bias="0.0"></Button>
+</androidx.constraintlayout.widget.ConstraintLayout>
