@@ -15,8 +15,6 @@ import com.example.sw2.R
 class AdaptadorListView(var contexto : FragmentActivity?, items:ArrayList<ServicioListView>):BaseAdapter() {
     var item: ArrayList<ServicioListView> = ArrayList(items)
 
-
-
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
         var viewHolde : ViewHolder? = null
         var vista: View? =  p1

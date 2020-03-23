@@ -6,11 +6,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
-import android.widget.ListView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.sw2.Clases.AdaptadorListView
 import com.example.sw2.Clases.ServicioListView
 import com.example.sw2.R
@@ -26,9 +24,8 @@ class HomeFragment: Fragment() {
     private var adaptador: AdaptadorListView? =null
     private lateinit var intentRecive : String
     var Lista: ArrayList<ServicioListView>? = null
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         Lista = ArrayList()
         Lista?.add(ServicioListView("Servicio Electrico" ,"SJL",0))
         Lista?.add(ServicioListView("Servicio Mecanico" ,"San Luis",1))
@@ -43,20 +40,18 @@ class HomeFragment: Fragment() {
         * ImageView imageView = (ImageView) view.findViewById(R.id.my_image);
         * return view;
         * }
-         */
         adaptador = AdaptadorListView(activity,Lista!!)
         ListView?.adapter = adaptador
-
-
-        retrieveDataFromFireBase()
-
+*/
+        ListView?.adapter = activity?.let {
+            ArrayAdapter(
+                it,R.layout.support_simple_spinner_dropdown_item,
+                Lista!!
+            )
+        }
+        //retrieveDataFromFireBase()
         return inflater.inflate(R.layout.fragment_home,container,false)
-
-
-
-
     }
-
     fun retrieveDataFromFireBase(){
         val reff  = FirebaseDatabase.getInstance().getReference().child(    "Servicios").child("-M2zHQllD_lB0er61cMj")
         Log.d("datos",reff.toString())
