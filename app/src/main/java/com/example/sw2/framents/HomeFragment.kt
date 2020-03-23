@@ -38,6 +38,9 @@ class HomeFragment: Fragment() {
         * Bundle savedInstanceState) {
         * View view = inflater.inflate(R.layout.testclassfragment, container, false);
         * ImageView imageView = (ImageView) view.findViewById(R.id.my_image);
+         *
+         *
+         *
         * return view;
         * }
         adaptador = AdaptadorListView(activity,Lista!!)
