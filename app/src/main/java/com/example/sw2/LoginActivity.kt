@@ -62,11 +62,7 @@ class LoginActivity : AppCompatActivity() {
         val password: String = txtPassword.text.toString()*/
         val user:String = usuarioProp
         val password:String = contraseñaProp
-
-
-
         auth = FirebaseAuth.getInstance()
-
         if (!(TextUtils.isEmpty(user) && TextUtils.isEmpty(password))) {
             pogressBarLogin.visibility = View.VISIBLE
             Toast.makeText(this, "entre a loquear", Toast.LENGTH_SHORT).show()
@@ -76,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
                     intent.putExtra("NombreUsuario",user)
                     action(intent)
                 } else {
-                    Toast.makeText(this, "Error en autotentificaio", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Error en autotentificación", Toast.LENGTH_SHORT).show()
                 }
 
             }

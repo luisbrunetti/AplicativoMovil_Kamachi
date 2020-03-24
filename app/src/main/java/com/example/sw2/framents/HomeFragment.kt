@@ -20,22 +20,16 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-
-
 class HomeFragment: Fragment() {
     private lateinit var myRecyclyview : RecyclerView
     private lateinit var intentRecive : String
     lateinit var v:View
     lateinit var lstServicios : ArrayList<ServicioListView>
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = inflater.inflate(R.layout.fragment_home,container,false)
         myRecyclyview = v.findViewById(R.id.recycleview_homefragment)
-        var  recycleAdapter = ReclyceViewAdapter(requireActivity(),lstServicios)
-        myRecyclyview.layoutManager = LinearLayoutManager(context)
-        myRecyclyview.adapter = recycleAdapter
+        retrieveDataFromFireBase()
         return v
-
         /**
          * public View onCreateView(LayoutInflater inflater,
         * ViewGroup container,
@@ -45,17 +39,30 @@ class HomeFragment: Fragment() {
         * return view;
         * }*/
         //retrieveDataFromFireBase()
-        return view
     }
-    fun retrieveDataFromFireBase(){
-        val reff  = FirebaseDatabase.getInstance().getReference().child(    "Servicios").child("-M2zHQllD_lB0er61cMj")
+    private fun retrieveDataFromFireBase(){
+        val reff  = FirebaseDatabase.getInstance().reference.child(    "Servicios")
         Log.d("datos",reff.toString())
         val postListener = object :  ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
             override fun onDataChange(p0: DataSnapshot) {
-                Toast.makeText(context,p0.child("distrito").value.toString(),Toast.LENGTH_LONG).show()
+                //Toast.makeText(context,p0.child("distrito").value.toString(),Toast.LENGTH_LONG).show()
+                for(h in p0.children){
+                    var a : ServicioListView? = h.getValue(ServicioListView::class.java)
+                    if (a != null) {
+                        /*Toast.makeText(context,a.NombreTrabaj ,Toast.LENGTH_LONG).show()
+                        Toast.makeText(context,a.Distrito,Toast.LENGTH_LONG).show()
+                        Toast.makeText(context,a.Imagen,Toast.LENGTH_LONG).show()*/
+                        lstServicios.add(a)
+                        var  recycleAdapter = ReclyceViewAdapter(requireActivity(),lstServicios)
+                        myRecyclyview.layoutManager = LinearLayoutManager(context)
+                        myRecyclyview.adapter = recycleAdapter
+                    }else{
+                        Toast.makeText(context,"Error al ingresar alguno de los datos",Toast.LENGTH_LONG).show()
+                    }
+                            }
             }
         }
         reff.addValueEventListener(postListener)
@@ -63,15 +70,7 @@ class HomeFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         lstServicios = ArrayList()
-        lstServicios.add(ServicioListView("Servicio electrico","SJL"))
-        lstServicios.add(ServicioListView("Servicio mecanico","SJL"))
-        lstServicios.add(ServicioListView("Servicio mecanico","SJL"))
-        lstServicios.add(ServicioListView("Servicio mecanico","SJL"))
-        lstServicios.add(ServicioListView("Servicio mecanico","SJL"))
-        lstServicios.add(ServicioListView("Servicio mecanico","SJL"))
-        lstServicios.add(ServicioListView("Servicio mecanico","SJL"))
 
     }
 }

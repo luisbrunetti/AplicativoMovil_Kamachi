@@ -1,10 +1,12 @@
 package com.example.sw2.Clases
 
-class ServicioListView(NombreTrabajo:String,Distrito:String){
-    var NombreTrabajo:String? = null
+class ServicioListView(var NT:String = "",var DIST:String = "" ,var Img:String = ""){
     var Distrito:String? = null
+    var NombreTrabaj:String? = null
+    var Imagen:String? = null
     init{
-        this.NombreTrabajo = NombreTrabajo
-        this.Distrito = Distrito
+        this.Distrito = DIST
+        this.NombreTrabaj = NT
+        this.Imagen = Img
     }
 }

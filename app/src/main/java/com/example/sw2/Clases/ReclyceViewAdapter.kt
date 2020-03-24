@@ -14,6 +14,7 @@ class ReclyceViewAdapter(var mcontext:Context, mdata: ArrayList<ServicioListView
     class MyviewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tv_nombreTrabajo: TextView? = null
         var tv_distrito:TextView? = null
+
         init{
             tv_nombreTrabajo = itemView.findViewById(R.id.textTrabajo)
             tv_distrito = itemView.findViewById(R.id.textDistrito)
@@ -28,7 +29,8 @@ class ReclyceViewAdapter(var mcontext:Context, mdata: ArrayList<ServicioListView
         return mdata.size
     }
     override fun onBindViewHolder(holder: MyviewHolder, position: Int) {
-        holder.tv_nombreTrabajo?.text = mdata[position].NombreTrabajo
+        holder.tv_nombreTrabajo?.text = mdata[position].NombreTrabaj
         holder.tv_distrito?.text= mdata[position].Distrito
+        //holder.tv_distrito?.text = mdata[position].Imagen
     }
 }
