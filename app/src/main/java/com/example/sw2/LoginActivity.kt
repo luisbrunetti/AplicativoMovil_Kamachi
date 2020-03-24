@@ -77,7 +77,6 @@ class LoginActivity : AppCompatActivity() {
                     action(intent)
                 } else {
                     Toast.makeText(this, "Error en autotentificaio", Toast.LENGTH_SHORT).show()
-
                 }
 
             }
@@ -88,6 +87,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun action(intent:Intent) {
         startActivity(intent)
+        pogressBarLogin.visibility = View.GONE
     }
 }
 

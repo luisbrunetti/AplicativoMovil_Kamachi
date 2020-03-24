@@ -18,11 +18,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".navagation_main_bottom_ba"
-            android:label="@string/title_activity_navagation_main_bottom_bar" />
-            android:name=".menu_principal"
-            android:label="@string/title_activity_menu_principal" />
         <activity android:name=".ForgotPassowrd" />
         <activity android:name=".RegistrarActivity" />
         <activity android:name=".MainActivity" />
