@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="142dp"
             android:layout_marginTop="40dp"
-            app:srcCompat="@drawable/holy_burger_logo" />
+            app:srcCompat="@drawable/holy_burger_log" />
     </LinearLayout>
 
     <LinearLayout

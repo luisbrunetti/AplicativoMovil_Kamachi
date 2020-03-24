@@ -9,11 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sw2.R
 
 class ReclyceViewAdapter(var mcontext:Context, mdata: ArrayList<ServicioListView>): RecyclerView.Adapter<ReclyceViewAdapter.MyviewHolder>() {
-    private var mdata : ArrayList<ServicioListView>
-    init{
+    private var mdata : ArrayList<ServicioListView> = mdata
 
-        this.mdata = mdata
-    }
     class MyviewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tv_nombreTrabajo: TextView? = null
         var tv_distrito:TextView? = null
@@ -22,7 +19,6 @@ class ReclyceViewAdapter(var mcontext:Context, mdata: ArrayList<ServicioListView
             tv_distrito = itemView.findViewById(R.id.textDistrito)
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyviewHolder {
         val v : View  = LayoutInflater.from(mcontext).inflate(R.layout.template_listview_homefragment,parent,false)
         val vHolder = MyviewHolder(v)

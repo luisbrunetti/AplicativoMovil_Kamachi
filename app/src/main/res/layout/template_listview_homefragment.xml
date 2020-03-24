@@ -3,8 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_marginTop="10dp"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,17 +24,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textSize="24dp"
-            android:text="Servicio de electricista" />
+            android:text="Servicio de electricista"
+            android:textSize="24dp" />
 
         <TextView
             android:id="@+id/textDistrito"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_gravity="center"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="2dp"
-            android:textSize="18dp"
-            android:text="Distrito : SJL" />
+            android:text="Distrito : SJL"
+            android:textSize="18dp" />
     </LinearLayout>
+
 </LinearLayout>
