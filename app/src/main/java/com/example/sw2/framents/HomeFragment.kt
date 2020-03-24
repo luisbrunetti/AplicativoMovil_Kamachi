@@ -25,6 +25,8 @@ class HomeFragment: Fragment() {
     private lateinit var intentRecive : String
     lateinit var v:View
     lateinit var lstServicios : ArrayList<ServicioListView>
+
+    ///Testeando 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = inflater.inflate(R.layout.fragment_home,container,false)
         myRecyclyview = v.findViewById(R.id.recycleview_homefragment)

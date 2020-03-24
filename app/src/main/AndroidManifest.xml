@@ -7,6 +7,8 @@
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
 
     <application
@@ -17,9 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".navagation_main_bottom_bar"
-            android:label="@string/title_activity_navagation_main_bottom_bar"></activity>
-        <activity
+            android:name=".navagation_main_bottom_ba"
+            android:label="@string/title_activity_navagation_main_bottom_bar" />
             android:name=".menu_principal"
             android:label="@string/title_activity_menu_principal" />
         <activity android:name=".ForgotPassowrd" />

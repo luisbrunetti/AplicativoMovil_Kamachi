@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.sw2.R
 import com.google.android.gms.tasks.OnSuccessListener
@@ -32,8 +33,6 @@ class AfiliacionFragment: Fragment() {
         vista = inflater.inflate(R.layout.fragment_afiliacion,container,false)
         storageRef = FirebaseStorage.getInstance().reference
         botonSubir = vista.findViewById(R.id.buttonsubirImage)
-
-
         botonSubir.setOnClickListener(View.OnClickListener { v ->
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
@@ -41,14 +40,9 @@ class AfiliacionFragment: Fragment() {
         })
         return vista
     }
-
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
-
         if(requestCode == GALERY_INTENT && resultCode == RESULT_OK){
-
             /**
              * ref.putFile(file).addOnSuccessListener (
             object : OnSuccessListener<UploadTask.TaskSnapshot> {
@@ -63,11 +57,12 @@ class AfiliacionFragment: Fragment() {
             val uri :Uri? = data?.data
                 var filePath:StorageReference = storageRef.child("fotosUsuario").child(uri?.lastPathSegment.toString())
             if (uri != null) {
-                filePath.putFile(uri).addOnSuccessListener(taskSnapShot {
+                filePath.putFile(uri).addOnSuccessListener{
+
+                    Toast.makeText(context,"Se hizo exitosamente ",Toast.LENGTH_LONG).show()
+                }
 
 
-
-                } )
             }
         }
     }
