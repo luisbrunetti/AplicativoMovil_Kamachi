@@ -86,12 +86,13 @@ class AfiliacionFragment: Fragment() {
              */
             val uri :Uri? = data?.data
             ImageName = "FotoPerfil"
-            var filePath:StorageReference = storageRef.child("fotosUsuario/"+userID+"/"+ImageName).child(uri?.lastPathSegment.toString())
+            var filePath:StorageReference = storageRef.child("fotosUsuario/"+userID+"/"+ImageName).child("FotoPerfil.jpg")
             Log.d("FilePath - >",uri?.lastPathSegment.toString())
             if (uri != null) {
                 filePath.putFile(uri).addOnSuccessListener{
                     progressbar.visibility = View.VISIBLE
-                    // Obteniendo el URL de descarga de las imagenes
+                    // Obtenie
+                    // ndo el URL de descarga de las imagenes
                     var urlDescarga : Task<Uri>? = it.metadata?.reference?.downloadUrl
                     //Agregando un Listener , ya que (isComplete por si solo no es suficieinte)
                     urlDescarga?.addOnCompleteListener { task: Task<Uri> ->

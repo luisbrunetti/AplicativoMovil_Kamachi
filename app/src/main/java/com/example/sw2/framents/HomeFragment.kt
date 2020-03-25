@@ -1,6 +1,8 @@
 package com.example.sw2.framents
 
 
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,9 +15,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestBuilder
 import com.example.sw2.Clases.ReclyceViewAdapter
 import com.example.sw2.Clases.ServicioListView
 import com.example.sw2.R
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -64,20 +70,18 @@ class HomeFragment: Fragment() {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
             override fun onDataChange(p0: DataSnapshot) {
-                //Toast.makeText(context,p0.child("distrito").value.toString(),Toast.LENGTH_LONG).show()
                 for(h in p0.children){
                     Log.d("#key ", h.key.toString())
-
                     var a : ServicioListView? = h.getValue(ServicioListView::class.java)
                     if (a != null) {
                         /*Toast.makeText(context,a.NombreTrabaj ,Toast.LENGTH_LONG).show()
                         Toast.makeText(context,a.Distrito,Toast.LENGTH_LONG).show()
                         Toast.makeText(context,a.Imagen,Toast.LENGTH_LONG).show()*/
+
                         lstServicios.add(a)
-                        DownloadImagsToRecycleView()
-                        var  recycleAdapter = ReclyceViewAdapter(requireActivity(),lstServicios)
-                        myRecyclyview.layoutManager = LinearLayoutManager(context)
-                        myRecyclyview.adapter = recycleAdapter
+                        DownloadImagsToRecycleView(h,a)
+
+
                     }else{
                         Toast.makeText(context,"Error al ingresar alguno de los datos",Toast.LENGTH_LONG).show()
                     }
@@ -86,9 +90,23 @@ class HomeFragment: Fragment() {
         }
         reff.addValueEventListener(postListener)
     }
-    private fun DownloadImagsToRecycleView() {
-        var filepath:StorageReference =storageRef.child("ImagenServicios")
-        filepath.
+    private fun DownloadImagsToRecycleView(h:DataSnapshot,a:ServicioListView?) {
+        var key : String = h.key.toString()
+        var drawable:ImageView? = null
+        drawable?.setImageResource(R.drawable.backwithborder)
+        Log.d("Key de h -> ",storageRef.child("ImagenServicios/"+key).
+            child("Fotoservicio.jpg").downloadUrl.toString())
+        var filepath: Task<Uri> =storageRef.child("ImagenServicios/"+key).
+                child("Fotoservicio.jpg").downloadUrl.addOnSuccessListener(OnSuccessListener {
+            if (it != null) {
+                    var  recycleAdapter = ReclyceViewAdapter(requireActivity(),lstServicios,it)
+                    a?.ImagenView = drawable
+                    myRecyclyview.layoutManager = LinearLayoutManager(context)
+                    myRecyclyview.adapter = recycleAdapter
+                }
+
+
+        })
 
 
     }
