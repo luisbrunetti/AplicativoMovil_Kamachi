@@ -87,6 +87,7 @@ class AfiliacionFragment: Fragment() {
             val uri :Uri? = data?.data
             ImageName = "FotoPerfil"
             var filePath:StorageReference = storageRef.child("fotosUsuario/"+userID+"/"+ImageName).child(uri?.lastPathSegment.toString())
+            Log.d("FilePath - >",uri?.lastPathSegment.toString())
             if (uri != null) {
                 filePath.putFile(uri).addOnSuccessListener{
                     progressbar.visibility = View.VISIBLE

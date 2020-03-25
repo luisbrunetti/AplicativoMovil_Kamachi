@@ -74,7 +74,6 @@ class LoginActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(this, "Error en autotentificación", Toast.LENGTH_SHORT).show()
                 }
-
             }
         }else{
             Toast.makeText(this, "Si sabes que gobiernas ", Toast.LENGTH_SHORT).show()

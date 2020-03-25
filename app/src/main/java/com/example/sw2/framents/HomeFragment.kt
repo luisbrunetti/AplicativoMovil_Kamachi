@@ -16,18 +16,34 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sw2.Clases.ReclyceViewAdapter
 import com.example.sw2.Clases.ServicioListView
 import com.example.sw2.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+
 class HomeFragment: Fragment() {
     private lateinit var myRecyclyview : RecyclerView
     private lateinit var intentRecive : String
+    //Firebaser variables
+    private lateinit var storageRef: StorageReference
+    private lateinit var userFirebase:FirebaseUser
+    private lateinit var auth: FirebaseAuth
     lateinit var v:View
     lateinit var lstServicios : ArrayList<ServicioListView>
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = inflater.inflate(R.layout.fragment_home,container,false)
         myRecyclyview = v.findViewById(R.id.recycleview_homefragment)
+
+        //Inicialización Firebaase//
+        storageRef = FirebaseStorage.getInstance().reference
+        auth = FirebaseAuth.getInstance()
+        userFirebase = auth.currentUser!!
+        ///////////////////////////////////
+
         retrieveDataFromFireBase()
         return v
         /**
@@ -50,12 +66,15 @@ class HomeFragment: Fragment() {
             override fun onDataChange(p0: DataSnapshot) {
                 //Toast.makeText(context,p0.child("distrito").value.toString(),Toast.LENGTH_LONG).show()
                 for(h in p0.children){
+                    Log.d("#key ", h.key.toString())
+
                     var a : ServicioListView? = h.getValue(ServicioListView::class.java)
                     if (a != null) {
                         /*Toast.makeText(context,a.NombreTrabaj ,Toast.LENGTH_LONG).show()
                         Toast.makeText(context,a.Distrito,Toast.LENGTH_LONG).show()
                         Toast.makeText(context,a.Imagen,Toast.LENGTH_LONG).show()*/
                         lstServicios.add(a)
+                        DownloadImagsToRecycleView()
                         var  recycleAdapter = ReclyceViewAdapter(requireActivity(),lstServicios)
                         myRecyclyview.layoutManager = LinearLayoutManager(context)
                         myRecyclyview.adapter = recycleAdapter
@@ -67,10 +86,35 @@ class HomeFragment: Fragment() {
         }
         reff.addValueEventListener(postListener)
     }
+    private fun DownloadImagsToRecycleView() {
+        var filepath:StorageReference =storageRef.child("ImagenServicios")
+        filepath.
 
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lstServicios = ArrayList()
+
+
+        /**
+         *  var urlDescarga : Task<Uri>? = it.metadata?.reference?.downloadUrl
+        //Agregando un Listener , ya que (isComplete por si solo no es suficieinte)
+        urlDescarga?.addOnCompleteListener { task: Task<Uri> ->
+        var Uri: Uri? = urlDescarga?.result
+        Log.d("urlDescarga",Uri.toString())
+        if (urlDescarga != null) {
+        if (task.isComplete && task.isSuccessful) {
+        Glide.with(vista)
+        .load(Uri)
+        .fitCenter()
+        .centerCrop()
+        .into(imagenDownload)
+        Toast.makeText(context, "Se hizo exitosamente ", Toast.LENGTH_LONG)
+        .show()
+        }
+        }
+         */
 
     }
 }
