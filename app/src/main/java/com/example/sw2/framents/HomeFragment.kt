@@ -38,8 +38,8 @@ class HomeFragment: Fragment() {
     private lateinit var storageRef: StorageReference
     private lateinit var userFirebase:FirebaseUser
     private lateinit var auth: FirebaseAuth
-    lateinit var v:View
-    lateinit var lstServicios : ArrayList<ServicioListView>
+    private lateinit var v:View
+    private lateinit var lstServicios : ArrayList<ServicioListView>
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = inflater.inflate(R.layout.fragment_home,container,false)
         myRecyclyview = v.findViewById(R.id.recycleview_homefragment)
@@ -49,7 +49,6 @@ class HomeFragment: Fragment() {
         auth = FirebaseAuth.getInstance()
         userFirebase = auth.currentUser!!
         ///////////////////////////////////
-
         retrieveDataFromFireBase()
         return v
         /**
@@ -64,7 +63,6 @@ class HomeFragment: Fragment() {
     }
     private fun retrieveDataFromFireBase(){
         val reff  = FirebaseDatabase.getInstance().reference.child(    "Servicios")
-        Log.d("datos",reff.toString())
         val postListener = object :  ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -74,47 +72,40 @@ class HomeFragment: Fragment() {
                     Log.d("#key ", h.key.toString())
                     var a : ServicioListView? = h.getValue(ServicioListView::class.java)
                     if (a != null) {
-                        /*Toast.makeText(context,a.NombreTrabaj ,Toast.LENGTH_LONG).show()
-                        Toast.makeText(context,a.Distrito,Toast.LENGTH_LONG).show()
-                        Toast.makeText(context,a.Imagen,Toast.LENGTH_LONG).show()*/
-
-                        lstServicios.add(a)
-                        DownloadImagsToRecycleView(h,a)
-
-
+                        DownloadImagsToRecycleView(h,a).addOnCompleteListener {
+                            task ->
+                            if (task.isComplete) {
+                                val recycleAdapter =
+                                    ReclyceViewAdapter(requireActivity(), lstServicios)
+                                myRecyclyview.layoutManager = LinearLayoutManager(context)
+                                myRecyclyview.adapter = recycleAdapter
+                            }
+                        }
                     }else{
                         Toast.makeText(context,"Error al ingresar alguno de los datos",Toast.LENGTH_LONG).show()
                     }
-                            }
+                }
             }
         }
         reff.addValueEventListener(postListener)
     }
-    private fun DownloadImagsToRecycleView(h:DataSnapshot,a:ServicioListView?) {
+    private fun DownloadImagsToRecycleView(h:DataSnapshot,a:ServicioListView?): Task<Uri> {
         var key : String = h.key.toString()
-        var drawable:ImageView? = null
-        drawable?.setImageResource(R.drawable.backwithborder)
-        Log.d("Key de h -> ",storageRef.child("ImagenServicios/"+key).
-            child("Fotoservicio.jpg").downloadUrl.toString())
         var filepath: Task<Uri> =storageRef.child("ImagenServicios/"+key).
-                child("Fotoservicio.jpg").downloadUrl.addOnSuccessListener(OnSuccessListener {
+            child("Fotoservicio.jpg").downloadUrl.addOnSuccessListener(OnSuccessListener {
             if (it != null) {
-                    var  recycleAdapter = ReclyceViewAdapter(requireActivity(),lstServicios,it)
-                    a?.ImagenView = drawable
-                    myRecyclyview.layoutManager = LinearLayoutManager(context)
-                    myRecyclyview.adapter = recycleAdapter
+                a?.UriImagen= it
+                Log.d("Objeto",a.toString())
+                if (a != null) {
+                    lstServicios.add(a)
                 }
-
-
+            }
         })
-
-
+        return filepath
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lstServicios = ArrayList()
-
-
         /**
          *  var urlDescarga : Task<Uri>? = it.metadata?.reference?.downloadUrl
         //Agregando un Listener , ya que (isComplete por si solo no es suficieinte)
@@ -133,6 +124,5 @@ class HomeFragment: Fragment() {
         }
         }
          */
-
     }
 }

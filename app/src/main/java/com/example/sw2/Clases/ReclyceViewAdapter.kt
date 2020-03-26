@@ -2,6 +2,7 @@ package com.example.sw2.Clases
 
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +13,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.sw2.R
 
-class ReclyceViewAdapter(var mcontext:Context, mdata: ArrayList<ServicioListView> , it: Uri): RecyclerView.Adapter<ReclyceViewAdapter.MyviewHolder>() {
+class ReclyceViewAdapter(var mcontext:Context, mdata: ArrayList<ServicioListView>): RecyclerView.Adapter<ReclyceViewAdapter.MyviewHolder>() {
     private var mdata : ArrayList<ServicioListView> = mdata
-    private var it : Uri = it
     class MyviewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tv_nombreTrabajo: TextView? = null
         var tv_distrito:TextView? = null
@@ -38,10 +38,12 @@ class ReclyceViewAdapter(var mcontext:Context, mdata: ArrayList<ServicioListView
         holder.tv_nombreTrabajo?.text = mdata[position].NombreTrabaj
         holder.tv_distrito?.text= mdata[position].Distrito
         //holder.tv_distrito?.text = mdata[position].Imagen
+        Log.d("UriImagen ",mdata[position].UriImagen.toString())
+        holder.tv_ImagenView.setBackgroundResource(R.drawable.circular_imageview)
         Glide.with(mcontext)
-            .load(it)
+            .load(mdata[position].UriImagen)
             .fitCenter()
-            .apply(RequestOptions.overrideOf(200,180))
+            .apply(RequestOptions.overrideOf(160,180))
             .centerCrop()
             .into(holder.tv_ImagenView)
 

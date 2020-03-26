@@ -28,9 +28,21 @@ class RegistrarActivity : AppCompatActivity() {
     private lateinit var database:FirebaseDatabase
     private lateinit var auth:FirebaseAuth
 
+    //Testeando
+    private lateinit var Array:ArrayList<ServicioListView>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registrar)
+        Array = ArrayList()
+        Array.add(ServicioListView("Servicio de gas","Los Olivos","",null,"981077300",5,null))
+        Array.add(ServicioListView("Servicio de sanidad","La molina","",null,"981077301",4,null))
+        Array.add(ServicioListView("Servicio de transporte público","Comas","",null,"981077302",3,null))
+        Array.add(ServicioListView("Servicio de telecomunicaciones","Surco","",null,"981077303",4,null))
+        Array.add(ServicioListView("Servicio de transporte público","Surquillo","",null,"981077304",5,null))
+        Array.add(ServicioListView("Servicio de vivienda pública","San Juan de Miraflores","",null,"981077305",4,null))
+        Array.add(ServicioListView("Servicio de educacion","Barranco","",null,"981077306",3,null))
+        Array.add(ServicioListView("Servicio de gas","Pueblo Libre","",null,"981077307",5,null))
 
         txtName = findViewById(R.id.textNombre)
         txLasttName = findViewById(R.id.textApellidos)
@@ -40,15 +52,17 @@ class RegistrarActivity : AppCompatActivity() {
 
         database = FirebaseDatabase.getInstance()
         auth = FirebaseAuth.getInstance()
-
+        IngresandoDatosPrueba()
         /*dbReference = database.reference.child("message")
         dbReference.setValue("Hola mundo")
-
 */
         dbReference = database.reference.child("User")
     }
     fun register(view:View){
         CreateNewAccount()
+    }
+    private fun IngresandoDatosPrueba(){
+
     }
     private fun CreateNewAccount(){
         val name:String = txtName.text.toString()

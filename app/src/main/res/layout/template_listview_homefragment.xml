@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp">
+    android:layout_marginTop="10dp"
+    >
 
     <ImageView
         android:id="@+id/imageViewHolder"
         android:layout_width="228dp"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
+        android:layout_weight="4"
+        android:background="@drawable/backwithborder"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <LinearLayout
@@ -24,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
             android:text="Servicio de electricista"
             android:textSize="24dp" />
 
@@ -32,7 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginBottom="2dp"
             android:text="Distrito : SJL"
             android:textSize="18dp" />
