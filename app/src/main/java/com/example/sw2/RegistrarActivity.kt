@@ -5,11 +5,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.sw2.Clases.ServicioListView
+import com.example.sw2.Clases.ServicioListViewTesteo
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
@@ -29,21 +31,11 @@ class RegistrarActivity : AppCompatActivity() {
     private lateinit var auth:FirebaseAuth
 
     //Testeando
-    private lateinit var Array:ArrayList<ServicioListView>
-
+    public lateinit var Array:ArrayList<ServicioListViewTesteo>
+    private lateinit var dbReferenceServicios : DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registrar)
-        Array = ArrayList()
-        Array.add(ServicioListView("Servicio de gas","Los Olivos","",null,"981077300",5,null))
-        Array.add(ServicioListView("Servicio de sanidad","La molina","",null,"981077301",4,null))
-        Array.add(ServicioListView("Servicio de transporte público","Comas","",null,"981077302",3,null))
-        Array.add(ServicioListView("Servicio de telecomunicaciones","Surco","",null,"981077303",4,null))
-        Array.add(ServicioListView("Servicio de transporte público","Surquillo","",null,"981077304",5,null))
-        Array.add(ServicioListView("Servicio de vivienda pública","San Juan de Miraflores","",null,"981077305",4,null))
-        Array.add(ServicioListView("Servicio de educacion","Barranco","",null,"981077306",3,null))
-        Array.add(ServicioListView("Servicio de gas","Pueblo Libre","",null,"981077307",5,null))
-
         txtName = findViewById(R.id.textNombre)
         txLasttName = findViewById(R.id.textApellidos)
         txtEmail = findViewById(R.id.txtCorreo)
@@ -52,16 +44,33 @@ class RegistrarActivity : AppCompatActivity() {
 
         database = FirebaseDatabase.getInstance()
         auth = FirebaseAuth.getInstance()
-        IngresandoDatosPrueba()
+
         /*dbReference = database.reference.child("message")
         dbReference.setValue("Hola mundo")
 */
         dbReference = database.reference.child("User")
+
+        //IngresandoDatosPrueba()
     }
     fun register(view:View){
         CreateNewAccount()
     }
     private fun IngresandoDatosPrueba(){
+        dbReferenceServicios = database.reference.child("Servicios")
+        Array = ArrayList()
+        Array.add(ServicioListViewTesteo("","Servicio de gas","Los Olivos","",null,"981077300",5,null))
+        Array.add(ServicioListViewTesteo("","Servicio de sanidad","La molina","",null,"981077301",4,null))
+        Array.add(ServicioListViewTesteo("","Servicio de transporte público","Comas","",null,"981077302",3,null))
+        Array.add(ServicioListViewTesteo("","Servicio de telecomunicaciones","Surco","",null,"981077303",4,null))
+        Array.add(ServicioListViewTesteo("","Servicio de transporte público","Surquillo","",null,"981077304",5,null))
+        Array.add(ServicioListViewTesteo("","Servicio de vivienda pública","San Juan de Miraflores","",null,"981077305",4,null))
+        Array.add(ServicioListViewTesteo("","Servicio de educacion","Barranco","",null,"981077306",3,null))
+        Array.add(ServicioListViewTesteo("","Servicio de gas","Pueblo Libre","",null,"981077307",5,null))
+
+        for(p in Array){
+            dbReferenceServicios.push().setValue(p)
+        }
+
 
     }
     private fun CreateNewAccount(){
@@ -69,11 +78,9 @@ class RegistrarActivity : AppCompatActivity() {
         val lastname:String = txLasttName.text.toString()
         val email: String = txtEmail.text.toString()
         val password: String = txtPassword.text.toString()
-
 /*
         var postRef : DatabaseReference = database.reference.child("Servicios")
         var newPost :DatabaseReference = postRef.push()*/
-
         if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(lastname) &&
             !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)){
                 progressBar.visibility = View.VISIBLE

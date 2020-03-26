@@ -25,21 +25,40 @@
             android:id="@+id/textTrabajo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
-            android:text="Servicio de electricista"
-            android:textSize="24dp" />
+            android:text="Servicio de telecomunicaciones"
+            android:textSize="19dp" />
 
-        <TextView
-            android:id="@+id/textDistrito"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_height="match_parent"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginBottom="2dp"
-            android:text="Distrito : SJL"
-            android:textSize="18dp" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewTituloDistrito"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="8dp"
+
+                android:layout_marginBottom="2dp"
+                android:text="Distrito : "
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/textDistrito"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="8dp"
+
+                android:layout_marginBottom="2dp"
+                android:text="Distrito : SJL"
+                android:textSize="15sp" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

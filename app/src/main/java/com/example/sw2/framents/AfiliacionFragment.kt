@@ -17,9 +17,12 @@ import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
 import com.example.sw2.MainActivity
 import com.example.sw2.R
+import com.example.sw2.RegistrarActivity
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -33,6 +36,7 @@ class AfiliacionFragment: Fragment() {
     private lateinit var authFirbase:FirebaseAuth
     ///Testeando
     private lateinit var imagenDownload : ImageView;
+
     private lateinit var progressbar: ProgressBar;
     companion object{
         private val IMAGE_PICK_CODE :Int = 1000
@@ -126,5 +130,14 @@ class AfiliacionFragment: Fragment() {
                  */
             }
         }
-    }
+    }/*
+    private fun Upload_Imanges_Test(){
+        var reff : DatabaseReference = FirebaseDatabase.getInstance().reference.child("Servicios")
+        ,
+        var R : RegistrarActivity = RegistrarActivity()
+        for(h in R.Array){
+            var key : = h.ke
+        }
+        var filepathImageUpload:StorageReference =storageRef.child("ImagenServicios"/)
+    }*/
 }

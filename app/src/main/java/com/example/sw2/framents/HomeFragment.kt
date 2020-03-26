@@ -70,7 +70,14 @@ class HomeFragment: Fragment() {
             override fun onDataChange(p0: DataSnapshot) {
                 for(h in p0.children){
                     Log.d("#key ", h.key.toString())
-                    var a : ServicioListView? = h.getValue(ServicioListView::class.java)
+                    var a : ServicioListView = ServicioListView("",h.child("nombreTrabaj").value.toString(),
+                        h.child("distrito").value.toString(),
+                        h.child("Imagen").value.toString(),
+                        null,h.child("telefono").value.toString(),
+                        h.child("calificacion").value.toString().toInt(),
+                        null
+                    )
+                   // var a : ServicioListView? = h.getValue(ServicioListView::class.java)
                     if (a != null) {
                         DownloadImagsToRecycleView(h,a).addOnCompleteListener {
                             task ->
