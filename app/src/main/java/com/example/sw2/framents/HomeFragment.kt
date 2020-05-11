@@ -130,6 +130,8 @@ class HomeFragment(): Fragment() , ReclyceViewAdapter.OnClickListener {
             }
         }
         reff.addValueEventListener(postListener)
+
+
     }
     private fun filtrar(str:String?){
         lstServicios.clear()
