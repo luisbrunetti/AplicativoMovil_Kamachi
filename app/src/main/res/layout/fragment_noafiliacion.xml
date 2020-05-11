@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/fondo_herramientas"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/textView_title_noafiliado"
+        android:layout_width="316dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/backwithborder"
+        android:textAlignment="center"
+        android:textSize="28sp" />
+
+    <ImageView
+        android:id="@+id/Imange_noafiliado"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
+        android:layout_below="@id/textView_title_noafiliado"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@mipmap/ic_launcher"></ImageView>
+
+    <TextView
+        android:id="@+id/textdescrip_noafiliado"
+        android:layout_width="353dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Imange_noafiliado"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/backwithborder"
+        android:padding="2dp"
+
+        android:text="Si deseas publicar y dar a conocer tu servicio, inscribete"
+        android:textAlignment="center"
+        android:textColorHighlight="@android:color/holo_orange_light"
+        android:textSize="24sp"></TextView>
+
+    <Button
+        android:id="@+id/button_afiliarse_noafiliado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textdescrip_noafiliado"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/backwithborder"
+        android:onClick="CambiarFragment"
+        android:text="Afiliarse"></Button>
+</RelativeLayout>

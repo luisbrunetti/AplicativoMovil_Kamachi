@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="Altura_editetext_register">50dp</dimen>
+    <dimen name="Ancho_editetext_register">300dp</dimen>
+</resources>

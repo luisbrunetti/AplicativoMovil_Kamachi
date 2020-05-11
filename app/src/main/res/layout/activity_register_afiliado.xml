@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_register_afiliado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_dark"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textSize="16dp"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text="Indique el tipo de persona"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"></TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:checkedButton="@id/radioButton_personaindependiente">
+
+                    <RadioButton
+                        android:id="@+id/radioButton_personaindependiente"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Persona Independiente" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton_personajuridica"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Persona Jurídica" />
+                </RadioGroup>
+
+                <ImageView
+                    android:id="@+id/imageView_Register_Afiliado"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="3dp"
+                    android:onClick="cambiarimagen"
+                    app:srcCompat="@drawable/ic_business_black_24dp"
+                 />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/empresa_register_servicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Nombre de la empresa "
+                android:visibility="gone"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/RUC_register_servicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="RUC de la empresa"
+                android:visibility="gone"
+                android:inputType="number" />
+            <EditText
+                android:id="@+id/Nombres_register_servicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:hint="Nombres"
+                android:visibility="gone"
+                ></EditText>
+            <EditText
+                android:id="@+id/Apellidos_register_servicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:hint="Apellidos"
+                android:visibility="gone"
+                ></EditText>
+            <EditText
+                android:id="@+id/DNI_register_servicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:hint="DNI"
+                android:visibility="gone"
+                ></EditText>
+            <EditText
+                android:id="@+id/editext_Telefono_Servicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:hint= "Telefono del servicio"
+                android:inputType="phone"
+                ></EditText>
+
+            <EditText
+                android:id="@+id/editext_Email_Servicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= "Email del servicio"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:inputType="textEmailAddress"
+                ></EditText>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="3dp"
+                android:layout_weight="0.2"
+                android:background="@drawable/spinnerstyle"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spinner_registerafiliado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:spinnerMode="dropdown" />
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="0dp"
+                    android:src="@drawable/dropdrown" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="3dp"
+                android:layout_weight="0.2"
+                android:background="@drawable/spinnerstyle"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spinner_categoria_registro_afiliado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:spinnerMode="dropdown" />
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="0dp"
+                    android:src="@drawable/dropdrown" />
+
+            </RelativeLayout>
+            <Button
+                android:id="@+id/id_Crear_afiliado_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Crear afiliación"
+                ></Button>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
