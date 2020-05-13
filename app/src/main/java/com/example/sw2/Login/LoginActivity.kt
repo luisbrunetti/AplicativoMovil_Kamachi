@@ -47,8 +47,13 @@ class LoginActivity : AppCompatActivity() {
         loginUser()
     }
 
+    override fun onResume() {
+        super.onResume()
+        botonIniciarSesion.isEnabled = true
+    }
     private fun ObtenerDatosUsuario(user:String){
-        var intentTest = FirebaseConexion(applicationContext)
+        //var intentTest = FirebaseConexion().Inicia(applicationContext)
+        val intentTest = FirebaseConexion(applicationContext)
         var query: Query =
             FirebaseDatabase.getInstance().reference.child("User").orderByChild("E-mail")
                 .equalTo(user)
@@ -96,6 +101,7 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }else{
+            botonIniciarSesion.isEnabled = true
             Toast.makeText(this, "Ingrese conrectamente su email y contraseña", Toast.LENGTH_SHORT).show()
         }
     }

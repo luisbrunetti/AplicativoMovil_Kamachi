@@ -4,16 +4,29 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 
-class FirebaseConexion(context : Context){
+class FirebaseConexion(context: Context){
     var userLocalDataBase : SharedPreferences? = null
     private val SP_NAME = "userdetails"
-    companion object fun InstanceFireBaseConexion(context:Context): FirebaseConexion {
-            return FirebaseConexion(context)
-        }
+    /*
+    private object Holder{
+        val instance = FirebaseConexion()
+    }
+    companion object fun Inicia(context: Context) : FirebaseConexion{
+        val instance: FirebaseConexion by lazy {  Holder.instance }
+        IniciaruserLocalDataBase(context)
+        return instance!!
+    }*/
+    /*
+    private fun IniciaruserLocalDataBase(context:Context){
+        userLocalDataBase = context.getSharedPreferences(SP_NAME,0)
+    }*/
 
-        init{
+    init {
         userLocalDataBase = context.getSharedPreferences(SP_NAME,0)
     }
+
+
+
 
     fun StoreUserDate(user:Usuario?){
         var spEditor =userLocalDataBase?.edit()

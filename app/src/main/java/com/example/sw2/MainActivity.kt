@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         bottomNav?.setOnNavigationItemSelectedListener(navListener)
         bottomNav?.selectedItemId = R.id.nav_home
         bottomNav?.menu?.findItem(R.id.nav_home)?.isEnabled = false
-        FirebaseConexion= FirebaseConexion(applicationContext)
+
 
     }
 

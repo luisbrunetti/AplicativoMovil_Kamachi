@@ -195,9 +195,9 @@ class HomeFragment(): Fragment() , ReclyceViewAdapter.OnClickListener {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         lstServicios = ArrayList()
-        FirebaseConexion = FirebaseConexion(requireContext())
-        ///////////////////////////////////
+        FirebaseConexion = FirebaseConexion((requireContext()))
         retrieveDataFromFireBase()
+        ///////////////////////////////////
 
 
     }

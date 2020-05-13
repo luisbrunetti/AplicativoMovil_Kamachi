@@ -20,7 +20,7 @@ import com.google.firebase.database.*
 import com.google.firebase.firestore.auth.User
 
 class AfiliacionFragment: Fragment() {
-    private lateinit var FirebaseConexion:FirebaseConexion
+    private var FirebaseConexion:FirebaseConexion? = null
     private lateinit var FirebaseDatabase:FirebaseDatabase
     private var botonSubir: Button? = null
     private lateinit var vista : View
@@ -34,8 +34,9 @@ class AfiliacionFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        this.FirebaseConexion = FirebaseConexion(requireContext()).InstanceFireBaseConexion(requireContext())
-        user = this.FirebaseConexion.getStoreSaved()
+        //this.FirebaseConexion = FirebaseConexion?.Inicia(requireContext())
+        FirebaseConexion = FirebaseConexion(requireContext())
+        user = FirebaseConexion?.getStoreSaved()
 
         Log.d("userrr", user.toString())
 
@@ -55,15 +56,4 @@ class AfiliacionFragment: Fragment() {
 
         return vista
     }
-
-    override fun onResume() {
-        super.onResume()
-
-
-    }
-    override fun onStart() {
-        super.onStart()
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    }
-
 }

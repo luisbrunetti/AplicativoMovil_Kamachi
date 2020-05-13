@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_dark"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -14,14 +22,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar_profile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/holo_orange_dark"
-                android:minHeight="?attr/actionBarSize"
-                android:theme="?attr/actionBarTheme" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,18 +43,20 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
-                    </LinearLayout>
+                    </TextView>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/backwithborder"
                         android:layout_marginLeft="55dp"
+                        android:layout_weight="1"
                         android:orientation="horizontal">
 
                         <TextView
@@ -75,6 +77,13 @@
                             android:textSize="16sp"
                             android:textColor="@color/Negro" />
                     </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                    </TextView>
 
                 </LinearLayout>
 
