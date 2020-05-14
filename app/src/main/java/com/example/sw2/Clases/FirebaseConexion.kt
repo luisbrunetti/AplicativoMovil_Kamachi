@@ -3,9 +3,13 @@ package com.example.sw2.Clases
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.internal.synchronized
 
-class FirebaseConexion(context: Context){
+class FirebaseConexion{
     var userLocalDataBase : SharedPreferences? = null
+    @Volatile private var context:Context? =null
     private val SP_NAME = "userdetails"
     /*
     private object Holder{
@@ -20,14 +24,26 @@ class FirebaseConexion(context: Context){
     private fun IniciaruserLocalDataBase(context:Context){
         userLocalDataBase = context.getSharedPreferences(SP_NAME,0)
     }*/
-
-    init {
+    constructor(context:Context){
+        this.context = context
         userLocalDataBase = context.getSharedPreferences(SP_NAME,0)
     }
-
-
-
-
+    // Creando el patron de diseño Singleton con Kotlin
+    companion object{
+        @Volatile private var INSTANCE : FirebaseConexion? = null
+        @InternalCoroutinesApi
+        fun getinstance(Contexto_intanciar:Context) : FirebaseConexion {
+            if(INSTANCE == null){
+                synchronized(this){
+                    INSTANCE = FirebaseConexion(Contexto_intanciar)
+                    Log.d("InstanciaFire","Se ha creado la primer instancia de Conexión A Firebase")
+                }
+            }else{
+                Log.d("InstanciaFire","Ya se ha creado la sintacia de Conexión firebase")
+            }
+            return INSTANCE!!
+        }
+    }
     fun StoreUserDate(user:Usuario?){
         var spEditor =userLocalDataBase?.edit()
         spEditor?.putString("email", user?.Email!!)

@@ -52,10 +52,6 @@ class HomeFragment(): Fragment() , ReclyceViewAdapter.OnClickListener {
 
         //Obteniendo vista del fragment
         v = inflater.inflate(R.layout.fragment_home,container,false)
-
-
-
-
         //Obteniendo la dirrecion de toolbar
         var toolbar : Toolbar = v.findViewById(R.id.toolbar_mainactivity)
         toolbar.title = "Servicios diponibles"

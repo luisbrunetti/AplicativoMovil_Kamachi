@@ -18,6 +18,7 @@ import com.example.sw2.Secundarios.RegisterAfiliado
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.firestore.auth.User
+import kotlinx.coroutines.InternalCoroutinesApi
 
 class AfiliacionFragment: Fragment() {
     private var FirebaseConexion:FirebaseConexion? = null
@@ -29,13 +30,15 @@ class AfiliacionFragment: Fragment() {
     private lateinit var authFirbase:FirebaseAuth
     private var user: Usuario? = null
     private var afiliado: Boolean? = null
+
+    @InternalCoroutinesApi
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //this.FirebaseConexion = FirebaseConexion?.Inicia(requireContext())
-        FirebaseConexion = FirebaseConexion(requireContext())
+
+        this.FirebaseConexion = com.example.sw2.Clases.FirebaseConexion.getinstance(requireContext())
         user = FirebaseConexion?.getStoreSaved()
 
         Log.d("userrr", user.toString())

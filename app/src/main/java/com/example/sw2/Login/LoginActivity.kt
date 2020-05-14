@@ -15,6 +15,7 @@ import com.example.sw2.MainActivity
 import com.example.sw2.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import kotlinx.coroutines.InternalCoroutinesApi
 
 
 class LoginActivity : AppCompatActivity() {
@@ -43,6 +44,7 @@ class LoginActivity : AppCompatActivity() {
     fun register(view: View) {
         startActivity(Intent(this, RegistrarActivity::class.java))
     }
+    @InternalCoroutinesApi
     fun login(view: View) {
         loginUser()
     }
@@ -51,9 +53,10 @@ class LoginActivity : AppCompatActivity() {
         super.onResume()
         botonIniciarSesion.isEnabled = true
     }
+    @InternalCoroutinesApi
     private fun ObtenerDatosUsuario(user:String){
         //var intentTest = FirebaseConexion().Inicia(applicationContext)
-        val intentTest = FirebaseConexion(applicationContext)
+        val intentTest = FirebaseConexion.getinstance(applicationContext)
         var query: Query =
             FirebaseDatabase.getInstance().reference.child("User").orderByChild("E-mail")
                 .equalTo(user)
@@ -80,6 +83,7 @@ class LoginActivity : AppCompatActivity() {
             }
         })
     }
+    @InternalCoroutinesApi
     private fun loginUser() {
 
         /*val user: String = txtUser.text.toString()
