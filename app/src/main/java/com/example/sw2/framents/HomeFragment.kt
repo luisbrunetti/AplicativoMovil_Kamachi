@@ -26,9 +26,10 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.example.sw2.Clases.IntefaceClickListeer
 
 
-class HomeFragment(): Fragment() , ReclyceViewAdapter.InterfaceClickListeer {
+class HomeFragment(): Fragment() ,  IntefaceClickListeer{
     private lateinit var myRecyclyview : RecyclerView
     private lateinit var intentRecive : String
     private lateinit var bottonNav: BottomNavigationView

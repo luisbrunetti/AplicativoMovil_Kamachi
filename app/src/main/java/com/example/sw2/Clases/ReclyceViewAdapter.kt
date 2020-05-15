@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
+import com.example.sw2.Clases.IntefaceClickListeer
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -14,12 +15,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.sw2.R
 
-class ReclyceViewAdapter(var mcontext:Context, mdata: ArrayList<ServicioListView>,clickLister:InterfaceClickListeer): RecyclerView.Adapter<ReclyceViewAdapter.MyviewHolder>() {
+class ReclyceViewAdapter(var mcontext:Context, mdata: ArrayList<ServicioListView>,clickLister:IntefaceClickListeer ): RecyclerView.Adapter<ReclyceViewAdapter.MyviewHolder>() {
     private var mdata : ArrayList<ServicioListView> = mdata
-    private var onClickListener : InterfaceClickListeer = clickLister
+    private var onClickListener : IntefaceClickListeer = clickLister
     private var mdataCopy : ArrayList<ServicioListView> = mdata
-    class MyviewHolder(itemView: View,OnClickList:  InterfaceClickListeer) : RecyclerView.ViewHolder(itemView) ,View.OnClickListener{
-        var OnClickListenerHolder:InterfaceClickListeer
+    class MyviewHolder(itemView: View,OnClickList:  IntefaceClickListeer) : RecyclerView.ViewHolder(itemView) ,View.OnClickListener{
+        var OnClickListenerHolder:IntefaceClickListeer
         var tv_nombreTrabajo: TextView? = null
         var tv_distrito:TextView? = null
         var tv_ImagenView :ImageView
@@ -34,6 +35,7 @@ class ReclyceViewAdapter(var mcontext:Context, mdata: ArrayList<ServicioListView
             OnClickListenerHolder.onClickListener(adapterPosition)
         }
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyviewHolder {
         val v : View  = LayoutInflater.from(mcontext).inflate(R.layout.template_listview_homefragment,parent,false)
         val vHolder = MyviewHolder(v,onClickListener)
@@ -54,9 +56,4 @@ class ReclyceViewAdapter(var mcontext:Context, mdata: ArrayList<ServicioListView
             .centerCrop()
             .into(holder.tv_ImagenView)
     }
-    interface InterfaceClickListeer {
-        fun onClickListener(pos : Int)
-    }
-
-
 }
