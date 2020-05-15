@@ -11,7 +11,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.example.sw2.Clases.FirebaseConexion
+import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
 import com.example.sw2.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -67,7 +67,10 @@ class ProfileFragment: Fragment() {
     override fun onResume() {
         super.onResume()
         var uriImagen: String? = null
-        FirebaseConexion = FirebaseConexion(requireContext())
+        FirebaseConexion =
+            FirebaseConexion(
+                requireContext()
+            )
         var ObjectUser = FirebaseConexion.getStoreSaved()
         Toast.makeText(requireContext(),ObjectUser?.Email.toString(),Toast.LENGTH_SHORT).show()
         var query: Query =

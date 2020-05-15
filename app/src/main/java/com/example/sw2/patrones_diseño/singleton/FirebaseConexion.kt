@@ -1,9 +1,9 @@
-package com.example.sw2.Clases
+package com.example.sw2.patrones_diseño.singleton
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
-import com.google.firebase.ktx.Firebase
+import com.example.sw2.Clases.Usuario
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.internal.synchronized
 
@@ -35,7 +35,10 @@ class FirebaseConexion{
         fun getinstance(Contexto_intanciar:Context) : FirebaseConexion {
             if(INSTANCE == null){
                 synchronized(this){
-                    INSTANCE = FirebaseConexion(Contexto_intanciar)
+                    INSTANCE =
+                        FirebaseConexion(
+                            Contexto_intanciar
+                        )
                     Log.d("InstanciaFire","Se ha creado la primer instancia de Conexión A Firebase")
                 }
             }else{
@@ -44,7 +47,7 @@ class FirebaseConexion{
             return INSTANCE!!
         }
     }
-    fun StoreUserDate(user:Usuario?){
+    fun StoreUserDate(user: Usuario?){
         var spEditor =userLocalDataBase?.edit()
         spEditor?.putString("email", user?.Email!!)
         spEditor?.putString("Nombre",user?.Nombre)
@@ -68,7 +71,17 @@ class FirebaseConexion{
         var ID: String? = userLocalDataBase?.getString("ID","")
         var IDAfiliado:String? = userLocalDataBase?.getString("IDAfiliado","")
         var Afiliado: String? = userLocalDataBase?.getString("Afiliado","")
-        return Usuario(Nombre!!,Apellido!!,Distrito!!,Email!!,Telefono!!,UriImagen!!,ID!!,IDAfiliado!!,Afiliado.toString().toBoolean())
+        return Usuario(
+            Nombre!!,
+            Apellido!!,
+            Distrito!!,
+            Email!!,
+            Telefono!!,
+            UriImagen!!,
+            ID!!,
+            IDAfiliado!!,
+            Afiliado.toString().toBoolean()
+        )
     }
     fun UpdateValue(value:String,update:String){
         var spUpdate = userLocalDataBase?.edit()

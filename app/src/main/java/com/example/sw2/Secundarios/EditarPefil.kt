@@ -11,7 +11,7 @@ import android.widget.*
 import androidx.appcompat.widget.Toolbar
 import androidx.core.net.toUri
 import com.bumptech.glide.Glide
-import com.example.sw2.Clases.FirebaseConexion
+import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
 import com.example.sw2.Clases.Usuario
 import com.example.sw2.R
 import com.example.sw2.framents.ProfileFragment
@@ -35,7 +35,7 @@ class EditarPefil : AppCompatActivity() {
     private lateinit var checkboxTelefono:CheckBox
 
     private lateinit var ImageViewProfile: ImageView
-    private lateinit var FirebaseConexion:FirebaseConexion
+    private lateinit var FirebaseConexion: FirebaseConexion
 
     //Firebase
     private lateinit var Auth:FirebaseAuth
@@ -66,7 +66,10 @@ class EditarPefil : AppCompatActivity() {
         toolbar_Edit = findViewById(R.id.toolbar_edit)
         setSupportActionBar(toolbar_Edit)
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        FirebaseConexion = FirebaseConexion(applicationContext)
+        FirebaseConexion =
+            FirebaseConexion(
+                applicationContext
+            )
         UsuerInstance = FirebaseConexion.getStoreSaved()!!
         ViewName.setText(UsuerInstance!!.Nombre.toString(),TextView.BufferType.EDITABLE)
         ViewLastname.setText(UsuerInstance!!.Apellido.toString(),TextView.BufferType.EDITABLE)

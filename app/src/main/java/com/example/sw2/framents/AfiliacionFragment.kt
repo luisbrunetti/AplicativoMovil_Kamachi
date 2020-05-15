@@ -8,20 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import com.example.sw2.Clases.FirebaseConexion
+import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
 import com.example.sw2.Clases.Usuario
-import com.example.sw2.Login.LoginActivity
 import com.example.sw2.R
 import com.example.sw2.Secundarios.RegisterAfiliado
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.firestore.auth.User
 import kotlinx.coroutines.InternalCoroutinesApi
 
 class AfiliacionFragment: Fragment() {
-    private var FirebaseConexion:FirebaseConexion? = null
+    private var FirebaseConexion: FirebaseConexion? = null
     private lateinit var FirebaseDatabase:FirebaseDatabase
     private var botonSubir: Button? = null
     private lateinit var vista : View
@@ -38,7 +34,7 @@ class AfiliacionFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        this.FirebaseConexion = com.example.sw2.Clases.FirebaseConexion.getinstance(requireContext())
+        this.FirebaseConexion = com.example.sw2.patrones_diseño.singleton.FirebaseConexion.getinstance(requireContext())
         user = FirebaseConexion?.getStoreSaved()
 
         Log.d("userrr", user.toString())

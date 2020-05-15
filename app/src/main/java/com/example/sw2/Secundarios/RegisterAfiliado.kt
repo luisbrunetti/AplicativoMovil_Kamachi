@@ -4,18 +4,15 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.text.TextUtils
 import android.text.TextUtils.*
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.get
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.sw2.Clases.FirebaseConexion
-import com.example.sw2.MainActivity
+import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
 import com.example.sw2.R
 import com.example.sw2.framents.ProfileFragment
 import com.google.firebase.auth.FirebaseAuth
@@ -23,7 +20,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.FirebaseStorage.*
 import com.google.firebase.storage.StorageReference
-import kotlinx.coroutines.Dispatchers
 
 class RegisterAfiliado : AppCompatActivity() {
     private lateinit var Spinner: Spinner
@@ -33,7 +29,7 @@ class RegisterAfiliado : AppCompatActivity() {
     private lateinit var Auth:FirebaseAuth
     private lateinit var FirebaseStorage:FirebaseStorage
     private lateinit var FirebaseReal:FirebaseDatabase
-    private lateinit var FirebaseConexion :FirebaseConexion
+    private lateinit var FirebaseConexion : FirebaseConexion
     private var idPush:String? = null
     //Widgets del registro
     private var radiobuttonPI:RadioButton? = null
@@ -61,7 +57,10 @@ class RegisterAfiliado : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_afiliado)
 
-        FirebaseConexion = FirebaseConexion(applicationContext)
+        FirebaseConexion =
+            FirebaseConexion(
+                applicationContext
+            )
         var user = FirebaseConexion.getStoreSaved()
         FirebaseReal = FirebaseDatabase.getInstance()
         toolbar = findViewById(R.id.toolbar_register_afiliado)

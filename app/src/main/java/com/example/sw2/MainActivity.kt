@@ -2,7 +2,6 @@ package com.example.sw2
 
 
 import android.app.SearchManager
-import android.content.ClipData
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,24 +10,20 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.viewpager.widget.ViewPager
-import com.example.sw2.Clases.FirebaseConexion
+import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
 import com.example.sw2.Secundarios.EditarPefil
 import com.example.sw2.framents.AfiliacionFragment
 import com.example.sw2.framents.ContratosFragment
 import com.example.sw2.framents.HomeFragment
 import com.example.sw2.framents.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_main.*
-import android.view.MenuItem as MenuItem
 
 class MainActivity : AppCompatActivity() {
     private lateinit var selectedFragment : Fragment
     private lateinit var viewPager :ViewPager
     private lateinit var emailUsuario : String
-    private lateinit var FirebaseConexion:FirebaseConexion
+    private lateinit var FirebaseConexion: FirebaseConexion
     private lateinit var fragment:Fragment
 
     private val navListener: BottomNavigationView.OnNavigationItemSelectedListener =

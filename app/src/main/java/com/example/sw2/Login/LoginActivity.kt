@@ -9,7 +9,7 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.sw2.Clases.FirebaseConexion
+import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
 import com.example.sw2.Clases.Usuario
 import com.example.sw2.MainActivity
 import com.example.sw2.R

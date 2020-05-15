@@ -1,7 +1,6 @@
 package com.example.sw2.framents
 
 
-import android.content.ClipData
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -13,7 +12,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sw2.Clases.FirebaseConexion
+import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
 import com.example.sw2.Clases.ReclyceViewAdapter
 import com.example.sw2.Clases.ServicioListView
 import com.example.sw2.Secundarios.Detalles_activity
@@ -29,7 +28,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
 
-class HomeFragment(): Fragment() , ReclyceViewAdapter.OnClickListener {
+class HomeFragment(): Fragment() , ReclyceViewAdapter.InterfaceClickListeer {
     private lateinit var myRecyclyview : RecyclerView
     private lateinit var intentRecive : String
     private lateinit var bottonNav: BottomNavigationView
@@ -40,7 +39,7 @@ class HomeFragment(): Fragment() , ReclyceViewAdapter.OnClickListener {
     private lateinit var v:View
     private lateinit var lstServicios : ArrayList<ServicioListView>
     private lateinit var lstServiciosCopy: ArrayList<ServicioListView>
-    private lateinit var FirebaseConexion:FirebaseConexion
+    private lateinit var FirebaseConexion: FirebaseConexion
     companion object{
         private lateinit var recycleAdapter :ReclyceViewAdapter
         private lateinit var emailusuario: String
@@ -191,7 +190,8 @@ class HomeFragment(): Fragment() , ReclyceViewAdapter.OnClickListener {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         lstServicios = ArrayList()
-        FirebaseConexion = FirebaseConexion((requireContext()))
+        FirebaseConexion =
+            FirebaseConexion((requireContext()))
         retrieveDataFromFireBase()
         ///////////////////////////////////
 

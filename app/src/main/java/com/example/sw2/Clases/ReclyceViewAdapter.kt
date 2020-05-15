@@ -14,13 +14,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.sw2.R
 
-class ReclyceViewAdapter(var mcontext:Context, mdata: ArrayList<ServicioListView>,clickLister:OnClickListener): RecyclerView.Adapter<ReclyceViewAdapter.MyviewHolder>() {
+class ReclyceViewAdapter(var mcontext:Context, mdata: ArrayList<ServicioListView>,clickLister:InterfaceClickListeer): RecyclerView.Adapter<ReclyceViewAdapter.MyviewHolder>() {
     private var mdata : ArrayList<ServicioListView> = mdata
-    private var onClickListener : OnClickListener = clickLister
+    private var onClickListener : InterfaceClickListeer = clickLister
     private var mdataCopy : ArrayList<ServicioListView> = mdata
-    class MyviewHolder(itemView: View,OnClickList: OnClickListener) : RecyclerView.ViewHolder(itemView) ,View.OnClickListener{
-
-        var OnClickListener:OnClickListener
+    class MyviewHolder(itemView: View,OnClickList:  InterfaceClickListeer) : RecyclerView.ViewHolder(itemView) ,View.OnClickListener{
+        var OnClickListenerHolder:InterfaceClickListeer
         var tv_nombreTrabajo: TextView? = null
         var tv_distrito:TextView? = null
         var tv_ImagenView :ImageView
@@ -28,11 +27,11 @@ class ReclyceViewAdapter(var mcontext:Context, mdata: ArrayList<ServicioListView
             tv_nombreTrabajo = itemView.findViewById(R.id.textTrabajo)
             tv_distrito = itemView.findViewById(R.id.textDistrito)
             tv_ImagenView = itemView.findViewById(R.id.imageViewHolder)
-            this.OnClickListener = OnClickList
+            this.OnClickListenerHolder = OnClickList
             itemView.setOnClickListener(this)
         }
         override fun onClick(p0: View?) {
-            OnClickListener.onClickListener(adapterPosition)
+            OnClickListenerHolder.onClickListener(adapterPosition)
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyviewHolder {
@@ -43,7 +42,6 @@ class ReclyceViewAdapter(var mcontext:Context, mdata: ArrayList<ServicioListView
     override fun getItemCount(): Int {
         return mdata.size
     }
-
     override fun onBindViewHolder(holder: MyviewHolder, position: Int) {
         holder.tv_nombreTrabajo?.text = mdata[position].NombreTrabaj
         holder.tv_distrito?.text= mdata[position].Distrito
@@ -55,10 +53,8 @@ class ReclyceViewAdapter(var mcontext:Context, mdata: ArrayList<ServicioListView
             .apply(RequestOptions.overrideOf(160,180))
             .centerCrop()
             .into(holder.tv_ImagenView)
-
     }
-
-    interface OnClickListener {
+    interface InterfaceClickListeer {
         fun onClickListener(pos : Int)
     }
 
