@@ -13,6 +13,7 @@ import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
 import com.example.sw2.Clases.Usuario
 import com.example.sw2.MainActivity
 import com.example.sw2.R
+import com.example.sw2.patrones_diseño.factory_Register.RegistrarActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.coroutines.InternalCoroutinesApi

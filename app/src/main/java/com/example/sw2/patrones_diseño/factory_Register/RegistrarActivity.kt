@@ -1,4 +1,4 @@
-package com.example.sw2.Login
+package com.example.sw2.patrones_diseño.factory_Register
 
 
 import android.content.Intent
@@ -11,6 +11,7 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter.*
 import androidx.appcompat.widget.Toolbar
 import com.example.sw2.Clases.ServicioListViewTesteo
+import com.example.sw2.Login.LoginActivity
 import com.example.sw2.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser

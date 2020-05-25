@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
-import com.example.sw2.Clases.ReclyceViewAdapter
+import com.example.sw2.patrones_diseño.factory.ReclyceViewAdapter
 import com.example.sw2.Clases.ServicioListView
 import com.example.sw2.Secundarios.Detalles_activity
 import com.example.sw2.MainActivity
@@ -26,10 +26,11 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.example.sw2.Clases.IntefaceClickListeer
+import com.example.sw2.patrones_diseño.factory.IntefaceClickListeer
 
 
-class HomeFragment(): Fragment() ,  IntefaceClickListeer{
+class HomeFragment(): Fragment() ,
+    IntefaceClickListeer {
     private lateinit var myRecyclyview : RecyclerView
     private lateinit var intentRecive : String
     private lateinit var bottonNav: BottomNavigationView
@@ -42,7 +43,7 @@ class HomeFragment(): Fragment() ,  IntefaceClickListeer{
     private lateinit var lstServiciosCopy: ArrayList<ServicioListView>
     private lateinit var FirebaseConexion: FirebaseConexion
     companion object{
-        private lateinit var recycleAdapter :ReclyceViewAdapter
+        private lateinit var recycleAdapter : ReclyceViewAdapter
         private lateinit var emailusuario: String
 
     }
@@ -113,7 +114,11 @@ class HomeFragment(): Fragment() ,  IntefaceClickListeer{
                             task ->
                             if (task.isComplete) {
                                 recycleAdapter =
-                                    ReclyceViewAdapter(requireActivity(), lstServicios,this@HomeFragment)
+                                    ReclyceViewAdapter(
+                                        requireActivity(),
+                                        lstServicios,
+                                        this@HomeFragment
+                                    )
                                 myRecyclyview.layoutManager = LinearLayoutManager(context)
                                 myRecyclyview.adapter = recycleAdapter
                                 MainActivity.bottomNav?.menu?.findItem(R.id.nav_home)?.isEnabled = true
@@ -176,7 +181,11 @@ class HomeFragment(): Fragment() ,  IntefaceClickListeer{
                 menu.findItem(R.id.app_bar_search).collapseActionView()*/
                 filtrar(newText?.trim())
                 recycleAdapter =
-                    ReclyceViewAdapter(requireActivity(), lstServicios,this@HomeFragment)
+                    ReclyceViewAdapter(
+                        requireActivity(),
+                        lstServicios,
+                        this@HomeFragment
+                    )
                 myRecyclyview.layoutManager = LinearLayoutManager(context)
                 myRecyclyview.adapter = recycleAdapter
 

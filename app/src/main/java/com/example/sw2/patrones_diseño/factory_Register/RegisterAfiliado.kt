@@ -1,4 +1,4 @@
-package com.example.sw2.Secundarios
+package com.example.sw2.patrones_diseño.factory_Register
 
 import android.app.Activity
 import android.content.Intent
@@ -224,14 +224,10 @@ class RegisterAfiliado : AppCompatActivity() {
         val intent = Intent(Intent.ACTION_PICK)
         Log.d("action pick", Intent.ACTION_PICK)
         intent.type = "image/*"
-        startActivityForResult(intent,GALERY_INTENT)
+        startActivityForResult(intent,
+            GALERY_INTENT
+        )
     }
-
-
-    /*fun SaveUriImagenInFireBase(uri:Uri?,userId: String){
-        Toast.makeText(context,"2",Toast.LENGTH_SHORT).show()
-        InstanceFirebaseToSaveImage.reference.child("User").child(userId).child("UrlImagen").setValue(uri.toString())
-    }*/
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         Auth = FirebaseAuth.getInstance()

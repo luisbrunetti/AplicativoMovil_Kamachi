@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
 import com.example.sw2.Clases.Usuario
 import com.example.sw2.R
-import com.example.sw2.Secundarios.RegisterAfiliado
+import com.example.sw2.patrones_diseño.factory_Register.RegisterAfiliado
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.coroutines.InternalCoroutinesApi
