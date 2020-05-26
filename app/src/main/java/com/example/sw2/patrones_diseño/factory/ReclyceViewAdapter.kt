@@ -13,7 +13,6 @@ import com.example.sw2.R
 class ReclyceViewAdapter(var mcontext:Context, mdata: ArrayList<ServicioListView>, clickLister: IntefaceClickListeer): RecyclerView.Adapter<MyviewHolder>() {
     private var mdata : ArrayList<ServicioListView> = mdata
     private var onClickListener : IntefaceClickListeer = clickLister
-    private var mdataCopy : ArrayList<ServicioListView> = mdata
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyviewHolder {
         val v : View  = LayoutInflater.from(mcontext).inflate(R.layout.template_listview_homefragment,parent,false)
         val vHolder =

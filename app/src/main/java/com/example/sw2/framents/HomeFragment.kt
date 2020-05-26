@@ -151,7 +151,7 @@ class HomeFragment(): Fragment() ,
     private fun DownloadImagsToRecycleView(h:DataSnapshot,a:ServicioListView?): Task<Uri> {
         var key : String = h.key.toString()
         var filepath: Task<Uri> =storageRef.child("ImagenServicios/"+key).
-            child("Fotoservicio.jpg").downloadUrl.addOnSuccessListener(OnSuccessListener {
+            child("Fotoservicio.png").downloadUrl.addOnSuccessListener(OnSuccessListener {
             if (it != null) {
                 a?.UriImagen= it
                 if (a != null) {

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_register_afiliado"
+        android:id="@+id/toolbar_nuevo_servicio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/holo_orange_dark"
@@ -21,61 +21,79 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="370dp"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:textSize="16dp"></TextView>
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:text="Indique el tipo de persona"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"></TextView>
+                android:text="Complete los siguiente datos para para crear la publicación del servicio"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginBottom="3dp"
+                android:textSize="18dp">
+
+            </TextView>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"
+                android:hint="Nombre del servicio"
+                android:inputType="phone"
+                android:autofillHints="" />
+            <EditText
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
-
-                <RadioGroup
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="15dp"
-                    android:checkedButton="@id/radioButton_personaindependiente">
-
-                    <RadioButton
-                        android:id="@+id/radioButton_personaindependiente"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Persona Independiente" />
-
-                    <RadioButton
-                        android:id="@+id/radioButton_personajuridica"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Persona Jurídica" />
-                </RadioGroup>
 
                 <ImageView
                     android:id="@+id/imageView_Register_Afiliado"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="3dp"
+                    android:layout_weight="1"
                     android:onClick="cambiarimagen"
                     app:srcCompat="@drawable/ic_business_black_24dp"
                     />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="8dp"
+                        android:hint="Nombre de la empresa"
+                        android:inputType="phone" />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="8dp"
+                        android:hint="Tipo de servicio"
+                        android:inputType="phone" />
+                </LinearLayout>
 
             </LinearLayout>
+            <EditText
 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= "Email del servicio"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:inputType="textEmailAddress"
+                ></EditText>
             <EditText
                 android:id="@+id/empresa_register_servicio"
                 android:layout_width="match_parent"
@@ -95,35 +113,9 @@
                 android:hint="RUC de la empresa"
                 android:visibility="gone"
                 android:inputType="number" />
+
             <EditText
-                android:id="@+id/Nombres_register_servicio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:hint="Nombres"
-                android:visibility="gone"
-                ></EditText>
-            <EditText
-                android:id="@+id/Apellidos_register_servicio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:hint="Apellidos"
-                android:visibility="gone"
-                ></EditText>
-            <EditText
-                android:id="@+id/DNI_register_servicio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:hint="DNI"
-                android:visibility="gone"
-                ></EditText>
-            <EditText
-                android:id="@+id/editext_Telefono_Servicio"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -133,7 +125,7 @@
                 ></EditText>
 
             <EditText
-                android:id="@+id/editext_Email_Servicio"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint= "Email del servicio"
@@ -208,6 +200,4 @@
                 ></Button>
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>
-
