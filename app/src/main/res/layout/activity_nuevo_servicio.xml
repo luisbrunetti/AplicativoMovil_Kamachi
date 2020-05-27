@@ -19,7 +19,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
@@ -28,39 +28,42 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Complete los siguiente datos para para crear la publicación del servicio"
+                android:text="@string/complete_los_siguiente_datos_para_para_crear_la_publicaci_n_del_servicio"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="@color/colorPrimaryDark"
                 android:layout_marginBottom="3dp"
-                android:textSize="18dp">
+                android:textSize="18sp">
 
             </TextView>
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="2"
                 android:layout_marginTop="10dp"
                 android:textAlignment="center"
-                android:hint="Nombre del servicio"
+                android:hint="nombre_del_servicio1"
                 android:inputType="phone"
                 android:autofillHints="" />
-            <EditText
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_weight="2"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/imageView_Register_Afiliado"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_margin="10dp"
                     android:layout_marginStart="3dp"
                     android:layout_weight="1"
-                    android:onClick="cambiarimagen"
-                    app:srcCompat="@drawable/ic_business_black_24dp"
-                    />
+
+                    app:srcCompat="@drawable/ic_business_black_24dp" />
+
+                <!--android:onClick="cambiarimagen"-->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -72,74 +75,77 @@
                         android:layout_marginTop="10dp"
                         android:layout_weight="1"
                         android:layout_marginBottom="8dp"
-                        android:hint="Nombre de la empresa"
+                        android:hint="nombre_de_la_empresa"
                         android:inputType="phone" />
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:layout_marginBottom="8dp"
-                        android:hint="Tipo de servicio"
-                        android:inputType="phone" />
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_weight="0.2"
+                        android:background="@drawable/spinnerstyle"
+                        android:orientation="horizontal">
+
+                        <Spinner
+                            android:id="@+id/spinner_categoria_registro_afiliado"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="bottom"
+                            android:background="@android:color/transparent"
+                            android:gravity="center"
+                            android:layout_marginStart="5dp"
+                            android:spinnerMode="dropdown" />
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="0dp"
+                            android:src="@drawable/dropdrown" />
+
+                    </RelativeLayout>
                 </LinearLayout>
 
             </LinearLayout>
-            <EditText
 
+            <EditText
+                android:id="@+id/edittext_email_nuevoservicio"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint= "Email del servicio"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:hint="Email_del_servicio"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:inputType="textEmailAddress"
-                ></EditText>
-            <EditText
-                android:id="@+id/empresa_register_servicio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:ems="10"
-                android:hint="Nombre de la empresa "
-                android:visibility="gone"
-                android:inputType="textPersonName" />
+                android:inputType="textEmailAddress" />
 
             <EditText
-                android:id="@+id/RUC_register_servicio"
+                android:id="@+id/editext_NuevoTelefonoservicio"
+                android:layout_weight="2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:ems="10"
-                android:hint="RUC de la empresa"
-                android:visibility="gone"
-                android:inputType="number" />
-
-            <EditText
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:hint= "Telefono del servicio"
-                android:inputType="phone"
-                ></EditText>
+                android:hint="Telefono_del_servicio"
+                android:inputType="phone" />
 
             <EditText
-
+                android:id="@+id/editetext_nuevoemailservicio"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint= "Email del servicio"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:hint="Email_del_servicio"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:inputType="textEmailAddress"
-                ></EditText>
+                android:inputType="textEmailAddress" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginRight="3dp"
-                android:layout_weight="0.2"
+                android:layout_marginEnd="3dp"
+                android:layout_weight="2"
                 android:background="@drawable/spinnerstyle"
                 android:orientation="horizontal">
 
@@ -156,48 +162,34 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:layout_marginRight="0dp"
+                    android:layout_marginEnd="0dp"
                     android:src="@drawable/dropdrown" />
 
             </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginRight="3dp"
-                android:layout_weight="0.2"
-                android:background="@drawable/spinnerstyle"
-                android:orientation="horizontal">
 
-                <Spinner
-                    android:id="@+id/spinner_categoria_registro_afiliado"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent"
-                    android:gravity="center"
-                    android:layout_marginLeft="5dp"
-                    android:spinnerMode="dropdown" />
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="0dp"
-                    android:src="@drawable/dropdrown" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:hint="Describe tu servicio"
+                android:singleLine="false"
+                android:layout_marginTop="10dp"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:scrollbars="vertical"
+                >
 
-            </RelativeLayout>
+            </EditText>
+
             <Button
                 android:id="@+id/id_Crear_afiliado_button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Crear afiliación"
-                ></Button>
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:text="Crear afiliación" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
