@@ -11,6 +11,19 @@ class FirebaseConexion{
     var userLocalDataBase : SharedPreferences? = null
     @Volatile private var context:Context? =null
     private val SP_NAME = "userdetails"
+    /*
+    private object Holder{
+        val instance = FirebaseConexion()
+    }
+    companion object fun Inicia(context: Context) : FirebaseConexion{
+        val instance: FirebaseConexion by lazy {  Holder.instance }
+        IniciaruserLocalDataBase(context)
+        return instance!!
+    }*/
+    /*
+    private fun IniciaruserLocalDataBase(context:Context){
+        userLocalDataBase = context.getSharedPreferences(SP_NAME,0)
+    }*/
     constructor(context:Context){
         this.context = context
         userLocalDataBase = context.getSharedPreferences(SP_NAME,0)

@@ -6,21 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_mainactivity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/holo_orange_dark"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        android:textAlignment="center"
-        android:layout_alignParentTop="true"
-        />
+
     <RelativeLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar_mainactivity"
         android:layout_above="@id/bottom_navigation"
         />
 
