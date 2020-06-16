@@ -23,7 +23,7 @@
             android:label="@string/title_activity_register_afiliado"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".Secundarios.EditarPefil" />
+
         <activity
             android:name=".Secundarios.Detalles_activity"
             android:parentActivityName=".MainActivity" />

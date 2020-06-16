@@ -32,7 +32,7 @@ indicar , a través de la aplicación , que el servicio fue terminado con éxito
     </string>
     <string name="tag_name">Nombre</string>
     <string name="tag_lastname">Apellido</string>
-    <string name="tag_email">Correo Electronico</string>
+    <string name="tag_email">E-mail</string>
     <string name="tag_phone">Telefono</string>
     <string name="tag_deal_service">Servicios Contratados</string>
     <string name="Tag_Historial_de_servicios">Historial de servicios</string>

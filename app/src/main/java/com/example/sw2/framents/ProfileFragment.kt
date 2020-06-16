@@ -40,7 +40,6 @@ class ProfileFragment: Fragment() {
     private lateinit var ViewLastname: TextView
     private lateinit var ViewEmail: TextView
     private lateinit var ViewPhone: TextView
-    private lateinit var ImageViewProfile:ImageView
     private lateinit var Toolbar_profile:Toolbar
     private lateinit var ButtonEditPhoto: Button
     //Checkbox update
@@ -54,11 +53,14 @@ class ProfileFragment: Fragment() {
     private lateinit var storageRef: FirebaseStorage
     private lateinit var v:View
     private var emailUser: String? = null
-
+    //Cargar Imagen
+    private lateinit var ImageViewProfile:ImageView
+    private var Uri: Uri? = null
     companion object {
         val GALERY_INTENT = 1
-        val IMAGE_PICK_CODE: Int = 1000
+        private val IMAGE_PICK_CODE: Int = 1000
     }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -110,7 +112,12 @@ class ProfileFragment: Fragment() {
                 UpdateProfileVariables(b,"Modificación del telefono","Ingrese el telefono que desea mostrar",checkbox_telefono_profile,ViewPhone)
             }
         }
-
+        ImageViewProfile.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK)
+            Log.d("action pick", Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, ProfileFragment.GALERY_INTENT)
+        }
         setHasOptionsMenu(true)
         int_toolbar_trans_profilefrag?.change_tittle("Perfil")
 
