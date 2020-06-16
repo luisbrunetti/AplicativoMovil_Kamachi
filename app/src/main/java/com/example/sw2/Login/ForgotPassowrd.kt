@@ -20,9 +20,8 @@ class ForgotPassowrd : AppCompatActivity() {
         setContentView(R.layout.activity_forgot_passowrd)
         txtEmail= findViewById(R.id.txtemail)
         auth = FirebaseAuth.getInstance()
-
-
     }
+
     fun send(view: View){
         val email = txtEmail.text.toString()
 

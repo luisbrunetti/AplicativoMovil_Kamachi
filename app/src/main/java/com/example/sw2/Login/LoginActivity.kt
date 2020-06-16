@@ -24,11 +24,11 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var txtUser: EditText
     private lateinit var txtPassword: EditText
     private lateinit var pogressBarLogin: ProgressBar
-    private lateinit var mAuthListener : FirebaseAuth
+     private lateinit var mAuthListener : FirebaseAuth
     private lateinit var auth: FirebaseAuth
     private lateinit var botonIniciarSesion:Button
 
-    private var usuarioProp: String  = "Diana_Ninamango@gmail.com"
+    private var usuarioProp: String  = "luis@gmail.com"
     private var contraseñaProp:String = "123456"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,7 +86,6 @@ class LoginActivity : AppCompatActivity() {
     }
     @InternalCoroutinesApi
     private fun loginUser() {
-
         /*val user: String = txtUser.text.toString()
         val password: String = txtPassword.text.toString()*/
         botonIniciarSesion.isEnabled = false
@@ -101,11 +100,13 @@ class LoginActivity : AppCompatActivity() {
                     var intent = Intent(this, MainActivity::class.java)
                     action(intent)
                 } else {
+                    this.pogressBarLogin.visibility = View.GONE
                     botonIniciarSesion.isEnabled = true
                     Toast.makeText(this, "Error en autotentificación", Toast.LENGTH_SHORT).show()
                 }
             }
         }else{
+            this.pogressBarLogin.visibility = View.GONE
             botonIniciarSesion.isEnabled = true
             Toast.makeText(this, "Ingrese conrectamente su email y contraseña", Toast.LENGTH_SHORT).show()
         }
