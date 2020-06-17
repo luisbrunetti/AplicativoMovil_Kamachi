@@ -28,7 +28,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var botonIniciarSesion:Button
 
-    private var usuarioProp: String  = "luis@gmail.com"
+    private var usuarioProp: String  = "test@gmail.com"
     private var contraseñaProp:String = "123456"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +56,6 @@ class LoginActivity : AppCompatActivity() {
     }
     @InternalCoroutinesApi
     private fun ObtenerDatosUsuario(user:String){
-        //var intentTest = FirebaseConexion().Inicia(applicationContext)
         val intentTest = FirebaseConexion.getinstance(applicationContext)
         var query: Query =
             FirebaseDatabase.getInstance().reference.child("User").orderByChild("E-mail")

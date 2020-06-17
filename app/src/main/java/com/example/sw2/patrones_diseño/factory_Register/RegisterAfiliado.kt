@@ -20,6 +20,7 @@ import com.example.sw2.Clases.Usuario
 import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
 import com.example.sw2.R
 import com.example.sw2.framents.ProfileFragment
+import com.example.sw2.interfaces.toolbar_transaction
 import com.example.sw2.interfaces.translate_fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -32,6 +33,7 @@ class RegisterAfiliado : Fragment() {
     private lateinit var v_frag_RegisterAfiliado: View
     //Interface cambio fragment
     private var change_frag_RegisterAfiliado:translate_fragment? = null
+    private var int_toolbar_transaction_RegisterAfi:toolbar_transaction? =null
     private lateinit var Spinner: Spinner
     private lateinit var Spinner_categoria : Spinner
     private var Uri : Uri? = null
@@ -68,6 +70,7 @@ class RegisterAfiliado : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         change_frag_RegisterAfiliado = activity as translate_fragment
+        int_toolbar_transaction_RegisterAfi = activity as toolbar_transaction
     }
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -82,7 +85,6 @@ class RegisterAfiliado : Fragment() {
             )
         user = FirebaseConexion.getStoreSaved()
         FirebaseReal = FirebaseDatabase.getInstance()
-        toolbar = v_frag_RegisterAfiliado.findViewById(R.id.toolbar_register_afiliado)
         radiobuttonPI = v_frag_RegisterAfiliado.findViewById(R.id.radioButton_personaindependiente)
         radiobuttonPJ = v_frag_RegisterAfiliado.findViewById(R.id.radioButton_personajuridica)
         Spinner = v_frag_RegisterAfiliado.findViewById(R.id.spinner_registerafiliado)
@@ -96,6 +98,19 @@ class RegisterAfiliado : Fragment() {
         textDni = v_frag_RegisterAfiliado.findViewById(R.id.DNI_register_servicio)
         buttonCrear = v_frag_RegisterAfiliado.findViewById(R.id.id_Crear_afiliado_button)
         ImagenViewAfiliado = v_frag_RegisterAfiliado.findViewById(R.id.imageView_Register_Afiliado)
+
+        /////////////
+        setHasOptionsMenu(true)
+        int_toolbar_transaction_RegisterAfi?.change_tittle("Formulario de afiliación")
+        ///////////////////////////////////////////////////////////
+        ImagenViewAfiliado?.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK)
+            Log.d("action pick", Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent,
+                GALERY_INTENT
+            )
+        }
         //Inicialización de boton de crear afiliado
         buttonCrear?.setOnClickListener {
             //Asignación de los valores
@@ -181,21 +196,17 @@ class RegisterAfiliado : Fragment() {
         return v_frag_RegisterAfiliado
     }
     private fun CrearNuevoAfiliado(){
+        val referenciaFirebase = FirebaseReal.reference
+        val key = FirebaseReal.reference.push().key
+        val ref = referenciaFirebase.child("Afilados").child(key!!)
+        val refuser = referenciaFirebase.child("User").child(user?.ID.toString())
+        var radioButtonBooleanPI: Boolean = false
+        var radioButtonBooleanPJ:Boolean = false
         if(!SpinnerDistritoValue.equals("Escoge el distrito del servicio") && !SpinnerCategoriaValue.equals("Selecione la categoria")
         ){
-            var radioButtonBooleanPI: Boolean = false
-            var radioButtonBooleanPJ:Boolean = false
-            var referenciaFirebase = FirebaseReal.reference
-            var key = FirebaseReal.reference.push().key
-            var ref = referenciaFirebase.child("Afilados").child(key!!)
-            var refuser = referenciaFirebase.child("User").child(user?.ID.toString())
-            refuser.child("ID_Afiliado").setValue(key!!)
-            refuser.child("Afiliado").setValue("true")
-            FirebaseConexion.UpdateValue("true","Afiliado")
             if(ImagenViewAfiliado?.drawable.toString() == "android.graphics.drawable.VectorDrawable@789df4e"){
                 Toast.makeText(requireContext(),"Debe ingresar una imagen referencial para el servicio",Toast.LENGTH_LONG).show()
             }else{
-                ref.child("Tipo de persona").setValue(RadioButton_Value)
                 if(RadioButton_Value.equals("Persona Independiente")){
                     /*Log.d("test ", (isEmpty(textNombre.toString()) || isEmpty(textApellido.toString())  || isEmpty(textDni.toString())).toString())
                     Log.d("testnombre ", (isEmpty(textNombre?.toString()).toString()))
@@ -215,6 +226,9 @@ class RegisterAfiliado : Fragment() {
                     }
                 }
                 if(textemail?.text.toString().isNotEmpty() && textTelefono?.text.toString().isNotEmpty()){
+                    refuser.child("ID_Afiliado").setValue(key!!)
+                    refuser.child("Afiliado").setValue("true")
+                    FirebaseConexion.UpdateValue("true","Afiliado")
                     if(radioButtonBooleanPI){
                         ref.child("Nombres_servicio").setValue(textNombre?.text.toString())
                         ref.child("Apellidos_servicio").setValue(textApellido?.text.toString())
@@ -223,6 +237,7 @@ class RegisterAfiliado : Fragment() {
                         ref.child("Empresa_servicio").setValue(textempresa?.text.toString())
                         ref.child("RUC").setValue(textRUc?.text.toString())
                     }
+                    ref.child("Tipo de persona").setValue(RadioButton_Value)
                     ref.child("Email_servicio").setValue(textemail?.text.toString())
                     ref.child("Telefono_servicio").setValue(textTelefono?.text.toString())
                     ref.child("Distrito_servicio").setValue(SpinnerDistritoValue)
@@ -230,28 +245,19 @@ class RegisterAfiliado : Fragment() {
                     ref.child("URI_Imagen_Serivcio").setValue(Uri.toString())
                     ref.child("ID_Usuario_node").setValue(user?.ID.toString())
                     ref.child("ID_Afiliado").setValue(key!!)
-
-                    Toast.makeText(requireContext(),"Se creo tu cuenta de afilado correctamente",Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(),"Se creo tu cuenta de afilado correctamente",Toast.LENGTH_SHORT).show()
                     change_frag_RegisterAfiliado?.cambiar_fragment("AfiliacionFragment")
-                    /*var a = MainActivity()
-                    a.ReloadFragment()*/
                 }else{
-                    Toast.makeText(requireContext(),"Falta llenar campos para registrarse",Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(),"Falta llenar campos para registrarse",Toast.LENGTH_SHORT).show()
                 }
             }
         }
         else{
-            Toast.makeText(requireContext(),"Tiene que seleccionar el distrito o el tipo de categoria",Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(),"Tiene que seleccionar el distrito o el tipo de categoria",Toast.LENGTH_SHORT).show()
         }
     }
-    fun cambiarimagen(view :View){
-        val intent = Intent(Intent.ACTION_PICK)
-        Log.d("action pick", Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent,
-            GALERY_INTENT
-        )
-    }
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         Auth = FirebaseAuth.getInstance()
