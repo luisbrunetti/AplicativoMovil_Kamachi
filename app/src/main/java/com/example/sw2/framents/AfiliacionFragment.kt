@@ -10,9 +10,11 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.bumptech.glide.Glide
 import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
 import com.example.sw2.Clases.Usuario
 import com.example.sw2.R
@@ -26,7 +28,6 @@ import kotlinx.coroutines.InternalCoroutinesApi
 class AfiliacionFragment: Fragment() {
     //Inicialización de vista
     private lateinit var vista : View
-
     //varaibless interfaces
     private var variable_cambio_fragment: translate_fragment? = null
     private var int_toolbar_trans_afiliacionfrag:toolbar_transaction? = null
@@ -74,6 +75,36 @@ class AfiliacionFragment: Fragment() {
             variable_cambio_fragment?.cambiar_fragment("RegisterAfiliado")
         }
         return vista
+    }
+    private fun retrieveDataProfileAfiliado(){
+        var uriImagen: String? = null
+        FirebaseConexion =
+            FirebaseConexion(
+                requireContext()
+            )
+        var ObjectUser = FirebaseConexion.getStoreSaved()
+        Toast.makeText(requireContext(),ObjectUser?.Email.toString(),Toast.LENGTH_SHORT).show()
+        var query: Query =
+            com.google.firebase.database.FirebaseDatabase.getInstance().reference.child("User").orderByChild("E-mail")
+                .equalTo(ObjectUser?.Email)
+        query.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+            override fun onDataChange(p0: DataSnapshot) {
+                for (p0 in p0.children) {
+                    ViewName.text = p0.child("Nombre").value.toString()
+                    ViewLastname.text = p0.child("Apellido").value.toString()
+                    ViewEmail.text = p0.child("E-mail").value.toString()
+                    ViewPhone.text = p0.child("Telefono").value.toString()
+                    Glide.with(v)
+                        .load(p0.child("UrlImagen").value.toString().toUri())
+                        .fitCenter()
+                        .centerCrop()
+                        .into(ImageViewProfile)
+                }
+            }
+        })
     }
 
 }
