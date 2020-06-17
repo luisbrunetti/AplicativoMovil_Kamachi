@@ -13,7 +13,6 @@ import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
 import com.example.sw2.Clases.Usuario
 import com.example.sw2.MainActivity
 import com.example.sw2.R
-import com.example.sw2.patrones_diseño.factory_Register.RegistrarActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -24,7 +23,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var txtUser: EditText
     private lateinit var txtPassword: EditText
     private lateinit var pogressBarLogin: ProgressBar
-     private lateinit var mAuthListener : FirebaseAuth
+    private lateinit var mAuthListener : FirebaseAuth
     private lateinit var auth: FirebaseAuth
     private lateinit var botonIniciarSesion:Button
 
@@ -71,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
                     instancia= Usuario(p0.child("Nombre").value.toString(),p0.child("Apellido").value.toString()
                     ,p0.child("Distrito").value.toString(),p0.child("E-mail").value.toString(),
                         p0.child("Telefono").value.toString(),p0.child("UrlImagen").value.toString()
-                        ,p0.child("ID").value.toString(),p0.child("IDAfiliado").value.toString()
+                        ,p0.child("ID").value.toString(),p0.child("ID_Afiliado").value.toString()
                         ,p0.child("Afiliado").value.toString().toBoolean()
                     )
                 }

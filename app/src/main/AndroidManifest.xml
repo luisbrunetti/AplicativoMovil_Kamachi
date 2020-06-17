@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".patrones_diseño.factory_Register.RegisterAfiliado"
+            android:name=".framents.RegisterAfiliadoFragment"
             android:label="@string/title_activity_register_afiliado"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
@@ -31,7 +31,7 @@
             android:name=".Login.ForgotPassowrd"
             android:parentActivityName=".Login.LoginActivity" />
         <activity
-            android:name=".patrones_diseño.factory_Register.RegistrarActivity"
+            android:name=".Login.RegistrarActivity"
             android:parentActivityName=".Login.LoginActivity" />
         <activity
             android:name=".MainActivity"

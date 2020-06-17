@@ -7,17 +7,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
-import com.example.sw2.patrones_diseño.factory.ReclyceViewAdapter
+import com.example.sw2.patrones_diseño.factory.ReclyceViewAdapter_ServiciosHome
 import com.example.sw2.Clases.ServicioListView
 import com.example.sw2.Secundarios.Detalles_activity
 import com.example.sw2.MainActivity
@@ -51,7 +46,7 @@ class HomeFragment(): Fragment() ,
     private lateinit var FirebaseConexion: FirebaseConexion
 
     companion object {
-        private lateinit var recycleAdapter: ReclyceViewAdapter
+        private lateinit var recycleAdapterServiciosHome: ReclyceViewAdapter_ServiciosHome
         private lateinit var emailusuario: String
 
     }
@@ -118,14 +113,14 @@ class HomeFragment(): Fragment() ,
                     if (a != null) {
                         DownloadImagsToRecycleView(h, a).addOnCompleteListener { task ->
                             if (task.isComplete) {
-                                recycleAdapter =
-                                    ReclyceViewAdapter(
+                                recycleAdapterServiciosHome =
+                                    ReclyceViewAdapter_ServiciosHome(
                                         requireActivity(),
                                         lstServicios,
                                         this@HomeFragment
                                     )
                                 myRecyclyview.layoutManager = LinearLayoutManager(context)
-                                myRecyclyview.adapter = recycleAdapter
+                                myRecyclyview.adapter = recycleAdapterServiciosHome
                                 MainActivity.bottomNav?.menu?.findItem(R.id.nav_home)?.isEnabled =
                                     true
                             }
@@ -191,14 +186,14 @@ class HomeFragment(): Fragment() ,
                 /*searchview.setQuery("",false)
                 menu.findItem(R.id.app_bar_search).collapseActionVie3w()*/
                 filtrar(newText?.trim())
-                recycleAdapter =
-                    ReclyceViewAdapter(
+                recycleAdapterServiciosHome =
+                    ReclyceViewAdapter_ServiciosHome(
                         requireActivity(),
                         lstServicios,
                         this@HomeFragment
                     )
                 myRecyclyview.layoutManager = LinearLayoutManager(context)
-                myRecyclyview.adapter = recycleAdapter
+                myRecyclyview.adapter = recycleAdapterServiciosHome
 
                 return true
             }

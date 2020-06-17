@@ -1,11 +1,10 @@
-package com.example.sw2.patrones_diseño.factory_Register
+package com.example.sw2.framents
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.text.TextUtils.*
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +18,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.sw2.Clases.Usuario
 import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
 import com.example.sw2.R
-import com.example.sw2.framents.ProfileFragment
 import com.example.sw2.interfaces.toolbar_transaction
 import com.example.sw2.interfaces.translate_fragment
 import com.google.firebase.auth.FirebaseAuth
@@ -28,7 +26,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.FirebaseStorage.*
 import com.google.firebase.storage.StorageReference
 
-class RegisterAfiliado : Fragment() {
+class RegisterAfiliadoFragment : Fragment() {
     //VIEEW
     private lateinit var v_frag_RegisterAfiliado: View
     //Interface cambio fragment
@@ -198,7 +196,7 @@ class RegisterAfiliado : Fragment() {
     private fun CrearNuevoAfiliado(){
         val referenciaFirebase = FirebaseReal.reference
         val key = FirebaseReal.reference.push().key
-        val ref = referenciaFirebase.child("Afilados").child(key!!)
+        val ref = referenciaFirebase.child("Afiliados").child(key!!)
         val refuser = referenciaFirebase.child("User").child(user?.ID.toString())
         var radioButtonBooleanPI: Boolean = false
         var radioButtonBooleanPJ:Boolean = false
@@ -226,9 +224,11 @@ class RegisterAfiliado : Fragment() {
                     }
                 }
                 if(textemail?.text.toString().isNotEmpty() && textTelefono?.text.toString().isNotEmpty()){
-                    refuser.child("ID_Afiliado").setValue(key!!)
+                    refuser.child("ID_Afiliado").setValue(key)
                     refuser.child("Afiliado").setValue("true")
                     FirebaseConexion.UpdateValue("true","Afiliado")
+                    FirebaseConexion.UpdateValue(key.toString(),"IDAfiliado")
+                    Log.d("keyIDafiliado",FirebaseConexion.getStoreSaved()?.IDAfiliado!!)
                     if(radioButtonBooleanPI){
                         ref.child("Nombres_servicio").setValue(textNombre?.text.toString())
                         ref.child("Apellidos_servicio").setValue(textApellido?.text.toString())
@@ -245,6 +245,8 @@ class RegisterAfiliado : Fragment() {
                     ref.child("URI_Imagen_Serivcio").setValue(Uri.toString())
                     ref.child("ID_Usuario_node").setValue(user?.ID.toString())
                     ref.child("ID_Afiliado").setValue(key!!)
+                    ref.child("cant_servicio").setValue(0)
+                    ref.child("contratos_realizados").setValue(0)
                     Toast.makeText(requireContext(),"Se creo tu cuenta de afilado correctamente",Toast.LENGTH_SHORT).show()
                     change_frag_RegisterAfiliado?.cambiar_fragment("AfiliacionFragment")
                 }else{
@@ -264,13 +266,13 @@ class RegisterAfiliado : Fragment() {
 
         val user = Auth.currentUser!!
         val userID = user.uid
-        var ImagenName: String? = null
+        var Seccion: String? = null
         val uri: Uri? = data?.data
         idPush = FirebaseReal.reference.push().key
         if (requestCode == ProfileFragment.GALERY_INTENT && resultCode == Activity.RESULT_OK) {
-            ImagenName = "FotoPerfilAfiliado"
+            Seccion="FotoPerfilAfiliado"
             val filePath: StorageReference =
-                FirebaseStorage.reference.child("FotosAfiliado/" + idPush + "/" + ImagenName)
+                FirebaseStorage.reference.child("FotosAfiliado/" + idPush + "/" + Seccion)
                     .child("FotoPerfilAfiliado.jpg")
             if (uri != null) {
                 filePath.putFile(uri).addOnSuccessListener { t->
@@ -278,7 +280,6 @@ class RegisterAfiliado : Fragment() {
                     downloadURL?.addOnCompleteListener { task->
                         Uri = downloadURL.result!!
                         //SaveUriImagenInFireBase(Uri,userID)
-
                         if(task.isComplete && task.isSuccessful){
                             Glide.with(requireContext())
                                 .load(Uri)

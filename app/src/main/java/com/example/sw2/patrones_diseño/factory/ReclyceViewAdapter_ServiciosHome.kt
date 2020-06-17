@@ -10,7 +10,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.sw2.Clases.ServicioListView
 import com.example.sw2.R
 
-class ReclyceViewAdapter(var mcontext:Context, mdata: ArrayList<ServicioListView>, clickLister: IntefaceClickListeer): RecyclerView.Adapter<MyviewHolder>() {
+class ReclyceViewAdapter_ServiciosHome(var mcontext:Context, mdata: ArrayList<ServicioListView>, clickLister: IntefaceClickListeer): RecyclerView.Adapter<MyviewHolder>() {
     private var mdata : ArrayList<ServicioListView> = mdata
     private var onClickListener : IntefaceClickListeer = clickLister
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyviewHolder {

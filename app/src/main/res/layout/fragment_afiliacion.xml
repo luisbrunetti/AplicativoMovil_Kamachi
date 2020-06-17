@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/circle_view_profile_afiliado"
             android:layout_centerHorizontal="true"
-            android:text="Los Quenuales"
+
             android:textColor="@color/white"
             android:textSize="21sp" />
 
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvi_enterprisename_porifle"
             android:layout_centerHorizontal="true"
-            android:text="luisbruno777@gmail.com"
+
             android:textColor="@color/white"
             android:textSize="16sp" />
 
@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="10"
+                    android:text="0"
                     android:textColor="@color/white"
                     android:textSize="21sp" />
             </LinearLayout>
@@ -95,10 +95,11 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/tvi_dealsdone_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="5"
+                    android:text="0"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="21sp" />
@@ -132,6 +133,7 @@
                     android:layout_marginBottom="10dp"
                     />
                 <TextView
+                    android:id="@+id/tvi_phone_local_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@id/tvi_phone_local"
@@ -140,7 +142,7 @@
                     android:layout_marginStart="40dp"
                     android:layout_marginEnd="20dp"
                     android:gravity="center"
-                    android:text="981077300" />
+                     />
             </RelativeLayout>
 
             <RelativeLayout
@@ -162,6 +164,7 @@
                     android:textSize="16sp"
                     />
                 <TextView
+                    android:id="@+id/tvi_distrito_local_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@id/tvi_distrito_local"
@@ -170,7 +173,7 @@
                     android:layout_marginStart="40dp"
                     android:layout_marginEnd="20dp"
                     android:gravity="center"
-                    android:text="Surco" />
+              />
             </RelativeLayout>
             <View
                 android:layout_width="wrap_content"

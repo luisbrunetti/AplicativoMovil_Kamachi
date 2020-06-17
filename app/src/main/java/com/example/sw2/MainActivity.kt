@@ -15,7 +15,7 @@ import com.example.sw2.framents.HomeFragment
 import com.example.sw2.framents.ProfileFragment
 import com.example.sw2.interfaces.toolbar_transaction
 import com.example.sw2.interfaces.translate_fragment
-import com.example.sw2.patrones_diseño.factory_Register.RegisterAfiliado
+import com.example.sw2.framents.RegisterAfiliadoFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() ,translate_fragment,toolbar_transaction{
@@ -55,7 +55,9 @@ class MainActivity : AppCompatActivity() ,translate_fragment,toolbar_transaction
     override fun cambiar_fragment(fragment: String) {
         val supportFragment = supportFragmentManager.beginTransaction()
         when(fragment){
-            "RegisterAfiliado" -> supportFragment.replace(R.id.fragment_container,RegisterAfiliado()).commit()
+            "RegisterAfiliado" -> supportFragment.replace(R.id.fragment_container,
+                RegisterAfiliadoFragment()
+            ).commit()
             "AfiliacionFragment" -> supportFragment.replace(R.id.fragment_container,AfiliacionFragment()).commit()
         }
     }
