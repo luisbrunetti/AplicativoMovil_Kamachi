@@ -120,6 +120,8 @@
                     android:id="@+id/iv_phone_local"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_centerVertical="true"
                     android:src="@drawable/ic_local_phone_black_24dp" />
                 <TextView
                     android:id="@+id/tvi_phone_local"
@@ -129,6 +131,7 @@
                     android:layout_marginStart="10dp"
                     android:text="Teléfono"
                     android:textColor="@color/Negro"
+                    android:layout_centerVertical="true"
                     android:textSize="16sp"
                     android:layout_marginBottom="10dp"
                     />
@@ -141,6 +144,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="40dp"
                     android:layout_marginEnd="20dp"
+                    android:layout_centerVertical="true"
                     android:gravity="center"
                      />
             </RelativeLayout>
@@ -151,7 +155,10 @@
                 <ImageView
                     android:id="@+id/iv_home_local"
                     android:layout_width="wrap_content"
+
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_centerVertical="true"
                     android:src="@drawable/ic_home_black_24dp" />
                 <TextView
                     android:id="@+id/tvi_distrito_local"
@@ -160,6 +167,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Distrito"
+                    android:layout_centerVertical="true"
                     android:textColor="@color/Negro"
                     android:textSize="16sp"
                     />
@@ -171,6 +179,7 @@
                     android:background="@drawable/backwithborder"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="40dp"
+                    android:layout_centerVertical="true"
                     android:layout_marginEnd="20dp"
                     android:gravity="center"
               />
@@ -182,12 +191,25 @@
                 android:background="@color/Negro"/>
         </LinearLayout>
     </RelativeLayout>
-    <TextView
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Servicios actuales"
-        android:textColor="@color/Negro"
-        android:textSize="16sp" />
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Servicios publicados"
+            android:textColor="@color/Negro"
+            android:textSize="16sp" />
+
+        <ImageButton
+            android:id="@+id/add_service_profile_fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_insert_invitation_black_24dp"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

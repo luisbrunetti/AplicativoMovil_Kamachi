@@ -18,8 +18,8 @@ class ContratosFragment: Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view = inflater.inflate(R.layout.fragment_contratos,container,false)
-        var button = view.findViewById<Button>(R.id.buttonaapretar)
+        val view = inflater.inflate(R.layout.fragment_contratos,container,false)
+        val button = view.findViewById<Button>(R.id.buttonaapretar)
         button.setOnClickListener {
         }
         setHasOptionsMenu(true)

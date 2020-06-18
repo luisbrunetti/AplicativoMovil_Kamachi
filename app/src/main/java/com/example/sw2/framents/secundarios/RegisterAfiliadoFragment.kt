@@ -1,4 +1,4 @@
-package com.example.sw2.framents
+package com.example.sw2.framents.secundarios
 
 import android.app.Activity
 import android.content.Context
@@ -18,6 +18,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.sw2.Clases.Usuario
 import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
 import com.example.sw2.R
+import com.example.sw2.framents.ProfileFragment
 import com.example.sw2.interfaces.toolbar_transaction
 import com.example.sw2.interfaces.translate_fragment
 import com.google.firebase.auth.FirebaseAuth

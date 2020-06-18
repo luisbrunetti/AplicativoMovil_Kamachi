@@ -15,7 +15,8 @@ import com.example.sw2.framents.HomeFragment
 import com.example.sw2.framents.ProfileFragment
 import com.example.sw2.interfaces.toolbar_transaction
 import com.example.sw2.interfaces.translate_fragment
-import com.example.sw2.framents.RegisterAfiliadoFragment
+import com.example.sw2.framents.secundarios.RegisterAfiliadoFragment
+import com.example.sw2.framents.secundarios.RegistrarNewServiceFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() ,translate_fragment,toolbar_transaction{
@@ -59,6 +60,7 @@ class MainActivity : AppCompatActivity() ,translate_fragment,toolbar_transaction
                 RegisterAfiliadoFragment()
             ).commit()
             "AfiliacionFragment" -> supportFragment.replace(R.id.fragment_container,AfiliacionFragment()).commit()
+            "RegistrarNewServiceFragment" -> supportFragment.replace(R.id.fragment_container,RegistrarNewServiceFragment()).commit()
         }
     }
 

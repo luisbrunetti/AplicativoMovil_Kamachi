@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.3"
+        android:src="@drawable/brigde_golden" />
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:paddingStart="10dp"
+        >
+        <TextView
+            android:id="@+id/title_template_service_afiliacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Servicio de gasfitería"
+            android:textColor="@color/Negro"
+            android:textSize="18sp"/>
+        <TextView
+            android:id="@+id/fecha_template_service_afiliacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/title_template_service_afiliacion"
+            android:text="Fecha:"
+            android:textColor="@color/Negro"/>
+        <TextView
+            android:id="@+id/fecha_template_service_afiliacion_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/fecha_template_service_afiliacion"
+            android:layout_below="@+id/title_template_service_afiliacion"
+            android:text="10/06/2020" />
+        <TextView
+            android:id="@+id/usuario_template_service_afiliacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/fecha_template_service_afiliacion"
+            android:text="Usuario:"
+            android:textColor="@color/Negro"/>
+        <TextView
+            android:id="@+id/usuario_template_service_afiliacion_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/usuario_template_service_afiliacion"
+            android:layout_below="@+id/fecha_template_service_afiliacion"
+            android:text="luisbrunetti777" />
+    </RelativeLayout>
+
+
+
+</LinearLayout>

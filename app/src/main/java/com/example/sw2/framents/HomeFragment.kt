@@ -11,31 +11,32 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
-import com.example.sw2.patrones_diseño.factory.ReclyceViewAdapter_ServiciosHome
 import com.example.sw2.Clases.ServicioListView
-import com.example.sw2.Secundarios.Detalles_activity
 import com.example.sw2.MainActivity
 import com.example.sw2.R
+import com.example.sw2.Secundarios.Detalles_activity
 import com.example.sw2.interfaces.toolbar_transaction
-import com.google.android.gms.tasks.OnSuccessListener
+import com.example.sw2.patrones_diseño.factory.IntefaceClickListeer
+import com.example.sw2.patrones_diseño.factory.ReclyceViewAdapter_ServiciosHome
+import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
 import com.google.android.gms.tasks.Task
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.example.sw2.patrones_diseño.factory.IntefaceClickListeer
+import java.util.*
+import kotlin.collections.ArrayList
 
 
-class HomeFragment(): Fragment() ,
+class HomeFragment : Fragment() ,
     IntefaceClickListeer {
     private lateinit var myRecyclyview: RecyclerView
-    private lateinit var intentRecive: String
-    private lateinit var bottonNav: BottomNavigationView
     //variables interface
-    var int_toolbar_transaction: toolbar_transaction? = null
+    private var int_toolbar_transaction: toolbar_transaction? = null
     //Firebaser variables
     private lateinit var storageRef: StorageReference
     private lateinit var userFirebase: FirebaseUser
@@ -47,7 +48,6 @@ class HomeFragment(): Fragment() ,
 
     companion object {
         private lateinit var recycleAdapterServiciosHome: ReclyceViewAdapter_ServiciosHome
-        private lateinit var emailusuario: String
 
     }
     override fun onAttach(context: Context) {
@@ -71,13 +71,6 @@ class HomeFragment(): Fragment() ,
         //Creando acitivity para que reconozca el toolbar
         int_toolbar_transaction?.change_tittle("Servicios diponibles")
 
-        /*var activity : AppCompatActivity = activity as AppCompatActivity
-        activity.setSupportActionBar(toolbar)
-        activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)*/
-
-
-
-
         //Obteniendo el email de el intent
         myRecyclyview = v.findViewById(R.id.recycleview_homefragment)
 
@@ -99,7 +92,7 @@ class HomeFragment(): Fragment() ,
 
             override fun onDataChange(p0: DataSnapshot) {
                 for (h in p0.children) {
-                    var a: ServicioListView = ServicioListView(
+                    val a = ServicioListView(
                         "",
                         h.child("nombreTrabaj").value.toString(),
                         h.child("distrito").value.toString(),
@@ -110,27 +103,19 @@ class HomeFragment(): Fragment() ,
                         null
                     )
                     // var a : ServicioListView? = h.getValue(ServicioListView::class.java)
-                    if (a != null) {
-                        DownloadImagsToRecycleView(h, a).addOnCompleteListener { task ->
-                            if (task.isComplete) {
-                                recycleAdapterServiciosHome =
-                                    ReclyceViewAdapter_ServiciosHome(
-                                        requireActivity(),
-                                        lstServicios,
-                                        this@HomeFragment
-                                    )
-                                myRecyclyview.layoutManager = LinearLayoutManager(context)
-                                myRecyclyview.adapter = recycleAdapterServiciosHome
-                                MainActivity.bottomNav?.menu?.findItem(R.id.nav_home)?.isEnabled =
-                                    true
-                            }
+                    DownloadImagsToRecycleView(h, a).addOnCompleteListener { task ->
+                        if (task.isComplete) {
+                            recycleAdapterServiciosHome =
+                                ReclyceViewAdapter_ServiciosHome(
+                                    requireActivity(),
+                                    lstServicios,
+                                    this@HomeFragment
+                                )
+                            myRecyclyview.layoutManager = LinearLayoutManager(context)
+                            myRecyclyview.adapter = recycleAdapterServiciosHome
+                            MainActivity.bottomNav?.menu?.findItem(R.id.nav_home)?.isEnabled =
+                                true
                         }
-                    } else {
-                        Toast.makeText(
-                            context,
-                            "Error al ingresar alguno de los datos",
-                            Toast.LENGTH_LONG
-                        ).show()
                     }
                 }
             }
@@ -144,26 +129,26 @@ class HomeFragment(): Fragment() ,
             lstServicios = ArrayList(lstServiciosCopy)
             return
         }
-        var busqueda = str?.toLowerCase()
+        val busqueda = str.toLowerCase(Locale.ROOT)
         for (p in lstServiciosCopy) {
-            if (p.NombreTrabaj?.toLowerCase()?.contains(busqueda)!!) {
+            if (p.NombreTrabaj?.toLowerCase(Locale.ROOT)?.contains(busqueda)!!) {
                 lstServicios.add(p)
             }
         }
     }
 
     private fun DownloadImagsToRecycleView(h: DataSnapshot, a: ServicioListView?): Task<Uri> {
-        var key: String = h.key.toString()
-        var filepath: Task<Uri> = storageRef.child("ImagenServicios/" + key)
-            .child("Fotoservicio.png").downloadUrl.addOnSuccessListener(OnSuccessListener {
-            if (it != null) {
-                a?.UriImagen = it
-                if (a != null) {
-                    lstServicios.add(a)
-                    lstServiciosCopy = ArrayList(lstServicios)
+        val key: String = h.key.toString()
+        val filepath: Task<Uri> = storageRef.child("ImagenServicios/$key")
+            .child("Fotoservicio.png").downloadUrl.addOnSuccessListener {
+                if (it != null) {
+                    a?.UriImagen = it
+                    if (a != null) {
+                        lstServicios.add(a)
+                        lstServiciosCopy = ArrayList(lstServicios)
+                    }
                 }
             }
-        })
         return filepath
     }
 
@@ -198,9 +183,6 @@ class HomeFragment(): Fragment() ,
                 return true
             }
         })
-        searchview.setOnClickListener { view ->
-
-        }
 
     }
 
@@ -223,7 +205,7 @@ class HomeFragment(): Fragment() ,
 
     override fun onClickListener(pos: Int) {
         Toast.makeText(context, "clicked", Toast.LENGTH_SHORT).show()
-        var intent = Intent(
+        val intent = Intent(
             activity,
             Detalles_activity::class.java
         )
