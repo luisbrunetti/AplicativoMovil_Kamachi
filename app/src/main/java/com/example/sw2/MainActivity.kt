@@ -7,7 +7,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.viewpager.widget.ViewPager
+import com.example.sw2.Clases.Afiliado
 import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
 import com.example.sw2.framents.AfiliacionFragment
 import com.example.sw2.framents.ContratosFragment
@@ -53,15 +55,25 @@ class MainActivity : AppCompatActivity() ,translate_fragment,toolbar_transaction
 
     }
 
-    override fun cambiar_fragment(fragment: String) {
+    override fun cambiar_fragment(fragment: String,afiliado:Afiliado?) {
         val supportFragment = supportFragmentManager.beginTransaction()
         when(fragment){
             "RegisterAfiliado" -> supportFragment.replace(R.id.fragment_container,
                 RegisterAfiliadoFragment()
             ).commit()
             "AfiliacionFragment" -> supportFragment.replace(R.id.fragment_container,AfiliacionFragment()).commit()
-            "RegistrarNewServiceFragment" -> supportFragment.replace(R.id.fragment_container,RegistrarNewServiceFragment()).commit()
+            "RegistrarNewServiceFragment" -> RegistrarNuevoservicio(afiliado)//supportFragment.replace(R.id.fragment_container,RegistrarNewServiceFragment()).commit()
+            "AfiliacionFragment"-> supportFragment.replace(R.id.fragment_container,AfiliacionFragment()).commit()
         }
+    }
+    private fun RegistrarNuevoservicio(afiliado:Afiliado?){
+        val bundle = Bundle()
+        val RegistrarNewServiceFragment = RegistrarNewServiceFragment()
+        bundle.putSerializable("afiliado",afiliado!!)
+        RegistrarNewServiceFragment.arguments = bundle
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container,RegistrarNewServiceFragment).commit()
+
+
     }
 
     override fun change_tittle(tittle: String) {

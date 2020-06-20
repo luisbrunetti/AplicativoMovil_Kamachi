@@ -62,7 +62,7 @@ class RegisterAfiliadoFragment : Fragment() {
     //Valores de los radio button
     private var RadioButton_Value: String? = null
     companion object {
-        private val GALERY_INTENT = 1
+        val GALERY_INTENT = 1
         private val IMAGE_PICK_CODE: Int = 1000
     }
 
@@ -146,7 +146,7 @@ class RegisterAfiliadoFragment : Fragment() {
         }
         ////////////////////////////////////////////////////
         ////////Iniccialización del spinner///////////////
-        var adaptadorSpinnerCategoria  = ArrayAdapter.createFromResource(
+        val adaptadorSpinnerCategoria  = ArrayAdapter.createFromResource(
             requireContext(),
             R.array.list_servicios_categoria,R.layout.spinner_text)
         adaptadorSpinnerCategoria.setDropDownViewResource(R.layout.spinner_text)
@@ -160,7 +160,7 @@ class RegisterAfiliadoFragment : Fragment() {
                 SpinnerCategoriaValue = p0?.getItemAtPosition(p2).toString()
             }
         }
-        var adaptadorSpinner = ArrayAdapter.createFromResource(
+        val adaptadorSpinner = ArrayAdapter.createFromResource(
             requireContext(),
             R.array.list_distritos_lima,
             R.layout.spinner_text
@@ -196,7 +196,8 @@ class RegisterAfiliadoFragment : Fragment() {
     }
     private fun CrearNuevoAfiliado(){
         val referenciaFirebase = FirebaseReal.reference
-        val key = FirebaseReal.reference.push().key
+        //val key = FirebaseReal.reference.push().key
+        val key = referenciaFirebase.push().key
         val ref = referenciaFirebase.child("Afiliados").child(key!!)
         val refuser = referenciaFirebase.child("User").child(user?.ID.toString())
         var radioButtonBooleanPI: Boolean = false
@@ -249,7 +250,7 @@ class RegisterAfiliadoFragment : Fragment() {
                     ref.child("cant_servicio").setValue(0)
                     ref.child("contratos_realizados").setValue(0)
                     Toast.makeText(requireContext(),"Se creo tu cuenta de afilado correctamente",Toast.LENGTH_SHORT).show()
-                    change_frag_RegisterAfiliado?.cambiar_fragment("AfiliacionFragment")
+                    change_frag_RegisterAfiliado?.cambiar_fragment("AfiliacionFragment",null)
                 }else{
                     Toast.makeText(requireContext(),"Falta llenar campos para registrarse",Toast.LENGTH_SHORT).show()
                 }

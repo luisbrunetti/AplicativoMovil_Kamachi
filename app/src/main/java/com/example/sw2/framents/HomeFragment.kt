@@ -99,10 +99,10 @@ class HomeFragment : Fragment() ,
                         h.child("Imagen").value.toString(),
                         null,
                         h.child("telefono").value.toString(),
-                        h.child("calificacion").value.toString().toInt(),
+                        h.child("calificacion").value.toString(),
+                        null,
                         null
                     )
-                    // var a : ServicioListView? = h.getValue(ServicioListView::class.java)
                     DownloadImagsToRecycleView(h, a).addOnCompleteListener { task ->
                         if (task.isComplete) {
                             recycleAdapterServiciosHome =
@@ -120,7 +120,7 @@ class HomeFragment : Fragment() ,
                 }
             }
         }
-        reff.addValueEventListener(postListener)
+        reff.addListenerForSingleValueEvent(postListener)
     }
 
     private fun filtrar(str: String?) {

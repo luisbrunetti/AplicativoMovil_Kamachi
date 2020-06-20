@@ -29,6 +29,9 @@ class LoginActivity : AppCompatActivity() {
 
     private var usuarioProp: String  = "test@gmail.com"
     private var contraseñaProp:String = "123456"
+
+    private var user :String? = null
+    private var password: String ? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -65,7 +68,6 @@ class LoginActivity : AppCompatActivity() {
             }
             override fun onDataChange(p0: DataSnapshot) {
                 var instancia:Usuario? = null
-                Toast.makeText(applicationContext,p0.child("ID").value.toString(),Toast.LENGTH_SHORT).show()
                 for (p0 in p0.children) {
                     instancia= Usuario(p0.child("Nombre").value.toString(),p0.child("Apellido").value.toString()
                     ,p0.child("Distrito").value.toString(),p0.child("E-mail").value.toString(),
@@ -75,26 +77,32 @@ class LoginActivity : AppCompatActivity() {
                     )
                 }
                 if (instancia != null) {
-                    Toast.makeText(applicationContext,"ENTRE",Toast.LENGTH_SHORT).show()
                     intentTest.clearStoreSaved()
                     intentTest.StoreUserDate(instancia)
                 }
             }
         })
     }
+    fun logintest(){
+        user= usuarioProp
+        password = contraseñaProp
+    }
+    fun loginfirebase(){
+        user= txtUser.text.toString()
+        password= txtPassword.text.toString()
+    }
     @InternalCoroutinesApi
     private fun loginUser() {
-        /*val user: String = txtUser.text.toString()
-        val password: String = txtPassword.text.toString()*/
+        //loginfirebase()
+        logintest()
         botonIniciarSesion.isEnabled = false
-        var user:String = usuarioProp
-        var password:String = contraseñaProp
+
         auth = FirebaseAuth.getInstance()
         if (!(TextUtils.isEmpty(user) && TextUtils.isEmpty(password))) {
             pogressBarLogin.visibility = View.VISIBLE
-            auth.signInWithEmailAndPassword(user, password).addOnCompleteListener(this) { task ->
+            auth.signInWithEmailAndPassword(user!!, password!!).addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    ObtenerDatosUsuario(user)
+                    ObtenerDatosUsuario(user!!)
                     var intent = Intent(this, MainActivity::class.java)
                     action(intent)
                 } else {

@@ -162,9 +162,9 @@ class ProfileFragment: Fragment() {
             FirebaseConexion(
                 requireContext()
             )
-        var ObjectUser = FirebaseConexion.getStoreSaved()
-        Toast.makeText(requireContext(),ObjectUser?.Email.toString(),Toast.LENGTH_SHORT).show()
-        var query: Query =
+        val ObjectUser = FirebaseConexion.getStoreSaved()
+        //Toast.makeText(requireContext(),ObjectUser?.Email.toString(),Toast.LENGTH_SHORT).show()
+        val query: Query =
             FirebaseDatabase.getInstance().reference.child("User").orderByChild("E-mail")
                 .equalTo(ObjectUser?.Email)
         query.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -187,7 +187,6 @@ class ProfileFragment: Fragment() {
         })
     }
     fun SaveUriImagenInFireBase(uri:Uri?,userId: String){
-        Toast.makeText(context,"2",Toast.LENGTH_SHORT).show()
         InstanceFirebaseToSaveImage.reference.child("User").child(userId).child("UrlImagen").setValue(uri.toString())
     }
 

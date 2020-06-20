@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.example.sw2.Clases.Afiliado
 import com.example.sw2.Clases.Servicio_profile_afiliacion
 import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
 import com.example.sw2.Clases.Usuario
@@ -48,7 +49,7 @@ class AfiliacionFragment: Fragment() {
     private var FirebaseConexion: FirebaseConexion? = null
     private lateinit var FirebaseDatabase:FirebaseDatabase
     private var user: Usuario? = null
-    private var afiliado: Boolean? = null
+    private var afiliado:Afiliado? = null
     /////
     private var test_arreglo: ArrayList<Servicio_profile_afiliacion>? = null
     companion object {
@@ -94,12 +95,13 @@ class AfiliacionFragment: Fragment() {
                 intent.type = "image/*"
                 startActivityForResult(intent, ProfileFragment.GALERY_INTENT)
             }
-            iv_addService?.setOnClickListener {
-                Log.d("dewbug","asd")
-                variable_cambio_fragment?.cambiar_fragment("RegistrarNewServiceFragment")
-            }
+
             retrieveDataProfileAfiliado()
 
+            iv_addService?.setOnClickListener {
+                Log.d("dewbug","asd")
+                variable_cambio_fragment?.cambiar_fragment("RegistrarNewServiceFragment",afiliado)
+            }
 
 
         }else{
@@ -107,7 +109,7 @@ class AfiliacionFragment: Fragment() {
             TextViewTittle = vista.findViewById(R.id.textView_title_noafiliado)
             TextViewTittle?.text = "!"+ user!!.Nombre + " todavia no te afilias!"
             button?.setOnClickListener {
-                variable_cambio_fragment?.cambiar_fragment("RegisterAfiliado")
+                variable_cambio_fragment?.cambiar_fragment("RegisterAfiliado",null)
             }
 
         }
@@ -119,9 +121,6 @@ class AfiliacionFragment: Fragment() {
     }
     private fun arreglo_test(){
         test_arreglo = ArrayList(listOf(Servicio_profile_afiliacion("serivicio de prueba")))
-    }
-    private fun recly(){
-
     }
     private fun retrieveDataProfileAfiliado(){
         FirebaseConexion =
@@ -148,11 +147,19 @@ class AfiliacionFragment: Fragment() {
                     tvi_phone_local_value?.text = p0.child("Telefono_servicio").value.toString()
                     tvi_cant_servicios_value?.text = p0.child("cant_servicios").value.toString()
                     tvi_dealsdone_profile?.text = p0.child("contratos_realizados").value.toString()
+
                     Glide.with(vista)
                         .load(p0.child("URI_Imagen_Serivcio").value.toString().toUri())
                         .fitCenter()
                         .centerCrop()
                         .into(iv_circle_view_profile_afiliado!!)
+                    afiliado = Afiliado(p0.child("Categoria_servicio").value.toString(), p0.child("Distrito_servicio").value.toString(),
+                        p0.child("Email_servicio").value.toString(),p0.child("Empresa_servicio").value.toString(),p0.child("ID_Afiliado").value.toString(),
+                        p0.child("ID_Usuario_node").value.toString(),p0.child("RUC").value.toString(),p0.child("Telefono_servicio").value.toString(),
+                        p0.child("Tipo de persona").value.toString(),p0.child("URI_Imagen_Serivcio").value.toString(),p0.child("cant_servicio").value.toString(),
+                        p0.child("contratos_realizados").value.toString()
+                    )
+                    Log.d("afiliado", afiliado!!.Email_servicio.toString())
                 }
             }
         })
