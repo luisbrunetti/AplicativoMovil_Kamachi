@@ -28,7 +28,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.InternalCoroutinesApi
 
-class RegistrarNewServiceFragment():Fragment(){
+class RegistrarNewServiceFragment:Fragment(){
     private lateinit var vistaRegisterNewService: View
     //Firebase
     private var Auth:FirebaseAuth? = null
@@ -46,6 +46,8 @@ class RegistrarNewServiceFragment():Fragment(){
     //////////////////////
     private var user_profile: Usuario? = null
     private var afiliado:Afiliado? = null
+    ///Varaibles para el guardado en Firebase
+    private var uriImagenAndroid:Uri? = null
     private var keypush:String? = null
     private var referenciaDatabaseF:DatabaseReference? = null
     companion object {
@@ -101,6 +103,9 @@ class RegistrarNewServiceFragment():Fragment(){
             ete_costservice_newservice!!.text.isNotEmpty() && ete_description_newservice!!.text.isNotEmpty()){
             val refService = referenciaDatabaseF!!.child("Servicios")
                 .child(keypush!!)
+            val filePath: StorageReference =
+                FirebaseStorage!!.reference.child("ImagenServicios/"+keypush.toString())
+                    .child("Fotoservicio.png")
             Log.d("refServicio",refService.toString())
             refService.child("nombreTrabaj").setValue(ete_servicename_newservice!!.text.toString())
             refService.child("duracion").setValue(ete_timeduration_newservice!!.text.toString())
@@ -116,6 +121,11 @@ class RegistrarNewServiceFragment():Fragment(){
             refService.child("key").setValue(keypush)
             Toast.makeText(requireContext(),"El nuevo servici se ha creado correctamente",Toast.LENGTH_SHORT).show()
             int_translatefragment_newservice?.cambiar_fragment("AfiliacionFragment",null)
+            ///////////////////////////////////////////////////////////////////////////////////////////////////
+            filePath.putFile(uriImagenAndroid!!).addOnSuccessListener {
+                //Toast.makeText(requireContext(), "Se guardo la imagen exitosamente", Toast.LENGTH_LONG)
+                  //  .show()
+                }
 
         }else{
             Toast.makeText(requireContext(),"Llene los campos correctamente",Toast.LENGTH_SHORT).show()
@@ -123,13 +133,15 @@ class RegistrarNewServiceFragment():Fragment(){
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        val uri: Uri? = data?.data
+        uriImagenAndroid = data?.data
         if (requestCode == ProfileFragment.GALERY_INTENT && resultCode == Activity.RESULT_OK) {
-            val filePath: StorageReference =
-                FirebaseStorage!!.reference.child("ImagenServicios/"+keypush.toString())
-                    .child("Fotoservicio.png")
-            Log.d("path",filePath.toString())
-            if (uri != null) {
+            if (uriImagenAndroid != null) {
+                Glide.with(requireContext())
+                    .load(uriImagenAndroid)
+                    .fitCenter()
+                    .centerCrop()
+                    .into(iv_newService!!)
+                /*
                 filePath.putFile(uri).addOnSuccessListener { t->
                     val downloadURL = t.metadata?.reference?.downloadUrl
                     downloadURL?.addOnCompleteListener { task->
@@ -146,11 +158,11 @@ class RegistrarNewServiceFragment():Fragment(){
                             Toast.makeText(requireContext(), "Ocurrio al descargar la imagen", Toast.LENGTH_LONG)
                                 .show()
                         }
-                    }
+                    }*/
 
                 }
             }
         }
     }
 
-}
+//}
