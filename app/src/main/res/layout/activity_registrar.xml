@@ -68,10 +68,11 @@
         android:ems="10"
         android:hint="Nombre"
         android:paddingLeft="20dp"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.13"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/textApellidos"
@@ -135,7 +136,6 @@
         android:layout_height="46dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/button_border_registrar"
-        android:onClick="register"
         android:text="Crear cuenta"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"

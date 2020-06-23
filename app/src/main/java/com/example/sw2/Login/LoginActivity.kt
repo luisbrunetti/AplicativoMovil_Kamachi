@@ -93,8 +93,8 @@ class LoginActivity : AppCompatActivity() {
     }
     @InternalCoroutinesApi
     private fun loginUser() {
-        //loginfirebase()
-        logintest()
+        loginfirebase()
+        //logintest()
         botonIniciarSesion.isEnabled = false
 
         auth = FirebaseAuth.getInstance()

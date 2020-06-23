@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
+import android.util.Patterns
 import android.view.View
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
@@ -18,6 +20,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_registrar.*
+import java.util.*
+import java.util.regex.Pattern
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
@@ -32,6 +36,7 @@ class RegistrarActivity : AppCompatActivity() {
     private lateinit var database:FirebaseDatabase
     private lateinit var auth:FirebaseAuth
     private lateinit var distrito:String
+    private lateinit var button:Button
     private var toolbar:Toolbar? = null
     private var Spinner: Spinner? = null
     //Testeando
@@ -49,6 +54,7 @@ class RegistrarActivity : AppCompatActivity() {
         txtphone = findViewById(R.id.txtTelefono)
         toolbar = findViewById(R.id.toolbar_register)
         pogressBar = findViewById(R.id.progressBar)
+        button = findViewById(R.id.button)
         Spinner = findViewById(R.id.Spinner_distrito_registro)
         var adapter = createFromResource(applicationContext,
             R.array.list_distritos_lima,
@@ -75,6 +81,9 @@ class RegistrarActivity : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
         dbReference = database.reference.child("User")
 
+        button.setOnClickListener {
+            CreateNewAccount()
+        }
 
         //AgregarFlatantes()
         //IngresandoDatosPrueba()
@@ -116,47 +125,93 @@ class RegistrarActivity : AppCompatActivity() {
     private fun AgregarFlatantes(){
         dbReference.child("jG19WQpsTmSQhsdc4TUfTLHyj4w1").child("Afiliado").setValue("false")
     }
+    private fun verify(email:String) : Boolean{
+
+        return if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            Toast.makeText(applicationContext,"Ingrese un correo electronico valido",Toast.LENGTH_SHORT).show()
+            false
+        }else{
+            true
+        }
+
+    }
+    private fun VerificarNombre(name :String): Boolean {
+        var reg = "(^[a-zA-Z]{3,}(?: [a-zA-Z]+){0,2}\$?)"
+        var ptern = Pattern.compile(reg)
+        var matcher = ptern.matcher(name)
+        Log.d("regrex",matcher.matches().toString())
+        return matcher.matches()
+        /*
+        ^ - start of string
+        [a-zA-Z]{4,} - 4 or more ASCII letters
+        (?: [a-zA-Z]+){0,2} - 0 to 2 occurrences of a space followed with one or more ASCII letters
+        $ - end of string.
+         */
+    }
+    private fun VerificarApellido(lastname:String):Boolean{
+        var reg = "[a-zA-Z]*[\\s]{1}[a-zA-Z].*"
+        var ptern = Pattern.compile(reg)
+        var matcher = ptern.matcher(lastname)
+        Log.d("regrex2",matcher.matches().toString())
+        return matcher.matches()
+    }
+
     private fun CreateNewAccount(){
+        if(txtName.text.isNotEmpty() && txLasttName.text.isNotEmpty() && txtEmail.text.isNotEmpty() && txtPassword.text.isNotEmpty() && txtphone.text.isNotEmpty() ){
+
+        }
         val name:String = txtName.text.toString()
         val lastname:String = txLasttName.text.toString()
         val email:String = txtEmail.text.toString()
+
         val password:String = txtPassword.text.toString()
         val phone:String= txtphone.text.toString()
-/*
-        var postRef : DatabaseReference = database.reference.child("Servicios")
-        var newPost :DatabaseReference = postRef.push()*/
         if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(lastname) &&
-            !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)){
-                progressBar.visibility = View.VISIBLE
-            auth.createUserWithEmailAndPassword(email,password).
-                addOnCompleteListener(this){
-                task ->
-                    if(task.isComplete){
-                        val user : FirebaseUser?= auth.currentUser
-                        VerifyEmail(user)
-                        //String key = mDatabase.child("posts").push().getKey();
-                        //Obteniendo llave para tenerla como atributo
-                        val userBD = dbReference.child(user?.uid.toString())
-                        userBD.child("Nombre").setValue(name)
-                        userBD.child("Apellido").setValue(lastname)
-                        userBD.child("E-mail").setValue(email)
-                        userBD.child("Telefono").setValue(phone)
-                        userBD.child("Distrito").setValue(distrito)
-                        userBD.child("ID").setValue(user?.uid.toString())
-                        userBD.child("Afiliado").setValue("false")
-                        action()
+            !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(phone)){
+            if(VerificarNombre(name) && VerificarApellido(lastname)){
+                if (!distrito.equals("Escoge el distrito del servicio")){
+                    if(verify(email)){
+                        progressBar.visibility = View.VISIBLE
+                        auth.createUserWithEmailAndPassword(email,password).
+                        addOnCompleteListener(this){
+                                task ->
+                            if(task.isComplete){
+                                val user : FirebaseUser?= auth.currentUser
+                                VerifyEmail(user)
+                                //String key = mDatabase.child("posts").push().getKey();
+                                //Obteniendo llave para tenerla como atributo
+                                val userBD = dbReference.child(user?.uid.toString())
+                                userBD.child("Nombre").setValue(name)
+                                userBD.child("Apellido").setValue(lastname)
+                                userBD.child("E-mail").setValue(email)
+                                userBD.child("Telefono").setValue(phone)
+                                userBD.child("Distrito").setValue(distrito)
+                                userBD.child("ID").setValue(user?.uid.toString())
+                                userBD.child("Afiliado").setValue("false")
+                                action()
 
-                    }else{
-                        Toast.makeText(this,"Ha ocurrido un error al en la bae de dato s",Toast.LENGTH_SHORT).show()
+                            }else{
+                                Toast.makeText(this,"Ha ocurrido un error al en la bae de dato s",Toast.LENGTH_SHORT).show()
+                            }
+                        }
                     }
+                }else{
+                    Toast.makeText(applicationContext,"Escoja un distrito",Toast.LENGTH_SHORT).show()
                 }
+
+            }else{
+                Toast.makeText(applicationContext,"Ingrese un nombre u/o apeliido valido",Toast.LENGTH_SHORT).show()
+            }
+        }else{
+                Toast.makeText(applicationContext,"Llene lo campos correctamente",Toast.LENGTH_SHORT).show()
         }
+
+
     }
     private fun action(){
         startActivity(Intent(this, LoginActivity::class.java))
     }
     private fun VerifyEmail(user:FirebaseUser?){
-        Toast.makeText(this,"1",Toast.LENGTH_LONG).show()
         user?.sendEmailVerification()?.addOnCompleteListener(this){
             task ->
             if(task.isComplete){
