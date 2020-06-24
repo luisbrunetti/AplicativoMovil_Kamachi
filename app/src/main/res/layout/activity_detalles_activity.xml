@@ -27,162 +27,166 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="160dp"
+                >
                 <ImageView
                     android:id="@+id/fondoDetallesImageView"
                     android:layout_width="match_parent"
-                    android:layout_height="119dp"
-                    android:background="@drawable/fondomadera"></ImageView>
+                    android:layout_height="match_parent"
+                    android:background="@drawable/fondomadera" />
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imagenViewFotoDetalles"
                     android:layout_width="90dp"
                     android:layout_height="89dp"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_centerHorizontal="true"
+                    app:civ_border_color="#FFFFF"
+                    app:civ_border_width="2dp"
                     android:layout_marginTop="15dp" />
+                <TextView
+                    android:id="@+id/textViewEmpresaCargo_Detalle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textAlignment="center"
+                    android:layout_centerHorizontal="true"
+                    android:text="Los quenuales"
+                    android:layout_below="@id/imagenViewFotoDetalles"
+                    android:textColor="@color/white" />
+                <TextView
+                    android:id="@+id/textViewEmail_Detalles"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="luisbruno777@gmail.com"
+                    android:layout_centerHorizontal="true"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:layout_below="@id/textViewEmpresaCargo_Detalle"/>
 
-            </FrameLayout>
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FABF07"
                 android:orientation="horizontal">
-
                 <TextView
                     android:id="@+id/textViewDescripcion"
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
                     android:text="Información General"
-
                     android:layout_marginBottom="2dp"
-                    android:layout_marginLeft="5dp"
                     android:textColor="@color/Negro" />
 
                 <ImageView
                     android:id="@+id/imageView4"
                     android:layout_width="wrap_content"
-                    android:layout_marginLeft="2dp"
+                    android:layout_marginStart="2dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
                     android:layout_height="20dp"
                     app:srcCompat="@android:drawable/ic_menu_info_details" />
 
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.4"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textAlignment="center"
+                    android:text="Nombre del servicio"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/textViewNombreServicio_Detalle"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.6"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textAlignment="center"
+                    android:background="@drawable/backwithborder"
+                    android:text="Nombre de servicio test" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.4"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Telefono"
+                    android:textAlignment="center"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/textViewTelefono_Detalle"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.6"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textAlignment="center"
+                    android:background="@drawable/backwithborder"
+                    android:text="981077300" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizo ntal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.4"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Telefono"
+                    android:textAlignment="center"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/textViewTelefono_Detalle"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.6"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textAlignment="center"
+                    android:background="@drawable/backwithborder"
+                    android:text="981077300" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="141dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="7dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="Nombre del servicio"
-                        android:textSize="14dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="Empresa"
-                        android:textSize="14dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:text="Telefono"
-                        android:textSize="14dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:layout_weight="1"
-                        android:text="Email"
-                        android:textSize="14dp" />
-
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:layout_weight="1"
-                        android:text="Rating"
-                        android:textSize="14dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.4"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textAlignment="center"
+                    android:layout_gravity="center_vertical"
+                    android:text="Rating"
+                    android:textSize="14dp" />
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.6"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:layout_marginRight="6dp"
-                    android:layout_marginBottom="4dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textViewNombreServicio_Detalle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:textAlignment="center"
-                        android:background="@drawable/backwithborder"
-                        android:text="Nombre de servicio test" />
-
-                    <TextView
-                        android:id="@+id/textViewEmpresaCargo_Detalle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/backwithborder"
-                        android:text="Los quenuales" />
-
-                    <TextView
-                        android:id="@+id/textViewTelefono_Detalle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:textAlignment="center"
-                        android:background="@drawable/backwithborder"
-                        android:text="981077300" />
-
-                    <TextView
-                        android:id="@+id/textViewEmail_Detalles"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/backwithborder"
-                        android:text="luisbruno777@gmail.com"
-                        android:textAlignment="center" />
-
-                    <RatingBar
-                        android:id="@+id/ratingBar"
-                        style="@style/Widget.AppCompat.RatingBar.Indicator"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:numStars="5"
-                        android:rating="4" />
-
-                </LinearLayout>
+                    android:numStars="5"
+                    android:rating="4" />
             </LinearLayout>
 
             <LinearLayout
@@ -203,7 +207,6 @@
                     android:textColor="@color/Negro" />
 
                 <ImageView
-                    android:id="@+id/imageViewInfo2"
                     android:layout_width="wrap_content"
                     android:layout_marginLeft="2dp"
                     android:layout_marginTop="2dp"
@@ -251,7 +254,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textViewInformaciónGeneral"
+                    android:id="@+id/textViewComent"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_marginLeft="5dp"

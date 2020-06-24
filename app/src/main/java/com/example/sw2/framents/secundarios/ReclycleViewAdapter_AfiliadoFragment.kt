@@ -31,10 +31,6 @@ class ReclycleViewAdapter_AfiliadoFragment(var mcontext: Context, mdata: ArrayLi
         holder.tv_nombreTrabajo!!.text = mdata[position].nombreTrabajo
         holder.tv_categoriaservicio!!.text = mdata[position].categoria_servicio
         holder.tv_costservice!!.text = mdata[position].cost_service + " soles"
-
-        //holder.tv_distrito?.text= mdata[position].Distrito
-        //holder.tv_distrito?.text = mdata[position].Imagen
-        //holder.tv_ImagenView.setBackgroundResource(R.drawable.circular_imageview)
         Glide.with(mcontext)
             .load(mdata[position].Uri)
             .fitCenter()
