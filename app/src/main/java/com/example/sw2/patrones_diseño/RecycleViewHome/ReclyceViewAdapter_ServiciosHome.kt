@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.sw2.Clases.ServicioListView
 import com.example.sw2.R
+import com.example.sw2.interfaces.IntefaceClickListeer
 
 class ReclyceViewAdapter_ServiciosHome(var mcontext:Context, mdata: ArrayList<ServicioListView>, clickLister: IntefaceClickListeer): RecyclerView.Adapter<MyviewHolder>() {
     private var mdata : ArrayList<ServicioListView> = mdata
@@ -28,8 +29,6 @@ class ReclyceViewAdapter_ServiciosHome(var mcontext:Context, mdata: ArrayList<Se
     override fun onBindViewHolder(holder: MyviewHolder, position: Int) {
         holder.tv_nombreTrabajo?.text = mdata[position].NombreTrabaj
         holder.tv_distrito?.text= mdata[position].Distrito
-        //holder.tv_distrito?.text = mdata[position].Imagen
-        //holder.tv_ImagenView.setBackgroundResource(R.drawable.circular_imageview)
         Glide.with(mcontext)
             .load(mdata[position].UriImagen)
             .fitCenter()

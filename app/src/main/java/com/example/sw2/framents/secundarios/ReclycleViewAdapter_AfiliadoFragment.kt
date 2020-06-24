@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.sw2.Clases.ServicioListView
+import com.example.sw2.Clases.Servicio_profile_afiliacion
 import com.example.sw2.R
-import com.example.sw2.patrones_diseño.RecycleViewHome.IntefaceClickListeer
-import com.example.sw2.patrones_diseño.RecycleViewHome.MyviewHolder
+import com.example.sw2.interfaces.IntefaceClickListeer
 
-class ReclycleViewAdapter_AfiliadoFragment(var mcontext: Context, mdata: ArrayList<ServicioListView>, clickLister: IntefaceClickListeer): RecyclerView.Adapter<MyViewHolderAfiliacionFragment>(){
-    private var mdata : ArrayList<ServicioListView> = mdata
+
+class ReclycleViewAdapter_AfiliadoFragment(var mcontext: Context, mdata: ArrayList<Servicio_profile_afiliacion>, clickLister: IntefaceClickListeer): RecyclerView.Adapter<MyViewHolderAfiliacionFragment>(){
+    private var mdata : ArrayList<Servicio_profile_afiliacion> = mdata
     private var onClickListener : IntefaceClickListeer = clickLister
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolderAfiliacionFragment {
         val v : View = LayoutInflater.from(mcontext).inflate(R.layout.template_listservices_afiliacionfragment,parent,false)
@@ -28,15 +28,18 @@ class ReclycleViewAdapter_AfiliadoFragment(var mcontext: Context, mdata: ArrayLi
         return mdata.size
     }
     override fun onBindViewHolder(holder: MyViewHolderAfiliacionFragment, position: Int) {
-        holder.tv_nombreTrabajo!!.text = mdata[position].NombreTrabaj
+        holder.tv_nombreTrabajo!!.text = mdata[position].nombreTrabajo
+        holder.tv_categoriaservicio!!.text = mdata[position].categoria_servicio
+        holder.tv_costservice!!.text = mdata[position].cost_service + " soles"
+
         //holder.tv_distrito?.text= mdata[position].Distrito
         //holder.tv_distrito?.text = mdata[position].Imagen
         //holder.tv_ImagenView.setBackgroundResource(R.drawable.circular_imageview)
-        /*Glide.with(mcontext)
-            .load(mdata[position].UriImagen)
+        Glide.with(mcontext)
+            .load(mdata[position].Uri)
             .fitCenter()
-            .apply(RequestOptions.overrideOf(160,180))
+            //.apply(RequestOptions.overrideOf(160,180))
             .centerCrop()
-            .into(holder.tv_ImagenView)*/
+            .into(holder.iv_imagenServicio!!)
     }
 }

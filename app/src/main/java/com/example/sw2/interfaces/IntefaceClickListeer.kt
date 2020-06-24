@@ -1,4 +1,4 @@
-package com.example.sw2.patrones_diseño.RecycleViewHome
+package com.example.sw2.interfaces
 
 interface IntefaceClickListeer {
     fun onClickListener(pos : Int)

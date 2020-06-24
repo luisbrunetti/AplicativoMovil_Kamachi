@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
@@ -16,7 +17,7 @@ import com.example.sw2.MainActivity
 import com.example.sw2.R
 import com.example.sw2.Secundarios.Detalles_activity
 import com.example.sw2.interfaces.toolbar_transaction
-import com.example.sw2.patrones_diseño.RecycleViewHome.IntefaceClickListeer
+import com.example.sw2.interfaces.IntefaceClickListeer
 import com.example.sw2.patrones_diseño.RecycleViewHome.ReclyceViewAdapter_ServiciosHome
 import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
 import com.google.android.gms.tasks.Task
@@ -103,24 +104,21 @@ class HomeFragment : Fragment() ,
                         null,
                         null
                     )
-                    DownloadImagsToRecycleView(h, a).addOnCompleteListener { task ->
-                        if (task.isComplete) {
-
-                        }
+                    DownloadImagsToRecycleView(h, a).addOnSuccessListener {
+                        Log.d("Lista de servicios",lstServicios.size.toString())
+                        recycleAdapterServiciosHome =
+                            ReclyceViewAdapter_ServiciosHome(
+                                requireActivity(),
+                                lstServicios,
+                                this@HomeFragment
+                            )
+                        myRecyclyview.layoutManager = LinearLayoutManager(context)
+                        myRecyclyview.adapter = recycleAdapterServiciosHome
+                        MainActivity.bottomNav?.menu?.findItem(R.id.nav_home)?.isEnabled =
+                            true
                     }
-                    recycleAdapterServiciosHome =
-                        ReclyceViewAdapter_ServiciosHome(
-                            requireActivity(),
-                            lstServicios,
-                            this@HomeFragment
-                        )
-                    myRecyclyview.layoutManager = LinearLayoutManager(context)
-                    myRecyclyview.adapter = recycleAdapterServiciosHome
-                    MainActivity.bottomNav?.menu?.findItem(R.id.nav_home)?.isEnabled =
-                        true
-
-
                 }
+
             }
         }
         reff.addListenerForSingleValueEvent(postListener)
@@ -140,7 +138,7 @@ class HomeFragment : Fragment() ,
         }
     }
 
-    private fun DownloadImagsToRecycleView(h: DataSnapshot, a: ServicioListView?): Task<Uri> {
+    private fun DownloadImagsToRecycleView(h: DataSnapshot, a: ServicioListView?):Task<Uri>{
         val key: String = h.key.toString()
         val filepath: Task<Uri> = storageRef.child("ImagenServicios/$key")
             .child("Fotoservicio.png").downloadUrl.addOnSuccessListener {

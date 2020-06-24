@@ -3,6 +3,7 @@ package com.example.sw2.framents.secundarios
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.media.Image
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -26,6 +27,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import kotlinx.android.synthetic.main.fragment_register_newservice.*
 import kotlinx.coroutines.InternalCoroutinesApi
 
 class RegistrarNewServiceFragment:Fragment(){
@@ -48,6 +50,7 @@ class RegistrarNewServiceFragment:Fragment(){
     private var afiliado:Afiliado? = null
     ///Varaibles para el guardado en Firebase
     private var uriImagenAndroid:Uri? = null
+    private var ImagenServicio:Uri?= null
     private var keypush:String? = null
     private var referenciaDatabaseF:DatabaseReference? = null
     companion object {
@@ -98,72 +101,87 @@ class RegistrarNewServiceFragment:Fragment(){
 
         return vistaRegisterNewService
     }
-    private fun SaveDataofNewService(){
-        if(ete_servicename_newservice!!.text.isNotEmpty() && ete_timeduration_newservice!!.text.isNotEmpty() &&
-            ete_costservice_newservice!!.text.isNotEmpty() && ete_description_newservice!!.text.isNotEmpty()){
+    private fun SaveDataofNewService() {
+        progressbar_newservice.visibility = View.VISIBLE
+        if (ete_servicename_newservice!!.text.isNotEmpty() && ete_timeduration_newservice!!.text.isNotEmpty() &&
+            ete_costservice_newservice!!.text.isNotEmpty() && ete_description_newservice!!.text.isNotEmpty()
+        ) {
             val refService = referenciaDatabaseF!!.child("Servicios")
                 .child(keypush!!)
             val filePath: StorageReference =
-                FirebaseStorage!!.reference.child("ImagenServicios/"+keypush.toString())
+                FirebaseStorage!!.reference.child("ImagenServicios/" + keypush.toString())
                     .child("Fotoservicio.png")
-            Log.d("refServicio",refService.toString())
-            refService.child("nombreTrabaj").setValue(ete_servicename_newservice!!.text.toString())
-            refService.child("duracion").setValue(ete_timeduration_newservice!!.text.toString())
-            refService.child("cost_service").setValue(ete_costservice_newservice!!.text.toString())
-            refService.child("description").setValue(ete_description_newservice!!.text.toString())
-            refService.child("distrito").setValue(afiliado?.Distrito_servicio.toString())
-            refService.child("telefono").setValue(afiliado!!.Telefono_servicio)
-            refService.child("Email_servicio").setValue(afiliado!!.Email_servicio)
-            refService.child("Categoria_servicio").setValue(afiliado!!.Categoria_servicio)
-            refService.child("Tipo_persona").setValue(afiliado!!.Tipo_de_persona)
-            refService.child("calificacion").setValue(null)
-            refService.child("Uri").setValue(null)
-            refService.child("key").setValue(keypush)
-            refService.child("ID_Afiliado").setValue(afiliado!!.ID_afiliado)
-            Toast.makeText(requireContext(),"El nuevo servici se ha creado correctamente",Toast.LENGTH_SHORT).show()
-            int_translatefragment_newservice?.cambiar_fragment("AfiliacionFragment",null)
-            ///////////////////////////////////////////////////////////////////////////////////////////////////
-            filePath.putFile(uriImagenAndroid!!).addOnSuccessListener {
-                //Toast.makeText(requireContext(), "Se guardo la imagen exitosamente", Toast.LENGTH_LONG)
-                  //  .show()
-                }
+            filePath.putFile(ImagenServicio!!).addOnSuccessListener { t ->
+                val downloadURL = t.metadata?.reference?.downloadUrl
+                downloadURL?.addOnCompleteListener { task ->
+                    if (task.isComplete && task.isSuccessful) {
+                        uriImagenAndroid = downloadURL.result!!
+                        Toast.makeText(
+                            requireContext(),
+                            "Se guardo la imagen exitosamente",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        Log.d("refServicio", refService.toString())
+                        refService.child("nombreTrabaj")
+                            .setValue(ete_servicename_newservice!!.text.toString())
+                        refService.child("duracion")
+                            .setValue(ete_timeduration_newservice!!.text.toString())
+                        refService.child("cost_service")
+                            .setValue(ete_costservice_newservice!!.text.toString())
+                        refService.child("description")
+                            .setValue(ete_description_newservice!!.text.toString())
+                        refService.child("distrito")
+                            .setValue(afiliado?.Distrito_servicio.toString())
+                        refService.child("telefono").setValue(afiliado!!.Telefono_servicio)
+                        refService.child("Email_servicio").setValue(afiliado!!.Email_servicio)
+                        refService.child("Categoria_servicio")
+                            .setValue(afiliado!!.Categoria_servicio)
+                        refService.child("Tipo_persona").setValue(afiliado!!.Tipo_de_persona)
+                        refService.child("calificacion").setValue(null)
+                        refService.child("Uri").setValue(uriImagenAndroid.toString())
+                        refService.child("key").setValue(keypush)
+                        refService.child("ID_Afiliado").setValue(afiliado!!.ID_afiliado)
+                        Toast.makeText(
+                            requireContext(),
+                            "El nuevo servici se ha creado correctamente",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        progressbar_newservice.visibility = View.GONE
 
-        }else{
-            Toast.makeText(requireContext(),"Llene los campos correctamente",Toast.LENGTH_SHORT).show()
+                        int_translatefragment_newservice?.cambiar_fragment(
+                            "AfiliacionFragment",
+                            null
+                        )
+                        ///////////////////////////////////////////////////////////////////////////////////////////////////
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "Ocurrio un error al descargar la imagen",
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+                        progressbar_newservice.visibility = View.GONE
+                    }
+                }
+            }
+        } else {
+            progressbar_newservice.visibility = View.GONE
+            Toast.makeText(requireContext(), "Llene los campos correctamente", Toast.LENGTH_SHORT)
+                .show()
         }
     }
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        uriImagenAndroid = data?.data
-        if (requestCode == ProfileFragment.GALERY_INTENT && resultCode == Activity.RESULT_OK) {
-            if (uriImagenAndroid != null) {
-                Glide.with(requireContext())
-                    .load(uriImagenAndroid)
-                    .fitCenter()
-                    .centerCrop()
-                    .into(iv_newService!!)
-                /*
-                filePath.putFile(uri).addOnSuccessListener { t->
-                    val downloadURL = t.metadata?.reference?.downloadUrl
-                    downloadURL?.addOnCompleteListener { task->
-                        val Uri = downloadURL.result!!
-                        if(task.isComplete && task.isSuccessful){
-                            Glide.with(requireContext())
-                                .load(Uri)
-                                .fitCenter()
-                                .centerCrop()
-                                .into(iv_newService!!)
-                            Toast.makeText(requireContext(), "Se guardo la imagen exitosamente", Toast.LENGTH_LONG)
-                                .show()
-                        }else{
-                            Toast.makeText(requireContext(), "Ocurrio al descargar la imagen", Toast.LENGTH_LONG)
-                                .show()
-                        }
-                    }*/
-
+        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+            super.onActivityResult(requestCode, resultCode, data)
+            ImagenServicio = data?.data
+            if (requestCode == ProfileFragment.GALERY_INTENT && resultCode == Activity.RESULT_OK) {
+                if (ImagenServicio != null) {
+                    Glide.with(requireContext())
+                        .load(ImagenServicio)
+                        .fitCenter()
+                        .centerCrop()
+                        .into(iv_newService!!)
                 }
             }
         }
     }
 
-//}

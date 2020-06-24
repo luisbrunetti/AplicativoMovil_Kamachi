@@ -5,6 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sw2.R
+import com.example.sw2.interfaces.IntefaceClickListeer
 
 class MyviewHolder(itemView: View, OnClickList: IntefaceClickListeer) : RecyclerView.ViewHolder(itemView) ,
     View.OnClickListener {

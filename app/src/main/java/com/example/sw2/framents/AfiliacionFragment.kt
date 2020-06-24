@@ -11,6 +11,7 @@ import android.widget.*
 import androidx.appcompat.widget.Toolbar
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sw2.Clases.Afiliado
@@ -21,12 +22,13 @@ import com.example.sw2.R
 import com.example.sw2.framents.secundarios.ReclycleViewAdapter_AfiliadoFragment
 import com.example.sw2.interfaces.toolbar_transaction
 import com.example.sw2.interfaces.translate_fragment
-import com.example.sw2.patrones_diseño.RecycleViewHome.IntefaceClickListeer
+import com.example.sw2.interfaces.IntefaceClickListeer
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.coroutines.InternalCoroutinesApi
 
-class AfiliacionFragment: Fragment(), IntefaceClickListeer {
+class AfiliacionFragment: Fragment(),
+    IntefaceClickListeer {
     //Inicialización de vista
     private lateinit var vista : View
     //varaibless interfaces
@@ -45,7 +47,8 @@ class AfiliacionFragment: Fragment(), IntefaceClickListeer {
     private var tvi_distrito_local:TextView? = null
     private var tvi_phone_local_value:TextView? = null
     private var iv_circle_view_profile_afiliado:ImageView? = null
-    private var rv_afiliación_fragment:RecyclerView? = null
+    private var rv_afiliación_fragmentCustom:ReclycleViewAdapter_AfiliadoFragment? = null
+    private var rv_afiliación_fragment_service :RecyclerView? = null
     private var iv_addService: ImageButton? = null
     // Varaible para para conexión con Firebase
     private lateinit var authFirbase:FirebaseAuth
@@ -92,14 +95,14 @@ class AfiliacionFragment: Fragment(), IntefaceClickListeer {
             tvi_phone_local_value = vista.findViewById(R.id.tvi_phone_local_value)
             iv_addService = vista.findViewById(R.id.add_service_profile_fragment)
             iv_circle_view_profile_afiliado = vista.findViewById(R.id.circle_view_profile_afiliado)
-            rv_afiliación_fragment = vista.findViewById(R.id.recycleview_afiliacion_fragment)
+            rv_afiliación_fragment_service = vista.findViewById(R.id.recycleview_afiliacion_fragment)
             iv_circle_view_profile_afiliado?.setOnClickListener {
                 val intent = Intent(Intent.ACTION_PICK)
                 Log.d("action pick", Intent.ACTION_PICK)
                 intent.type = "image/*"
                 startActivityForResult(intent, ProfileFragment.GALERY_INTENT)
             }
-            ListServiciosAfiliado = ArrayList()
+            ListServiciosAfiliado = ArrayList<Servicio_profile_afiliacion>()
             FirebaseDatabase = com.google.firebase.database.FirebaseDatabase.getInstance()
             //////////////////////////////////
             retrieveDataProfileAfiliado()
@@ -138,10 +141,24 @@ class AfiliacionFragment: Fragment(), IntefaceClickListeer {
                 for(service in p0.children){
                     Log.d("Nombre servicio",p0.child("nombreTrabaj").value.toString())
                     val nombre = service.child("nombreTrabaj").value.toString()
-                    val objectservice = Servicio_profile_afiliacion(nombre)
+                    val uriimagenservicio = service.child("Uri").value.toString()
+                    val duracion = service.child("duracion").value.toString()
+                    val categoriaservicio = service.child("Categoria_servicio").value.toString()
+                    val emailservicio = service.child("Email_servicio").value.toString()
+                    val tipopersona = service.child("Tipo_persona").value.toString()
+                    val costoservicio = service.child("cost_service").value.toString()
+                    val telefono = service.child("telefono").value.toString()
+                    val idafiliado = service.child("ID_Afiliado").value.toString()
+                    val descripcion = service.child("description").value.toString()
+                    val key = service.child("key").value.toString()
+                    val distrito = service.child("distrito").value.toString()
+                    val objectservice = Servicio_profile_afiliacion(categoriaservicio, emailservicio, idafiliado, tipopersona, uriimagenservicio, costoservicio, descripcion, distrito, duracion, key, nombre, telefono)
                     ListServiciosAfiliado?.add(objectservice)
                 }
-                rv_afiliación_fragment = ReclycleViewAdapter_AfiliadoFragment(requireContext(),ListServiciosAfiliado,this)
+                rv_afiliación_fragmentCustom = ReclycleViewAdapter_AfiliadoFragment(requireContext(),ListServiciosAfiliado!!,this@AfiliacionFragment)
+                rv_afiliación_fragment_service?.layoutManager = LinearLayoutManager(requireContext())
+                rv_afiliación_fragment_service?.adapter = rv_afiliación_fragmentCustom
+
 
 
             }
