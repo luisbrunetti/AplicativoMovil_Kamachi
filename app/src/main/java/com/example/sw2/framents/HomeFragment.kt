@@ -94,15 +94,20 @@ class HomeFragment : Fragment() ,
             override fun onDataChange(p0: DataSnapshot) {
                 for (h in p0.children) {
                     val a = ServicioListView(
-                        "",
-                        h.child("nombreTrabaj").value.toString(),
+                        h.child("Nombre_empresa").value.toString(),
+                        h.child("Categoria_servicio").value.toString(),
+                        h.child("Email_servicio").value.toString(),
+                        h.child("ID_Afiliado").value.toString(),
+                        h.child("Tipo_persona").value.toString(),
+                        h.child("Uri").value.toString(),
+                        h.child("cost_service").value.toString(),
+                        h.child("description").value.toString(),
                         h.child("distrito").value.toString(),
-                        h.child("Imagen").value.toString(),
-                        null,
+                        h.child("duracion").value.toString(),
+                        h.child("key").value.toString(),
+                        h.child("nombreTrabaj").value.toString(),
                         h.child("telefono").value.toString(),
-                        h.child("calificacion").value.toString(),
-                        null,
-                        null
+                        h.child("calificacion").value.toString()
                     )
                     DownloadImagsToRecycleView(h, a).addOnSuccessListener {
                         Log.d("Lista de servicios",lstServicios.size.toString())
@@ -132,7 +137,7 @@ class HomeFragment : Fragment() ,
         }
         val busqueda = str.toLowerCase(Locale.ROOT)
         for (p in lstServiciosCopy) {
-            if (p.NombreTrabaj?.toLowerCase(Locale.ROOT)?.contains(busqueda)!!) {
+            if (p.nombreTrabajo?.toLowerCase(Locale.ROOT)?.contains(busqueda)!!) {
                 lstServicios.add(p)
             }
         }
@@ -143,7 +148,7 @@ class HomeFragment : Fragment() ,
         val filepath: Task<Uri> = storageRef.child("ImagenServicios/$key")
             .child("Fotoservicio.png").downloadUrl.addOnSuccessListener {
                 if (it != null) {
-                    a?.UriImagen = it
+                    a?.Uri = it.toString()
                     if (a != null) {
                         lstServicios.add(a)
                         lstServiciosCopy = ArrayList(lstServicios)
@@ -205,15 +210,26 @@ class HomeFragment : Fragment() ,
     }
 
     override fun onClickListener(pos: Int) {
+        val ob = lstServicios[pos]
         Toast.makeText(context, "clicked", Toast.LENGTH_SHORT).show()
         val intent = Intent(
             activity,
             Detalles_activity::class.java
         )
         intent.putExtra("pos", pos.toString())
-        intent.putExtra("foto", lstServicios[pos].UriImagen.toString())
-        intent.putExtra("NombreTrabajo", lstServicios[pos].NombreTrabaj.toString())
-        intent.putExtra("distrito", lstServicios[pos].Distrito.toString())
+        intent.putExtra("uri", lstServicios[pos].Uri.toString())
+        intent.putExtra("nombretrabajo", lstServicios[pos].nombreTrabajo.toString())
+        intent.putExtra("distrito", ob.distrito)
+        intent.putExtra("email", ob.Email_servicio)
+        intent.putExtra("tipopersona", ob.Tipo_persona)
+        intent.putExtra("calificacion", ob.calificacion)
+        intent.putExtra("costo", ob.cost_service)
+        intent.putExtra("categoria", ob.categoria_servicio)
+        intent.putExtra("telefono", ob.telefono)
+        intent.putExtra("descripcion", ob.description)
+        intent.putExtra("duracion", ob.duracion)
+        intent.putExtra("nombreempresa", ob.empresa)
+
         startActivity(intent)
     }
 

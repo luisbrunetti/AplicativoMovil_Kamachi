@@ -141,6 +141,15 @@ class RegistrarNewServiceFragment:Fragment(){
                         refService.child("Uri").setValue(uriImagenAndroid.toString())
                         refService.child("key").setValue(keypush)
                         refService.child("ID_Afiliado").setValue(afiliado!!.ID_afiliado)
+                        refService.child("calificacion").setValue("0")
+                        if(afiliado!!.Tipo_de_persona == "Persona Juridica" ){
+                            refService.child("Nombre_empresa").setValue(afiliado!!.Empresa_servicio)
+                        }else{
+                            /*refService.child("Nombres_servicio").setValue(afiliado!!.)
+                            refService.child("Apellidos_servicio")
+                            refService.child("DNI")*/
+                        }
+
                         Toast.makeText(
                             requireContext(),
                             "El nuevo servici se ha creado correctamente",

@@ -152,7 +152,8 @@ class AfiliacionFragment: Fragment(),
                     val descripcion = service.child("description").value.toString()
                     val key = service.child("key").value.toString()
                     val distrito = service.child("distrito").value.toString()
-                    val objectservice = Servicio_profile_afiliacion(categoriaservicio, emailservicio, idafiliado, tipopersona, uriimagenservicio, costoservicio, descripcion, distrito, duracion, key, nombre, telefono)
+                    val calificacion = service.child("calificacion").value.toString()
+                    val objectservice = Servicio_profile_afiliacion(categoriaservicio, emailservicio, idafiliado, tipopersona, uriimagenservicio, costoservicio, descripcion, distrito, duracion, key, nombre, telefono,calificacion)
                     ListServiciosAfiliado?.add(objectservice)
                 }
                 rv_afiliación_fragmentCustom = ReclycleViewAdapter_AfiliadoFragment(requireContext(),ListServiciosAfiliado!!,this@AfiliacionFragment)

@@ -27,10 +27,10 @@ class ReclyceViewAdapter_ServiciosHome(var mcontext:Context, mdata: ArrayList<Se
         return mdata.size
     }
     override fun onBindViewHolder(holder: MyviewHolder, position: Int) {
-        holder.tv_nombreTrabajo?.text = mdata[position].NombreTrabaj
-        holder.tv_distrito?.text= mdata[position].Distrito
+        holder.tv_nombreTrabajo?.text = mdata[position].nombreTrabajo
+        holder.tv_distrito?.text= mdata[position].distrito
         Glide.with(mcontext)
-            .load(mdata[position].UriImagen)
+            .load(mdata[position].Uri)
             .fitCenter()
             .apply(RequestOptions.overrideOf(160,180))
             .centerCrop()

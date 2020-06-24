@@ -42,7 +42,6 @@
                     android:layout_width="90dp"
                     android:layout_height="89dp"
                     android:layout_centerHorizontal="true"
-                    app:civ_border_color="#FFFFF"
                     app:civ_border_width="2dp"
                     android:layout_marginTop="15dp" />
                 <TextView
@@ -66,10 +65,20 @@
                     android:textColor="@color/white"
                     android:layout_below="@id/textViewEmpresaCargo_Detalle"/>
 
-
+|                <TextView
+                    android:id="@+id/tv_costo_detalles"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:padding="7dp"
+                    android:background="@drawable/backwithborder"
+                    android:layout_centerVertical="true"
+                    android:text="S/.50 soles"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20sp" />
             </RelativeLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FABF07"
@@ -78,21 +87,18 @@
                     android:id="@+id/textViewDescripcion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:layout_centerVertical="true"
                     android:text="Información General"
-                    android:layout_marginBottom="2dp"
                     android:textColor="@color/Negro" />
 
                 <ImageView
                     android:id="@+id/imageView4"
                     android:layout_width="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginBottom="2dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/textViewDescripcion"
                     android:layout_height="20dp"
                     app:srcCompat="@android:drawable/ic_menu_info_details" />
-
-            </LinearLayout>
+            </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -103,18 +109,18 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:textAlignment="center"
-                    android:text="Nombre del servicio"
+                    android:text="Categoria del serivcio"
                     android:textSize="14dp" />
 
                 <TextView
-                    android:id="@+id/textViewNombreServicio_Detalle"
+                    android:id="@+id/textViewCategoriaServicio_Detalle"
                     android:layout_width="0dp"
                     android:layout_weight="0.6"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:textAlignment="center"
                     android:background="@drawable/backwithborder"
-                    android:text="Nombre de servicio test" />
+                    android:text="Educación" />
 
             </LinearLayout>
             <LinearLayout
@@ -143,25 +149,48 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizo ntal">
+                android:orientation="horizontal">
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="0.4"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="Telefono"
+                    android:text="Distrito"
                     android:textAlignment="center"
                     android:textSize="14dp" />
 
                 <TextView
-                    android:id="@+id/textViewTelefono_Detalle"
+                    android:id="@+id/textViewDistro_Detalle"
+                    android:layout_width="0dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0.6"
+                    android:background="@drawable/backwithborder"
+                    android:text="La molina"
+                    android:textAlignment="center" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.4"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Tipo de persona"
+                    android:textAlignment="center"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/texttipopersona"
                     android:layout_width="0dp"
                     android:layout_weight="0.6"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:textAlignment="center"
                     android:background="@drawable/backwithborder"
-                    android:text="981077300" />
+                    android:text="Persona juridica" />
             </LinearLayout>
 
             <LinearLayout
@@ -233,7 +262,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/textView4"
+                            android:id="@+id/textViewdescripcion_detalles"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="7dp"

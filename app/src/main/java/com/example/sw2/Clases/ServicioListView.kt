@@ -2,29 +2,18 @@ package com.example.sw2.Clases
 
 import android.net.Uri
 import android.widget.ImageView
+import java.io.Serializable
 
-class ServicioListView(
-    key:String, NT:String = "", DIST:String, Img:String,
-    ImgView: ImageView?, tel: String, cali: String, Uri: Uri?, emp: Boolean?
-){
-    var KeyFireBase:String? = null
-    var Distrito:String? = null
-    var NombreTrabaj:String? = null
-    var Imagen:String? = null
-    var ImagenView:ImageView?=null
-    var Telefono:String? = null
-    var Calificacion:String? = null
-    var Empresa:Boolean? = false
-    var UriImagen:Uri? = null
-    init{
-        this.Distrito = DIST
-        this.NombreTrabaj = NT
-        this.Imagen = Img
-        this.KeyFireBase = key
-        this.ImagenView = ImgView
-        this.UriImagen = Uri
-        this.Telefono = tel
-        this.Empresa = emp
-        this.Calificacion = cali
-    }
-}
+data class ServicioListView(val empresa:String?,val categoria_servicio:String?,
+                            val Email_servicio:String?,
+                            val ID_Ailiado:String?,
+                            val Tipo_persona:String?,
+                            var Uri:String?,
+                            val cost_service:String?,
+                            val description:String?,
+                            val distrito:String?,
+                            val duracion:String?,
+                            val key : String?,
+                            val nombreTrabajo:String?,
+                            val telefono:String?,
+                            val calificacion : String?) : Serializable
