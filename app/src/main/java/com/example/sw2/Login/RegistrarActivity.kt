@@ -125,7 +125,7 @@ class RegistrarActivity : AppCompatActivity() {
     private fun AgregarFlatantes(){
         dbReference.child("jG19WQpsTmSQhsdc4TUfTLHyj4w1").child("Afiliado").setValue("false")
     }
-    private fun verify(email:String) : Boolean{
+    private fun verifyEmail(email:String) : Boolean{
 
         return if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             Toast.makeText(applicationContext,"Ingrese un correo electronico valido",Toast.LENGTH_SHORT).show()
@@ -170,7 +170,7 @@ class RegistrarActivity : AppCompatActivity() {
             !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(phone)){
             if(VerificarNombre(name) && VerificarApellido(lastname)){
                 if (!distrito.equals("Escoge el distrito del servicio")){
-                    if(verify(email)){
+                    if(verifyEmail(email)){
                         progressBar.visibility = View.VISIBLE
                         auth.createUserWithEmailAndPassword(email,password).
                         addOnCompleteListener(this){
@@ -203,12 +203,13 @@ class RegistrarActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext,"Ingrese un nombre u/o apeliido valido",Toast.LENGTH_SHORT).show()
             }
         }else{
-                Toast.makeText(applicationContext,"Llene lo campos correctamente",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext,"Tiene que llenar todos los campos",Toast.LENGTH_SHORT).show()
         }
 
 
     }
     private fun action(){
+        progressBar.visibility = View.GONE
         startActivity(Intent(this, LoginActivity::class.java))
     }
     private fun VerifyEmail(user:FirebaseUser?){

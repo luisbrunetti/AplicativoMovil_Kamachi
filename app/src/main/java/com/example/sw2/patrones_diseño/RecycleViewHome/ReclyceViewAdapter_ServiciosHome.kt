@@ -1,4 +1,4 @@
-package com.example.sw2.patrones_diseño.factory
+package com.example.sw2.patrones_diseño.RecycleViewHome
 
 import android.content.Context
 import android.view.LayoutInflater

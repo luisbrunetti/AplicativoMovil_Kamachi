@@ -16,8 +16,8 @@ import com.example.sw2.MainActivity
 import com.example.sw2.R
 import com.example.sw2.Secundarios.Detalles_activity
 import com.example.sw2.interfaces.toolbar_transaction
-import com.example.sw2.patrones_diseño.factory.IntefaceClickListeer
-import com.example.sw2.patrones_diseño.factory.ReclyceViewAdapter_ServiciosHome
+import com.example.sw2.patrones_diseño.RecycleViewHome.IntefaceClickListeer
+import com.example.sw2.patrones_diseño.RecycleViewHome.ReclyceViewAdapter_ServiciosHome
 import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
@@ -105,18 +105,21 @@ class HomeFragment : Fragment() ,
                     )
                     DownloadImagsToRecycleView(h, a).addOnCompleteListener { task ->
                         if (task.isComplete) {
-                            recycleAdapterServiciosHome =
-                                ReclyceViewAdapter_ServiciosHome(
-                                    requireActivity(),
-                                    lstServicios,
-                                    this@HomeFragment
-                                )
-                            myRecyclyview.layoutManager = LinearLayoutManager(context)
-                            myRecyclyview.adapter = recycleAdapterServiciosHome
-                            MainActivity.bottomNav?.menu?.findItem(R.id.nav_home)?.isEnabled =
-                                true
+
                         }
                     }
+                    recycleAdapterServiciosHome =
+                        ReclyceViewAdapter_ServiciosHome(
+                            requireActivity(),
+                            lstServicios,
+                            this@HomeFragment
+                        )
+                    myRecyclyview.layoutManager = LinearLayoutManager(context)
+                    myRecyclyview.adapter = recycleAdapterServiciosHome
+                    MainActivity.bottomNav?.menu?.findItem(R.id.nav_home)?.isEnabled =
+                        true
+
+
                 }
             }
         }

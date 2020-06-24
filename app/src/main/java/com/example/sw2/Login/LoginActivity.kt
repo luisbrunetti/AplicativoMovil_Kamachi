@@ -3,6 +3,7 @@ package com.example.sw2.Login
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Patterns
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -91,25 +92,37 @@ class LoginActivity : AppCompatActivity() {
         user= txtUser.text.toString()
         password= txtPassword.text.toString()
     }
+    private fun verificarRegextEmail(email:String) : Boolean{
+        return if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            Toast.makeText(applicationContext,"Porfavor, ingrese un correo electronico valido",Toast.LENGTH_SHORT).show()
+            false
+        }else{
+            true
+        }
+    }
     @InternalCoroutinesApi
     private fun loginUser() {
-        loginfirebase()
-        //logintest()
+        //loginfirebase()
+        logintest()
         botonIniciarSesion.isEnabled = false
-
         auth = FirebaseAuth.getInstance()
         if (!(TextUtils.isEmpty(user) && TextUtils.isEmpty(password))) {
             pogressBarLogin.visibility = View.VISIBLE
-            auth.signInWithEmailAndPassword(user!!, password!!).addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    ObtenerDatosUsuario(user!!)
-                    var intent = Intent(this, MainActivity::class.java)
-                    action(intent)
-                } else {
-                    this.pogressBarLogin.visibility = View.GONE
-                    botonIniciarSesion.isEnabled = true
-                    Toast.makeText(this, "Error en autotentificación", Toast.LENGTH_SHORT).show()
+            if(verificarRegextEmail(user!!)){
+                auth.signInWithEmailAndPassword(user!!, password!!).addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        ObtenerDatosUsuario(user!!)
+                        var intent = Intent(this, MainActivity::class.java)
+                        action(intent)
+                    } else {
+                        this.pogressBarLogin.visibility = View.GONE
+                        botonIniciarSesion.isEnabled = true
+                        Toast.makeText(this, "Error en autotentificación", Toast.LENGTH_SHORT).show()
+                    }
                 }
+            }else{
+                this.pogressBarLogin.visibility = View.GONE
+                botonIniciarSesion.isEnabled = true
             }
         }else{
             this.pogressBarLogin.visibility = View.GONE

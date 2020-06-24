@@ -1,4 +1,4 @@
-package com.example.sw2.patrones_diseño.factory
+package com.example.sw2.patrones_diseño.RecycleViewHome
 
 import android.view.View
 import android.widget.ImageView

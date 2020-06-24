@@ -11,20 +11,22 @@ import android.widget.*
 import androidx.appcompat.widget.Toolbar
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sw2.Clases.Afiliado
 import com.example.sw2.Clases.Servicio_profile_afiliacion
 import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
 import com.example.sw2.Clases.Usuario
 import com.example.sw2.R
+import com.example.sw2.framents.secundarios.ReclycleViewAdapter_AfiliadoFragment
 import com.example.sw2.interfaces.toolbar_transaction
 import com.example.sw2.interfaces.translate_fragment
-import com.example.sw2.patrones_diseño.factory.ReclyceViewAdapter_ServiciosHome
+import com.example.sw2.patrones_diseño.RecycleViewHome.IntefaceClickListeer
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.coroutines.InternalCoroutinesApi
 
-class AfiliacionFragment: Fragment() {
+class AfiliacionFragment: Fragment(), IntefaceClickListeer {
     //Inicialización de vista
     private lateinit var vista : View
     //varaibless interfaces
@@ -43,6 +45,7 @@ class AfiliacionFragment: Fragment() {
     private var tvi_distrito_local:TextView? = null
     private var tvi_phone_local_value:TextView? = null
     private var iv_circle_view_profile_afiliado:ImageView? = null
+    private var rv_afiliación_fragment:RecyclerView? = null
     private var iv_addService: ImageButton? = null
     // Varaible para para conexión con Firebase
     private lateinit var authFirbase:FirebaseAuth
@@ -51,7 +54,7 @@ class AfiliacionFragment: Fragment() {
     private var user: Usuario? = null
     private var afiliado:Afiliado? = null
     /////
-    private var test_arreglo: ArrayList<Servicio_profile_afiliacion>? = null
+    private var ListServiciosAfiliado: ArrayList<Servicio_profile_afiliacion>? = null
     companion object {
         val GALERY_INTENT = 1
         private val IMAGE_PICK_CODE: Int = 1000
@@ -89,14 +92,18 @@ class AfiliacionFragment: Fragment() {
             tvi_phone_local_value = vista.findViewById(R.id.tvi_phone_local_value)
             iv_addService = vista.findViewById(R.id.add_service_profile_fragment)
             iv_circle_view_profile_afiliado = vista.findViewById(R.id.circle_view_profile_afiliado)
+            rv_afiliación_fragment = vista.findViewById(R.id.recycleview_afiliacion_fragment)
             iv_circle_view_profile_afiliado?.setOnClickListener {
                 val intent = Intent(Intent.ACTION_PICK)
                 Log.d("action pick", Intent.ACTION_PICK)
                 intent.type = "image/*"
                 startActivityForResult(intent, ProfileFragment.GALERY_INTENT)
             }
-
+            ListServiciosAfiliado = ArrayList()
+            FirebaseDatabase = com.google.firebase.database.FirebaseDatabase.getInstance()
+            //////////////////////////////////
             retrieveDataProfileAfiliado()
+            getServiceAfliado()
 
             iv_addService?.setOnClickListener {
                 Log.d("dewbug","asd")
@@ -119,26 +126,38 @@ class AfiliacionFragment: Fragment() {
 
         return vista
     }
-    private fun arreglo_test(){
-        test_arreglo = ArrayList(listOf(Servicio_profile_afiliacion("serivicio de prueba")))
+
+    private fun getServiceAfliado(){
+        val queryrecycleView :Query = FirebaseDatabase.reference.child("Servicios").orderByChild("ID_Afiliado").equalTo(user!!.IDAfiliado)
+        queryrecycleView.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                for(service in p0.children){
+                    Log.d("Nombre servicio",p0.child("nombreTrabaj").value.toString())
+                    val nombre = service.child("nombreTrabaj").value.toString()
+                    val objectservice = Servicio_profile_afiliacion(nombre)
+                    ListServiciosAfiliado?.add(objectservice)
+                }
+                rv_afiliación_fragment = ReclycleViewAdapter_AfiliadoFragment(requireContext(),ListServiciosAfiliado,this)
+
+
+            }
+        })
     }
     private fun retrieveDataProfileAfiliado(){
-        FirebaseConexion =
-            FirebaseConexion(
-                requireContext()
-            )
-        val ObjectUser = FirebaseConexion!!.getStoreSaved()
-        Toast.makeText(requireContext(),ObjectUser?.Email.toString(),Toast.LENGTH_SHORT).show()
-        Log.d("IDafilaiado",ObjectUser!!.IDAfiliado.toString())
+        Toast.makeText(requireContext(),user?.Email.toString(),Toast.LENGTH_SHORT).show()
+        Log.d("IDafilaiado",user!!.IDAfiliado.toString())
         val query: Query =
             com.google.firebase.database.FirebaseDatabase.getInstance().reference.child("Afiliados").orderByChild("ID_Afiliado")
-                .equalTo(ObjectUser.IDAfiliado)
+                .equalTo(user!!.IDAfiliado)
         query.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
             override fun onDataChange(p0: DataSnapshot) {
-                Toast.makeText(requireContext(),"e",Toast.LENGTH_SHORT).show()
                 for (p0 in p0.children) {
                     Log.d("Empresa_servicio",p0.child("Distrito_servicio").value.toString())
                     tvi_enterprisename_porifle?.text = p0.child("Empresa_servicio").value.toString()
@@ -159,10 +178,14 @@ class AfiliacionFragment: Fragment() {
                         p0.child("Tipo de persona").value.toString(),p0.child("URI_Imagen_Serivcio").value.toString(),p0.child("cant_servicio").value.toString(),
                         p0.child("contratos_realizados").value.toString()
                     )
-                    Log.d("afiliado", afiliado!!.Email_servicio.toString())
+                    Log.d("afiliado", afiliado!!.Email_servicio)
                 }
             }
         })
+    }
+
+    override fun onClickListener(pos: Int) {
+        TODO("Not yet implemented")
     }
 
 }

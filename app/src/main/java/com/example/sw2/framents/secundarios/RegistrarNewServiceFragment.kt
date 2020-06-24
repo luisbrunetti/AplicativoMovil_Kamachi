@@ -119,6 +119,7 @@ class RegistrarNewServiceFragment:Fragment(){
             refService.child("calificacion").setValue(null)
             refService.child("Uri").setValue(null)
             refService.child("key").setValue(keypush)
+            refService.child("ID_Afiliado").setValue(afiliado!!.ID_afiliado)
             Toast.makeText(requireContext(),"El nuevo servici se ha creado correctamente",Toast.LENGTH_SHORT).show()
             int_translatefragment_newservice?.cambiar_fragment("AfiliacionFragment",null)
             ///////////////////////////////////////////////////////////////////////////////////////////////////
