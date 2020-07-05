@@ -208,11 +208,6 @@ class RegisterAfiliadoFragment : Fragment() {
                 Toast.makeText(requireContext(),"Debe ingresar una imagen referencial para el servicio",Toast.LENGTH_LONG).show()
             }else{
                 if(RadioButton_Value.equals("Persona Independiente")){
-                    /*Log.d("test ", (isEmpty(textNombre.toString()) || isEmpty(textApellido.toString())  || isEmpty(textDni.toString())).toString())
-                    Log.d("testnombre ", (isEmpty(textNombre?.toString()).toString()))
-                    Log.d("testnombre ", (isEmpty(textApellido?.toString()).toString()))
-                    Log.d("testnombre ", (isEmpty(textDni?.toString()).toString()))
-                    Log.d("testnombre ", textNombre?.text.toString())*/
                     if(textNombre?.text.toString().isNotEmpty() && textApellido?.text.toString().isNotEmpty() && textDni?.text.toString().isNotEmpty()){
                         radioButtonBooleanPI = true
                     }else{

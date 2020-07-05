@@ -68,7 +68,6 @@ class RegistrarNewServiceFragment:Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        user_profile = FirebaseConexion.getinstance(requireActivity()).getStoreSaved()
         vistaRegisterNewService = inflater.inflate(R.layout.fragment_register_newservice,container,false)
         FirebaseReal = FirebaseDatabase.getInstance()
         FirebaseStorage = com.google.firebase.storage.FirebaseStorage.getInstance()
@@ -108,6 +107,7 @@ class RegistrarNewServiceFragment:Fragment(){
         ) {
             val refService = referenciaDatabaseF!!.child("Servicios")
                 .child(keypush!!)
+            val refAfiliado = referenciaDatabaseF!!.child("Afiliados").child(afiliado!!.ID_afiliado)
             val filePath: StorageReference =
                 FirebaseStorage!!.reference.child("ImagenServicios/" + keypush.toString())
                     .child("Fotoservicio.png")
@@ -121,6 +121,8 @@ class RegistrarNewServiceFragment:Fragment(){
                             "Se guardo la imagen exitosamente",
                             Toast.LENGTH_LONG
                         ).show()
+                        refAfiliado.child("cant_servicio").setValue((afiliado!!.cant_servicios.toInt() +1).toString())
+
                         Log.d("refServicio", refService.toString())
                         refService.child("nombreTrabaj")
                             .setValue(ete_servicename_newservice!!.text.toString())

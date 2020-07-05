@@ -95,6 +95,7 @@ class AfiliacionFragment: Fragment(),
             tvi_phone_local_value = vista.findViewById(R.id.tvi_phone_local_value)
             iv_addService = vista.findViewById(R.id.add_service_profile_fragment)
             iv_circle_view_profile_afiliado = vista.findViewById(R.id.circle_view_profile_afiliado)
+            tvi_cant_servicios_value = vista.findViewById(R.id.tvi_cant_servicios_value)
             rv_afiliación_fragment_service = vista.findViewById(R.id.recycleview_afiliacion_fragment)
             iv_circle_view_profile_afiliado?.setOnClickListener {
                 val intent = Intent(Intent.ACTION_PICK)
@@ -182,9 +183,9 @@ class AfiliacionFragment: Fragment(),
                     tvi_distrito_local_value?.text = p0.child("Distrito_servicio").value.toString()
                     tvi_email_profile?.text = p0.child("Email_servicio").value.toString()
                     tvi_phone_local_value?.text = p0.child("Telefono_servicio").value.toString()
-                    tvi_cant_servicios_value?.text = p0.child("cant_servicios").value.toString()
+                    tvi_cant_servicios_value?.text = p0.child("cant_servicio").value.toString()
                     tvi_dealsdone_profile?.text = p0.child("contratos_realizados").value.toString()
-
+                    Log.d("cant servicio",p0.child("cant_servicio").value.toString())
                     Glide.with(vista)
                         .load(p0.child("URI_Imagen_Serivcio").value.toString().toUri())
                         .fitCenter()
