@@ -69,7 +69,7 @@ class Detalles_activity : AppCompatActivity() ,Serializable {
         tv_distritoservicio?.setText(distrito)
         tv_tipopersona?.text = tipopersona
         tv_costoservicio?.text = "S/. "+costo
-        tv_descripcion?.text = descripcion
+
         tv_categoriaservicio?.text = categoria
 
 

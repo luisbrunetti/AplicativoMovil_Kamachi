@@ -3,6 +3,7 @@ package com.example.sw2
 
 import android.content.DialogInterface
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() ,translate_fragment,toolbar_transaction
                 R.id.nav_home -> selectedFragment = HomeFragment()
                 R.id.nav_afiliación -> selectedFragment = AfiliacionFragment()
                 R.id.nav_Perfil -> selectedFragment = ProfileFragment()
-                R.id.nav_contratos -> selectedFragment = ContratosFragment()
+                //R.id.nav_contratos -> selectedFragment = ContratosFragment()
             }
             supportFragmentManager.beginTransaction().replace(R.id.fragment_container,selectedFragment).commit()
             true
@@ -87,6 +88,7 @@ class MainActivity : AppCompatActivity() ,translate_fragment,toolbar_transaction
     }
 
     override fun finish_fragment() {
+        Toast.makeText(applicationContext,"gaaaa",Toast.LENGTH_SHORT).show()
         AlertDialog.Builder(this).setTitle("¿Desea cerrar sesion?").setMessage("Si presiona ok, cerrará la sesión")
             .setPositiveButton(android.R.string.yes, object: DialogInterface.OnClickListener{
                 override fun onClick(p0: DialogInterface?, p1: Int) {

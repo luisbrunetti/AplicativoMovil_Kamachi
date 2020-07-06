@@ -61,11 +61,14 @@ class ProfileFragment: Fragment() {
         private val IMAGE_PICK_CODE: Int = 1000
     }
 
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         int_toolbar_trans_profilefrag = activity as toolbar_transaction
     }
+
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -123,6 +126,7 @@ class ProfileFragment: Fragment() {
 
         return v
     }
+
     fun UpdateProfileVariables(b:Boolean,title:String,message:String?,checkBox: CheckBox,tview:TextView){
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(title).setMessage(message)
