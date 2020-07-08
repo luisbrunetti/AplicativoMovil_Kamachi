@@ -16,6 +16,7 @@ import com.example.sw2.framents.AfiliacionFragment
 import com.example.sw2.framents.ContratosFragment
 import com.example.sw2.framents.HomeFragment
 import com.example.sw2.framents.ProfileFragment
+
 import com.example.sw2.interfaces.toolbar_transaction
 import com.example.sw2.interfaces.translate_fragment
 import com.example.sw2.framents.secundarios.RegisterAfiliadoFragment
@@ -64,7 +65,6 @@ class MainActivity : AppCompatActivity() ,translate_fragment,toolbar_transaction
             ).commit()
             "AfiliacionFragment" -> supportFragment.replace(R.id.fragment_container,AfiliacionFragment()).commit()
             "RegistrarNewServiceFragment" -> RegistrarNuevoservicio(afiliado)//supportFragment.replace(R.id.fragment_container,RegistrarNewServiceFragment()).commit()
-            "AfiliacionFragment"-> supportFragment.replace(R.id.fragment_container,AfiliacionFragment()).commit()
         }
     }
     private fun RegistrarNuevoservicio(afiliado:Afiliado?){

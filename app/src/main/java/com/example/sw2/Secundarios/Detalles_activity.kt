@@ -1,22 +1,28 @@
 package com.example.sw2.Secundarios
 
+import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.net.toUri
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.sw2.Clases.Afiliado
 import com.example.sw2.Clases.ServicioListView
 import com.example.sw2.R
+import com.example.sw2.interfaces.translate_fragment
+import com.example.sw2.pago.PagoActivity
 import java.io.Serializable
 
-class Detalles_activity : AppCompatActivity() ,Serializable {
+class Detalles_activity : AppCompatActivity() ,Serializable{
     private lateinit var ImageViewFoto : ImageView
     private var tv_empresa:TextView? = null
     private var tv_emailservicio:TextView? = null
@@ -29,6 +35,9 @@ class Detalles_activity : AppCompatActivity() ,Serializable {
     private var rating:RatingBar? = null
     //xml
     private var nombreservicio:String ? = null
+    // listener
+    var costo: String ? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalles_activity)
@@ -47,13 +56,15 @@ class Detalles_activity : AppCompatActivity() ,Serializable {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         ////////////////////////////////////////////////////////
+
+        //////
         val uri = intent.getStringExtra("uri")
         val nombretrabajo = intent.getStringExtra("nombretrabajo")
         val distrito = intent.getStringExtra("distrito")
         val email = intent.getStringExtra("email")
         val tipopersona = intent.getStringExtra("tipopersona")
         val calificacion = intent.getStringExtra("calificacion")
-        val costo = intent.getStringExtra("costo")
+        costo = intent.getStringExtra("costo")
         val categoria = intent.getStringExtra("categoria")
         val telefono = intent.getStringExtra("telefono")
         val descripcion = intent.getStringExtra("descripcion")
@@ -72,9 +83,6 @@ class Detalles_activity : AppCompatActivity() ,Serializable {
 
         tv_categoriaservicio?.text = categoria
 
-
-
-
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)
@@ -82,8 +90,22 @@ class Detalles_activity : AppCompatActivity() ,Serializable {
         menuInflater.inflate(R.menu.menu_detalles,menu)
         return super.onCreateOptionsMenu(menu)
     }
+    private fun inicializatePago(){
+        val intent = Intent(this,PagoActivity::class.java)
+        intent.putExtra("cost",costo)
+        startActivity(intent)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.item_contratar -> inicializatePago()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
     private fun obtenerparametros(){
 
 
     }
+
 }

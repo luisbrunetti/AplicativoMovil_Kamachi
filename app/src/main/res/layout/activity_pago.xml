@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".pago.PagoActivity">
+  <androidx.appcompat.widget.Toolbar
+      android:id="@+id/toolbar_Pago"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@android:color/holo_orange_dark"
+      android:minHeight="?attr/actionBarSize"
+      android:theme="?attr/actionBarTheme"
+      android:textAlignment="center"
+      />
+  <RelativeLayout
+      android:id="@+id/progress_pago"
+      android:layout_width="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="15dp"
+      android:padding="15dp"
+      android:visibility="gone">
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
+        android:layout_width="45dp"
+        android:layout_height= "45dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/progress_circular"
+        android:gravity="center"
+        android:text="CARGANDO...."
+        android:textColor="#190707"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+  </RelativeLayout>
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Pago por tarjeta"
+      android:textSize="21sp"
+      android:layout_margin="15dp"
+      android:textColor="@color/colorPrimaryDark"
+      android:gravity="center_horizontal"
+      />
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="20dp"
+      android:padding="10dp"
+      android:layout_gravity="center_vertical"
+      android:background="@drawable/border_orange"
+      android:layout_marginLeft="20dp"
+      android:orientation="vertical">
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:background="@drawable/visa"
+        />
+
+    <EditText
+        android:id="@+id/et_cardnumber_pago"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_baseline_credit_card_24"
+        android:hint="Numero de tarjeta"
+        android:inputType="number"
+        android:singleLine="true"
+        android:maxLength="16"
+        android:textColor="@color/colorPrimaryDark" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+      <EditText
+          android:id="@+id/et_venccimiento_pago"
+          android:layout_width="0dp"
+          android:layout_weight="1"
+          android:maxLength="8"
+          android:layout_height="wrap_content"
+          android:textColor="@color/colorPrimaryDark"
+          android:hint="Vencimiento"
+          android:drawableStart="@drawable/ic_baseline_access_time_24"
+          />
+
+      <EditText
+          android:id="@+id/et_cvv_pago"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:hint="CVV2"
+          android:inputType="number"
+          android:maxLength="3"
+          android:drawableEnd="@drawable/ic_baseline_error_outline_24"
+          android:singleLine="true"
+          android:textColor="@color/colorPrimaryDark" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_name_pago"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre del titular de la tarjeta"
+        android:drawableStart="@drawable/ic_person_black_24dp"
+        android:inputType="textPersonName"
+        android:singleLine="true"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <EditText
+        android:id="@+id/et_lastname_pago"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Apellidos del titular de la tarjeta"
+        android:drawableStart="@drawable/ic_person_black_24dp"
+        android:inputType="text"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <EditText
+        android:id="@+id/et_email_pago"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Correo electronico"
+        android:inputType="textEmailAddress"
+        android:drawableStart="@drawable/ic_baseline_mail_outline_24"
+        android:textColor="@color/colorPrimaryDark" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Total : S/."
+            android:textSize="21sp"
+            android:textColor="@color/colorPrimaryDark"
+            />
+      <TextView
+          android:id="@+id/tvi_pago_cost"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="20"
+          android:textSize="21sp"
+          android:layout_marginStart="20dp"
+          android:textColor="@color/colorPrimaryDark"
+          />
+      <View
+          android:layout_width="0dp"
+          android:layout_weight="1"
+          android:layout_height="1dp"
+          />
+      <Button
+          android:id="@+id/but_pay"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="2"
+          android:text="Pagar"
+          />
+    </LinearLayout>
+  </LinearLayout>
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="15dp"
+      android:layout_marginTop="15dp"
+      android:textSize="18sp"
+      />
+</LinearLayout>

@@ -66,9 +66,6 @@ class ProfileFragment: Fragment() {
         int_toolbar_trans_profilefrag = activity as toolbar_transaction
     }
 
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -28,7 +28,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var botonIniciarSesion:Button
 
-    private var usuarioProp: String  = "test@gmail.com"
+    private var usuarioProp: String  = "luisbruno777@gmail.com"
     private var contraseñaProp:String = "123456"
 
     private var user :String? = null
@@ -102,8 +102,8 @@ class LoginActivity : AppCompatActivity() {
     }
     @InternalCoroutinesApi
     private fun loginUser() {
-        loginfirebase()
-        //logintest()
+        //loginfirebase()
+        logintest()
         botonIniciarSesion.isEnabled = false
         auth = FirebaseAuth.getInstance()
         if (!(TextUtils.isEmpty(user) && TextUtils.isEmpty(password))) {
