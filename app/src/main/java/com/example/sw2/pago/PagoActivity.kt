@@ -1,6 +1,8 @@
 package com.example.sw2.pago
 
+import android.app.Service
 import android.content.DialogInterface
+import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +12,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
+import com.example.sw2.Clases.ServicioListView
 import com.example.sw2.Clases.Usuario
 import com.example.sw2.R
 import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
@@ -18,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.auth.User
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_pago.*
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.regex.Pattern
 
 class PagoActivity : AppCompatActivity() {
@@ -25,6 +30,7 @@ class PagoActivity : AppCompatActivity() {
     private var pago: String? = null
     var key : String? = null
     private var user_info : Usuario?  = null
+    private var service_pay: ServicioListView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pago)
@@ -36,12 +42,16 @@ class PagoActivity : AppCompatActivity() {
         ////////////////////////////////////////////////////
         pago = intent.getStringExtra("cost")
         key = intent.getStringExtra("key")
+        service_pay = intent.extras?.getSerializable("service") as ServicioListView
+        Log.d("a",service_pay!!.empresa)
         tvi_pago_cost.text = intent.getStringExtra("cost")
         /////////////////////////////////////////////////////////
         user_info = FirebaseConexion(applicationContext).getStoreSaved()
+        //////////////////////////////////////////////////////
 
         but_pay.setOnClickListener {
-            pay()
+            //pay()
+            alertPago()
         }
     }
 
@@ -74,16 +84,16 @@ class PagoActivity : AppCompatActivity() {
         return Pattern.compile("[0-9]{3}").matcher(cvv).matches()
     }
     private fun VerificarNombrePago(name :String): Boolean {
-        var reg = "(^[a-zA-Z]{3,}(?: [a-zA-Z]+){0,2}\$?)"
-        var ptern = Pattern.compile(reg)
-        var matcher = ptern.matcher(name)
+        val reg = "(^[a-zA-Z]{3,}(?: [a-zA-Z]+){0,2}\$?)"
+        val ptern = Pattern.compile(reg)
+        val matcher = ptern.matcher(name)
         Log.d("regrex",matcher.matches().toString())
         return matcher.matches()
     }
     private fun VerificarApellidoPago(lastname:String):Boolean{
-        var reg = "[a-zA-Z]*[\\s]{1}[a-zA-Z].*"
-        var ptern = Pattern.compile(reg)
-        var matcher = ptern.matcher(lastname)
+        val reg = "[a-zA-Z]*[\\s]{1}[a-zA-Z].*"
+        val ptern = Pattern.compile(reg)
+        val matcher = ptern.matcher(lastname)
         Log.d("regrex2",matcher.matches().toString())
         return matcher.matches()
     }
@@ -104,6 +114,14 @@ class PagoActivity : AppCompatActivity() {
         refinstance.child("ID_usuario").setValue(user_info!!.ID!!)
         refinstance.child("ID_Servicio").setValue(key)
         refinstance.child("Mount").setValue(pago.toString())
+        refinstance.child("Nombre_servicio_contratado").setValue(service_pay!!.nombreTrabajo)
+        refinstance.child("Uri_Servicio_Contratado").setValue(service_pay!!.Uri)
+        refinstance.child("Estado").setValue("progreso")
+        refinstance.child("Date").setValue(SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date()))
+        refinstance.child("Duración").setValue(service_pay!!.duracion)
+        refinstance.child("Empresa").setValue(service_pay!!.empresa)
+
+
     }
     private fun alertPago(){
         AlertDialog.Builder(this).setTitle("¿Desea cancelar la suma de S/.$pago ?").setMessage("Confirme la transsación porfavor")
@@ -116,7 +134,6 @@ class PagoActivity : AppCompatActivity() {
             }
             .setNegativeButton(android.R.string.no
             ) { p0, p1 ->
-
                 progress_pago.visibility = View.GONE
             }
             .show()

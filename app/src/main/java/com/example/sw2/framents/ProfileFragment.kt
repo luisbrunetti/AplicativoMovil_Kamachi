@@ -14,10 +14,16 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.sw2.Clases.Contratos
 import com.example.sw2.Clases.Usuario
 import com.example.sw2.R
+import com.example.sw2.Secundarios.Detalles_activity
+import com.example.sw2.interfaces.IntefaceClickListeer
 import com.example.sw2.interfaces.toolbar_transaction
+import com.example.sw2.patrones_diseño.RecycleViewContratos.RecycleViewAdapter_contratos
+import com.example.sw2.patrones_diseño.RecycleViewHome.ReclyceViewAdapter_ServiciosHome
 import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -27,7 +33,7 @@ import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 
-class ProfileFragment: Fragment() {
+class ProfileFragment: Fragment(), IntefaceClickListeer {
     private var m_Text: String = ""
     //Interface toolbar_transaction
     var int_toolbar_trans_profilefrag: toolbar_transaction? = null
@@ -56,6 +62,8 @@ class ProfileFragment: Fragment() {
     //Cargar Imagen
     private lateinit var ImageViewProfile:ImageView
     private var Uri: Uri? = null
+    ///////////////////////
+    private var ListContratosProfile: ArrayList<Contratos>? = null
     companion object {
         val GALERY_INTENT = 1
         private val IMAGE_PICK_CODE: Int = 1000
@@ -130,11 +138,8 @@ class ProfileFragment: Fragment() {
         val input = EditText(requireContext())
         input.inputType = InputType.TYPE_CLASS_TEXT /*or InputType.TYPE_TEXT_VARIATION_PASSWORD*/
         builder.setView(input)
-        builder.setPositiveButton("OK", object : DialogInterface.OnClickListener{
-            override fun onClick(p0: DialogInterface?, p1: Int) {
-                UpdateValueFirebase(input.text.toString(),tview)
-            }
-        })
+        builder.setPositiveButton("OK"
+        ) { p0, p1 -> UpdateValueFirebase(input.text.toString(),tview) }
         builder.setNegativeButton("Cancel") { dialog, _ ->
                 checkBox.isChecked = false
                 dialog.cancel()
@@ -164,7 +169,6 @@ class ProfileFragment: Fragment() {
                 requireContext()
             )
         val ObjectUser = FirebaseConexion.getStoreSaved()
-        //Toast.makeText(requireContext(),ObjectUser?.Email.toString(),Toast.LENGTH_SHORT).show()
         val query: Query =
             FirebaseDatabase.getInstance().reference.child("User").orderByChild("E-mail")
                 .equalTo(ObjectUser?.Email)
@@ -184,6 +188,34 @@ class ProfileFragment: Fragment() {
                         .centerCrop()
                         .into(ImageViewProfile)
                 }
+            }
+        })
+
+        val queryRecycle = FirebaseDatabase.getInstance().reference.child("pagos").orderByChild("ID_usuario").equalTo(ObjectUser!!.ID)
+        queryRecycle.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                ListContratosProfile = ArrayList<Contratos>()
+                for (p0 in p0.children){
+                    ListContratosProfile!!.add(Contratos(p0.child("Nombre_servicio_contratado").value.toString()
+                        ,p0.child("Empresa").value.toString(),
+                        p0.child("ID_Servicio").value.toString(),
+                        p0.child("ID_usuario").value.toString(),
+                        p0.child("Mount").value.toString(),
+                        p0.child("Estado").value.toString(),
+                        p0.child("Uri_Servicio_Contratado").value.toString(),
+                        p0.child("Duración").value.toString(),
+                        p0.child("Date").value.toString()))
+                }
+
+                val recycleAdapter = RecycleViewAdapter_contratos(requireContext(),
+                    ListContratosProfile!!,this@ProfileFragment)
+                rv_profilefragment.layoutManager = LinearLayoutManager(requireContext())
+                rv_profilefragment.adapter = recycleAdapter
+
             }
         })
     }
@@ -261,6 +293,16 @@ class ProfileFragment: Fragment() {
                 }
             }
         }
+
+    override fun onClickListener(pos: Int) {
+        val service = ListContratosProfile?.get(pos)
+        val bundle = Bundle()
+        bundle.putSerializable("serviceContratado",service!!)
+        val intent = Intent(requireContext(),Detalles_activity::class.java)
+        intent.putExtras(bundle)
+        intent.putExtra("xml","2")
+        startActivity(intent)
+    }
 
 }
 

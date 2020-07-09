@@ -173,7 +173,7 @@ class RegistrarActivity : AppCompatActivity() {
                                 task ->
                             if(task.isComplete){
                                 val user : FirebaseUser?= auth.currentUser
-                                Log.d("sasd",user!!.getPhoneNumber()!!)
+                                Log.d("sasd",user!!.phoneNumber!!)
                                 VerifyEmail(user)
                                 //String key = mDatabase.child("posts").push().getKey();
                                 //Obteniendo llave para tenerla como atributo

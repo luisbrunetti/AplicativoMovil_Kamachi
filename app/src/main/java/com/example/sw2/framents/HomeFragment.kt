@@ -216,7 +216,7 @@ class HomeFragment : Fragment() ,
             activity,
             Detalles_activity::class.java
         )
-        intent.putExtra("pos", pos.toString())
+        intent.putExtra("xml", "1")
         intent.putExtra("uri", lstServicios[pos].Uri.toString())
         intent.putExtra("nombretrabajo", lstServicios[pos].nombreTrabajo.toString())
         intent.putExtra("distrito", ob.distrito)
@@ -230,6 +230,7 @@ class HomeFragment : Fragment() ,
         intent.putExtra("duracion", ob.duracion)
         intent.putExtra("nombreempresa", ob.empresa)
         intent.putExtra("key", ob.key)
+        intent.putExtra("id_afiliado",ob.ID_Ailiado)
 
         startActivity(intent)
     }
