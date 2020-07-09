@@ -229,6 +229,7 @@ class HomeFragment : Fragment() ,
         intent.putExtra("descripcion", ob.description)
         intent.putExtra("duracion", ob.duracion)
         intent.putExtra("nombreempresa", ob.empresa)
+        intent.putExtra("key", ob.key)
 
         startActivity(intent)
     }

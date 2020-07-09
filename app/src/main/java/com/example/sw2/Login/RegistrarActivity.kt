@@ -155,17 +155,13 @@ class RegistrarActivity : AppCompatActivity() {
         Log.d("regrex2",matcher.matches().toString())
         return matcher.matches()
     }
-
     private fun CreateNewAccount(){
-        if(txtName.text.isNotEmpty() && txLasttName.text.isNotEmpty() && txtEmail.text.isNotEmpty() && txtPassword.text.isNotEmpty() && txtphone.text.isNotEmpty() ){
-
-        }
         val name:String = txtName.text.toString()
         val lastname:String = txLasttName.text.toString()
         val email:String = txtEmail.text.toString()
-
         val password:String = txtPassword.text.toString()
         val phone:String= txtphone.text.toString()
+
         if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(lastname) &&
             !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(phone)){
             if(VerificarNombre(name) && VerificarApellido(lastname)){
@@ -177,6 +173,7 @@ class RegistrarActivity : AppCompatActivity() {
                                 task ->
                             if(task.isComplete){
                                 val user : FirebaseUser?= auth.currentUser
+                                Log.d("sasd",user!!.getPhoneNumber()!!)
                                 VerifyEmail(user)
                                 //String key = mDatabase.child("posts").push().getKey();
                                 //Obteniendo llave para tenerla como atributo
@@ -198,15 +195,12 @@ class RegistrarActivity : AppCompatActivity() {
                 }else{
                     Toast.makeText(applicationContext,"Escoja un distrito",Toast.LENGTH_SHORT).show()
                 }
-
             }else{
                 Toast.makeText(applicationContext,"Ingrese un nombre u/o apeliido valido",Toast.LENGTH_SHORT).show()
             }
         }else{
                 Toast.makeText(applicationContext,"Tiene que llenar todos los campos",Toast.LENGTH_SHORT).show()
         }
-
-
     }
     private fun action(){
         progressBar.visibility = View.GONE

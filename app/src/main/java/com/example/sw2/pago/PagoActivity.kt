@@ -10,13 +10,21 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
+import com.example.sw2.Clases.Usuario
 import com.example.sw2.R
+import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.auth.User
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_pago.*
 import java.util.regex.Pattern
 
 class PagoActivity : AppCompatActivity() {
     private var toolbar_pago: Toolbar? = null
     private var pago: String? = null
+    var key : String? = null
+    private var user_info : Usuario?  = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pago)
@@ -27,7 +35,11 @@ class PagoActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         ////////////////////////////////////////////////////
         pago = intent.getStringExtra("cost")
+        key = intent.getStringExtra("key")
         tvi_pago_cost.text = intent.getStringExtra("cost")
+        /////////////////////////////////////////////////////////
+        user_info = FirebaseConexion(applicationContext).getStoreSaved()
+
         but_pay.setOnClickListener {
             pay()
         }
@@ -47,7 +59,6 @@ class PagoActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             android.R.id.home -> getback()
-
         }
         return super.onOptionsItemSelected(item)
     }
@@ -86,12 +97,20 @@ class PagoActivity : AppCompatActivity() {
         }
 
     }
-
+    private fun savePayFirebase(){
+        val instance = FirebaseDatabase.getInstance().reference
+        val keyPush = instance.push().key
+        val refinstance = instance.child("pagos").child(keyPush!!)
+        refinstance.child("ID_usuario").setValue(user_info!!.ID!!)
+        refinstance.child("ID_Servicio").setValue(key)
+        refinstance.child("Mount").setValue(pago.toString())
+    }
     private fun alertPago(){
-        AlertDialog.Builder(this).setTitle("¿Desea cancelar la suma de S/.$pago").setMessage("Confirme la transsación porfavor")
+        AlertDialog.Builder(this).setTitle("¿Desea cancelar la suma de S/.$pago ?").setMessage("Confirme la transsación porfavor")
             .setPositiveButton(android.R.string.yes
             ) { p0, p1 ->
                 progress_pago.visibility = View.GONE
+                savePayFirebase()
                 Toast.makeText(applicationContext,"Pago registrado con exito",Toast.LENGTH_SHORT).show()
                 finish()
             }

@@ -37,6 +37,7 @@ class Detalles_activity : AppCompatActivity() ,Serializable{
     private var nombreservicio:String ? = null
     // listener
     var costo: String ? = null
+    var key:String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +66,7 @@ class Detalles_activity : AppCompatActivity() ,Serializable{
         val tipopersona = intent.getStringExtra("tipopersona")
         val calificacion = intent.getStringExtra("calificacion")
         costo = intent.getStringExtra("costo")
+        key = intent.getStringExtra("key")
         val categoria = intent.getStringExtra("categoria")
         val telefono = intent.getStringExtra("telefono")
         val descripcion = intent.getStringExtra("descripcion")
@@ -93,6 +95,7 @@ class Detalles_activity : AppCompatActivity() ,Serializable{
     private fun inicializatePago(){
         val intent = Intent(this,PagoActivity::class.java)
         intent.putExtra("cost",costo)
+        intent.putExtra("key",key)
         startActivity(intent)
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -102,10 +105,5 @@ class Detalles_activity : AppCompatActivity() ,Serializable{
         return super.onOptionsItemSelected(item)
     }
 
-
-    private fun obtenerparametros(){
-
-
-    }
 
 }
