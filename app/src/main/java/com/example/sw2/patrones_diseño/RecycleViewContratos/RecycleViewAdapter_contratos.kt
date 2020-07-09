@@ -35,7 +35,7 @@ class RecycleViewAdapter_contratos(var mcontext: Context, mdata: ArrayList<Contr
         holder.tv_empresa?.text = mdata[position].empresa
         holder.tv_estado?.text = mdata[position].Estado
         holder.tv_fecha?.text = mdata[position].Date
-        holder.tv_costo?.text = "S/. "+mdata[position].Mount 
+        holder.tv_costo?.text = "S/. "+mdata[position].Mount
         Glide.with(mcontext)
             .load(mdata[position].Uri_Servicio_Contratado)
             .fitCenter()

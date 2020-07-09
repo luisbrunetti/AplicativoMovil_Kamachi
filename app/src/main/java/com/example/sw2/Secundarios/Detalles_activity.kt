@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
@@ -30,6 +31,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_detalles_activity.*
+import org.w3c.dom.Text
 import java.io.Serializable
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
@@ -46,6 +49,7 @@ class Detalles_activity : AppCompatActivity() ,Serializable{
     private var rating:RatingBar? = null
     private var toolbar:Toolbar? = null
     //xml
+    private var result : TextView? = null
     private var nombreservicio:String ? = null
     // listener
     var costo: String ? = null
@@ -60,6 +64,7 @@ class Detalles_activity : AppCompatActivity() ,Serializable{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalles_activity)
+        result = findViewById(R.id.tviresult)
         ImageViewFoto = findViewById(R.id.imagenViewFotoDetalles)
         tv_empresa = findViewById(R.id.textViewEmpresaCargo_Detalle)
         tv_emailservicio = findViewById(R.id.textViewEmail_Detalles)
@@ -99,12 +104,28 @@ class Detalles_activity : AppCompatActivity() ,Serializable{
                     }
                 }
             })
-            toolbar!!.title= nombreservicio
+            toolbar!!.title= a.Nombre_servicio_contratado
             setSupportActionBar(toolbar)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+            tv_estado_detalles.text = "En " + a.Estado.toString()
+            tv_estado_detalles.visibility = View.VISIBLE
+            but_details_confirmarservicio.visibility = View.VISIBLE
+
+            but_details_servicioterminado.setOnClickListener {
+                rating()
+            }
         }
         /////
 
+    }
+    private fun rating(){
+        GlobalUtils.showdialog(this, object : DialogCallback {
+            override fun callback(rating: Int) {
+                Toast.makeText(applicationContext,
+                    "Se califico al servicio con $rating estrellas",Toast.LENGTH_SHORT).show()
+            }
+        })
     }
     private fun ViewDetails(){
         val uri = intent.getStringExtra("uri")
@@ -131,7 +152,7 @@ class Detalles_activity : AppCompatActivity() ,Serializable{
         tv_distritoservicio?.setText(distrito)
         tv_tipopersona?.text = tipopersona
         tv_costoservicio?.text = "S/. "+costo
-
+        tv_empresa?.text = empresa
         tv_categoriaservicio?.text = categoria
 
         toolbar!!.title= nombreservicio
@@ -162,6 +183,7 @@ class Detalles_activity : AppCompatActivity() ,Serializable{
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.item_contratar -> inicializatePago()
+            android.R.id.home -> finish()
         }
         return super.onOptionsItemSelected(item)
     }

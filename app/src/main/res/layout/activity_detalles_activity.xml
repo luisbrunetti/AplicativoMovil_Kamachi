@@ -76,6 +76,19 @@
                     android:text="S/.50 soles"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/tv_estado_detalles"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="7dp"
+                    android:layout_marginStart="20dp"
+                    android:background="@drawable/buttonproceso"
+                    android:layout_centerVertical="true"
+                    android:text="En proceso"
+                    android:textColor="#FFFF"
+                    android:textStyle="bold"
+                    android:textSize="21sp"
+                    android:visibility="gone"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -200,24 +213,62 @@
                 <TextView
                     android:id="@+id/textView3"
                     android:layout_width="0dp"
-                    android:layout_weight="0.6"
+                    android:layout_weight="0.45"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="11dp"
                     android:textAlignment="center"
-                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
                     android:text="Rating"
                     android:textSize="14dp" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:layout_height="0.1dp"/>
+
                 <RatingBar
                     android:id="@+id/ratingBar"
                     style="@style/Widget.AppCompat.RatingBar.Indicator"
                     android:layout_width="0dp"
-                    android:layout_weight="0.5"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_weight="0.5"
+                    android:indeterminate="false"
+                    android:isIndicator="false"
                     android:numStars="5"
-                    android:rating="4" />
+                    android:rating="3" />
             </LinearLayout>
+            <TextView
+                android:id="@+id/tviresult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="REesult">
 
+            </TextView>
+            <LinearLayout
+                android:id="@+id/but_details_confirmarservicio"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/but_details_servicioterminado"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#B69A47"
+                    android:text="Servicio terminado" />
+
+                <Button
+                    android:id="@+id/but_details_InformarProblemas"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#D10E0E"
+                    android:text="Informar problemas" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
