@@ -112,7 +112,9 @@ class PagoActivity : AppCompatActivity() {
         val keyPush = instance.push().key
         val refinstance = instance.child("pagos").child(keyPush!!)
         refinstance.child("ID_usuario").setValue(user_info!!.ID!!)
-        refinstance.child("ID_Servicio").setValue(key)
+        refinstance.child("ID_Pago").setValue(keyPush)
+        refinstance.child("ID_Servicio").setValue(service_pay!!.key)
+        refinstance.child("ID_Afiliado").setValue(service_pay!!.ID_Ailiado)
         refinstance.child("Mount").setValue(pago.toString())
         refinstance.child("Nombre_servicio_contratado").setValue(service_pay!!.nombreTrabajo)
         refinstance.child("Uri_Servicio_Contratado").setValue(service_pay!!.Uri)
@@ -120,8 +122,6 @@ class PagoActivity : AppCompatActivity() {
         refinstance.child("Date").setValue(SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date()))
         refinstance.child("Duración").setValue(service_pay!!.duracion)
         refinstance.child("Empresa").setValue(service_pay!!.empresa)
-
-
     }
     private fun alertPago(){
         AlertDialog.Builder(this).setTitle("¿Desea cancelar la suma de S/.$pago ?").setMessage("Confirme la transsación porfavor")

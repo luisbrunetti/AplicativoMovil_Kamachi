@@ -238,13 +238,7 @@
                     android:numStars="5"
                     android:rating="3" />
             </LinearLayout>
-            <TextView
-                android:id="@+id/tviresult"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="REesult">
 
-            </TextView>
             <LinearLayout
                 android:id="@+id/but_details_confirmarservicio"
                 android:layout_width="match_parent"

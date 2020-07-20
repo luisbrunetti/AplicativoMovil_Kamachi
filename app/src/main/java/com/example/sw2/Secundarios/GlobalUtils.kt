@@ -2,6 +2,7 @@ package com.example.sw2.Secundarios
 
 import android.app.Dialog
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.RatingBar
 import android.widget.TextView
@@ -18,7 +19,8 @@ object GlobalUtils {
         val btnCalificar = dialog.findViewById<TextView>(R.id.tvi_dialog_calificar)
         val rating = dialog.findViewById<RatingBar>(R.id.ratingBar_calificar)
         btnCalificar.setOnClickListener {
-            DialogCallback.callback(rating!!.numStars)
+            Log.d("cal",rating!!.numStars.toString())
+            DialogCallback.callback(rating?.numStars)
             dialog.dismiss()
         }
         dialog.show()

@@ -1,8 +1,6 @@
 package com.example.sw2.Secundarios
 
 import android.content.Intent
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -12,27 +10,19 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.net.toUri
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.sw2.Clases.Afiliado
 import com.example.sw2.Clases.Contratos
 import com.example.sw2.Clases.ServicioListView
-import com.example.sw2.MainActivity
 import com.example.sw2.R
-import com.example.sw2.framents.HomeFragment
-import com.example.sw2.interfaces.translate_fragment
 import com.example.sw2.pago.PagoActivity
-import com.example.sw2.patrones_diseño.RecycleViewHome.ReclyceViewAdapter_ServiciosHome
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_detalles_activity.*
-import org.w3c.dom.Text
 import java.io.Serializable
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
@@ -54,6 +44,8 @@ class Detalles_activity : AppCompatActivity() ,Serializable{
     // listener
     var costo: String ? = null
     var key:String? = null
+    var contratos:Contratos? = null
+    var id_afiliado:String? = null
     private lateinit var service:ServicioListView
     private lateinit var servicioContrato: Contratos
 
@@ -64,7 +56,6 @@ class Detalles_activity : AppCompatActivity() ,Serializable{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalles_activity)
-        result = findViewById(R.id.tviresult)
         ImageViewFoto = findViewById(R.id.imagenViewFotoDetalles)
         tv_empresa = findViewById(R.id.textViewEmpresaCargo_Detalle)
         tv_emailservicio = findViewById(R.id.textViewEmail_Detalles)
@@ -77,14 +68,14 @@ class Detalles_activity : AppCompatActivity() ,Serializable{
         toolbar = findViewById(R.id.toolbar_Detalles)
         rating = findViewById(R.id.ratingBar)
         nombreservicio = intent.getStringExtra("nombretrabajo")
-
+        id_afiliado = intent.getStringExtra("id_afiliado")
         ////////////////////////////////////////////////////////
         if (intent.getStringExtra("xml").toInt() == 1){
             ViewDetails()
         }else{
-            val a = intent.extras!!.getSerializable("serviceContratado") as Contratos
+            contratos = intent.extras!!.getSerializable("serviceContratado") as Contratos
             val FirebaseReference = FirebaseDatabase.getInstance().reference
-            val query = FirebaseReference.child("Servicios").orderByChild("key").equalTo(a.ID_servicio)
+            val query = FirebaseReference.child("Servicios").orderByChild("key").equalTo(contratos!!.ID_servicio)
             query.addListenerForSingleValueEvent(object : ValueEventListener{
                 override fun onCancelled(p0: DatabaseError) {
                     TODO("Not yet implemented")
@@ -101,14 +92,15 @@ class Detalles_activity : AppCompatActivity() ,Serializable{
                         tv_tipopersona?.text = h.child("Tipo_persona").value.toString()
                         tv_costoservicio?.text = "S/. "+h.child("cost_service").value.toString()
                         tv_categoriaservicio?.text = h.child("Categoria_servicio").value.toString()
+
                     }
                 }
             })
-            toolbar!!.title= a.Nombre_servicio_contratado
+            toolbar!!.title= contratos!!.Nombre_servicio_contratado
             setSupportActionBar(toolbar)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-            tv_estado_detalles.text = "En " + a.Estado.toString()
+            tv_estado_detalles.text = contratos!!.Estado.toUpperCase()
             tv_estado_detalles.visibility = View.VISIBLE
             but_details_confirmarservicio.visibility = View.VISIBLE
 
@@ -121,9 +113,28 @@ class Detalles_activity : AppCompatActivity() ,Serializable{
     }
     private fun rating(){
         GlobalUtils.showdialog(this, object : DialogCallback {
-            override fun callback(rating: Int) {
+            override fun callback(rating: Int?) {
+                tv_estado_detalles.text = "Terminado"
+                Log.d("idafiliado",contratos!!.ID_Afiliado)
+                val FirebaseRefUsuario = FirebaseDatabase.getInstance().reference
+                FirebaseRefUsuario.child("Afiliados").orderByChild("ID_Afiliado").equalTo(contratos!!.ID_Afiliado).addListenerForSingleValueEvent(object :ValueEventListener{
+                    override fun onCancelled(p0: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+                    override fun onDataChange(p0: DataSnapshot) {
+                        var cant_contratos: String? = null
+                        for (p0 in p0.children){
+                            cant_contratos = p0.child("contratos_realizados").value.toString()
+                        }
+                        FirebaseRefUsuario.child("Servicios").child(contratos!!.ID_servicio).child("calificacion").setValue(rating.toString())
+                        FirebaseRefUsuario.child("Afiliados").child(contratos!!.ID_Afiliado).child("contratos_realizados").setValue((cant_contratos!!.toInt()+1).toString())
+                        FirebaseRefUsuario.child("pagos").child(contratos!!.ID_Pago).child("Estado").setValue("terminado")
+                    }
+                })
                 Toast.makeText(applicationContext,
                     "Se califico al servicio con $rating estrellas",Toast.LENGTH_SHORT).show()
+                but_details_InformarProblemas.visibility = View.GONE
+                but_details_servicioterminado.visibility = View.GONE
             }
         })
     }
@@ -141,12 +152,13 @@ class Detalles_activity : AppCompatActivity() ,Serializable{
         val descripcion = intent.getStringExtra("descripcion")
         val duracion = intent.getStringExtra("duracion")
         val empresa = intent.getStringExtra("nombreempresa")
-        Log.d("empresa",empresa)
+
         service = ServicioListView(empresa,categoria,email,id_afiliado,tipopersona,uri,costo,descripcion,distrito,duracion,key,nombreservicio,telefono,calificacion)
         ////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////
         Glide.with(applicationContext)
             .load(uri).fitCenter().centerCrop().apply(RequestOptions.overrideOf(160,180)).into(ImageViewFoto)
+
         tv_emailservicio?.setText(email)
         tv_telefonoservicio?.text = telefono
         tv_distritoservicio?.setText(distrito)

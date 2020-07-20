@@ -149,7 +149,7 @@ class RegistrarActivity : AppCompatActivity() {
          */
     }
     private fun VerificarApellido(lastname:String):Boolean{
-        var reg = "[a-zA-Z]*[\\s]{1}[a-zA-Z].*"
+        var reg = "[a-zA-Z]*[\\s]{1}[a-zA-Z]{3,}"
         var ptern = Pattern.compile(reg)
         var matcher = ptern.matcher(lastname)
         Log.d("regrex2",matcher.matches().toString())

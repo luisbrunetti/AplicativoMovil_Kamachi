@@ -230,7 +230,7 @@ class HomeFragment : Fragment() ,
         intent.putExtra("duracion", ob.duracion)
         intent.putExtra("nombreempresa", ob.empresa)
         intent.putExtra("key", ob.key)
-        intent.putExtra("id_afiliado",ob.ID_Ailiado)
+            intent.putExtra("id_afiliado",ob.ID_Ailiado)
 
         startActivity(intent)
     }

@@ -202,8 +202,10 @@ class ProfileFragment: Fragment(), IntefaceClickListeer {
                 for (p0 in p0.children){
                     ListContratosProfile!!.add(Contratos(p0.child("Nombre_servicio_contratado").value.toString()
                         ,p0.child("Empresa").value.toString(),
+                        p0.child("ID_Pago").value.toString(),
                         p0.child("ID_Servicio").value.toString(),
                         p0.child("ID_usuario").value.toString(),
+                        p0.child("ID_Afiliado").value.toString(),
                         p0.child("Mount").value.toString(),
                         p0.child("Estado").value.toString(),
                         p0.child("Uri_Servicio_Contratado").value.toString(),
