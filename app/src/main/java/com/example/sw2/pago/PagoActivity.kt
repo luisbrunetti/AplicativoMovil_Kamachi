@@ -50,8 +50,8 @@ class PagoActivity : AppCompatActivity() {
         //////////////////////////////////////////////////////
 
         but_pay.setOnClickListener {
-            //pay()
-            alertPago()
+            pay()
+            //alertPago()
         }
     }
 
@@ -130,6 +130,7 @@ class PagoActivity : AppCompatActivity() {
                 progress_pago.visibility = View.GONE
                 savePayFirebase()
                 Toast.makeText(applicationContext,"Pago registrado con exito",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext,"Se guardado en la lista de servicio contratados",Toast.LENGTH_SHORT).show()
                 finish()
             }
             .setNegativeButton(android.R.string.no

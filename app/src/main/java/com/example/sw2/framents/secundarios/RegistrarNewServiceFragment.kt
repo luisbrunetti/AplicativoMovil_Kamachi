@@ -184,15 +184,15 @@ class RegistrarNewServiceFragment:Fragment(){
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
             super.onActivityResult(requestCode, resultCode, data)
             ImagenServicio = data?.data
-            if (requestCode == ProfileFragment.GALERY_INTENT && resultCode == Activity.RESULT_OK) {
-                if (ImagenServicio != null) {
+            if (requestCode == ProfileFragment.GALERY_INTENT && resultCode == Activity.RESULT_OK){
                     Glide.with(requireContext())
                         .load(ImagenServicio)
                         .fitCenter()
                         .centerCrop()
                         .into(iv_newService!!)
-                }
+
             }
         }
     }
+
 

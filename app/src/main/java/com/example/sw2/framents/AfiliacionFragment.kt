@@ -19,6 +19,7 @@ import com.example.sw2.Clases.Servicio_profile_afiliacion
 import com.example.sw2.patrones_diseño.singleton.FirebaseConexion
 import com.example.sw2.Clases.Usuario
 import com.example.sw2.R
+import com.example.sw2.Secundarios.Detalles_activity
 import com.example.sw2.framents.secundarios.ReclycleViewAdapter_AfiliadoFragment
 import com.example.sw2.interfaces.toolbar_transaction
 import com.example.sw2.interfaces.translate_fragment
@@ -204,7 +205,29 @@ class AfiliacionFragment: Fragment(),
     }
 
     override fun onClickListener(pos: Int) {
-        TODO("Not yet implemented")
+        val ob = ListServiciosAfiliado?.get(pos)!!
+        Toast.makeText(context, "clicked", Toast.LENGTH_SHORT).show()
+        val intent = Intent(
+            activity,
+            Detalles_activity::class.java
+        )
+        intent.putExtra("xml", "1")
+        intent.putExtra("uri", ListServiciosAfiliado?.get(pos)!!.Uri.toString())
+        intent.putExtra("nombretrabajo", ListServiciosAfiliado?.get(pos)!!.nombreTrabajo.toString())
+        intent.putExtra("distrito", ob.distrito)
+        intent.putExtra("email", ob.Email_servicio)
+        intent.putExtra("tipopersona", ob.Tipo_persona)
+        intent.putExtra("calificacion", ob.calificacion)
+        intent.putExtra("costo", ob.cost_service)
+        intent.putExtra("categoria", ob.categoria_servicio)
+        intent.putExtra("telefono", ob.telefono)
+        intent.putExtra("descripcion", ob.description)
+        intent.putExtra("duracion", ob.duracion)
+        //intent.putExtra("nombreempresa", ob.em)
+        intent.putExtra("key", ob.key)
+        intent.putExtra("id_afiliado",ob.ID_Ailiado)
+        startActivity(intent)
+
     }
 
 }
